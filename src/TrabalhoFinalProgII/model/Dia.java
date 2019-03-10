@@ -11,4 +11,7 @@ package TrabalhoFinalProgII.model;
  */
 public class Dia {
     
+    private UnidadeGeradora gerador1;
+    private UnidadeGeradora gerador2;
+    
 }

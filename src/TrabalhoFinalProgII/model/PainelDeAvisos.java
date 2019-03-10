@@ -5,10 +5,16 @@
  */
 package TrabalhoFinalProgII.model;
 
+import java.util.List;
+
 /**
  *
  * @author guilh
  */
 public class PainelDeAvisos {
+    
+    private List<Avisos> avisos;
+    private List<SenhasLogins> senhasLogins;
+    private List<ValoresAlarmesTrip> valoresAlarmesTrip;
     
 }

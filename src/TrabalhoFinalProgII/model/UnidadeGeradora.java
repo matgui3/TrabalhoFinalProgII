@@ -11,4 +11,7 @@ package TrabalhoFinalProgII.model;
  */
 public class UnidadeGeradora {
     
+    private int numero;
+    private String potencia;
+    
 }

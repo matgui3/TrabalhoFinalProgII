@@ -11,4 +11,6 @@ package TrabalhoFinalProgII.model;
  */
 public class FrasesProntas {
     
+    private String frase;
+    
 }
