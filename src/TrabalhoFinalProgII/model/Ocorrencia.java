@@ -14,29 +14,20 @@ import java.util.Date;
 public class Ocorrencia {
     
     private Date hora;
-    private String ocorrencia;
+    private String descricao;
 
-    public Ocorrencia(Date hora, String ocorrencia) {
+    public Ocorrencia(Date hora, String descricao) {
         super();
         this.hora = hora;
-        this.ocorrencia = ocorrencia;
+        this.descricao = descricao;
     }  
     
     public Date getHora() {
         return hora;
     }
 
-    public void setHora(Date hora) {
-        this.hora = hora;
+    public String getDescricao() {
+        return descricao;
     }
-
-    public String getOcorrencia() {
-        return ocorrencia;
-    }
-
-    public void setOcorrencia(String ocorrencia) {
-        this.ocorrencia = ocorrencia;
-    }
-    
     
 }
