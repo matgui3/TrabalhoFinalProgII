@@ -8,8 +8,9 @@ package TrabalhoFinalProgII.model;
 import java.util.Date;
 
 /**
- *
- * @author guilh
+ * Classe contendo os comportamentos e atributos dos Avisos.
+ * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
+ * @since 11/03/2019
  */
 public class Aviso {
     
@@ -17,6 +18,12 @@ public class Aviso {
     private String aviso;
     private Operador publisher;
     
+   /**
+    * Método construtor da classe Aviso.
+    * @param data Data de postagem do aviso.
+    * @param aviso Conteúdo em escrito do aviso em si.
+    * @param publisher Operador que publicou o aviso no painel.
+    */ 
     public Aviso(Date data, String aviso, Operador publisher){
         super();
         this.data=data;

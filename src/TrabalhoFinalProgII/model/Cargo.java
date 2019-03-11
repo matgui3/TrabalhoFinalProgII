@@ -6,8 +6,9 @@
 package TrabalhoFinalProgII.model;
 
 /**
- *
- * @author guilh
+ * Classe enum contendo os possíveis cargos dos operadores.
+ * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
+ * @since 11/03/2019
  */
 public enum Cargo {
     OPERADOR1("OPERADOR I"),

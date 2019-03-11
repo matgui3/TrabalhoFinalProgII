@@ -6,8 +6,9 @@
 package TrabalhoFinalProgII.model;
 
 /**
- *
- * @author guilh
+ * Classe contendo os comportamentos e atributos dos Relatórios de Ocorrências.
+ * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
+ * @since 11/03/2019
  */
 public class ValoresAlarmesTrip {
     
@@ -15,6 +16,12 @@ public class ValoresAlarmesTrip {
     private String valorAjusteUg1;
     private String valorAjusteUg2;
 
+    /**
+     * Método construtor da classe ValoresAlarmesTrip.
+     * @param nomeAjuste Nome do ajuste a ser efetuado.
+     * @param valorAjusteUg1 Valor do ajuste na Unidade Geradora 1.
+     * @param valorAjusteUg2 Valor do ajuste na Unidade Geradora 2.
+     */
     public ValoresAlarmesTrip(String nomeAjuste, String valorAjusteUg1, String valorAjusteUg2) {
         this.nomeAjuste = nomeAjuste;
         this.valorAjusteUg1 = valorAjusteUg1;

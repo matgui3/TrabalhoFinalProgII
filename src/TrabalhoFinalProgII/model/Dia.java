@@ -16,8 +16,14 @@ public class Dia {
     private Turno turnoAtual;
     private EstadoSubestacao subestacao;
     private EstadoServicosAuxiliares servicosAuxiliares;
-//    private List<ArrayList<Ocorrencia>> ocorrenciasDia;
 
+    /**
+     * Método construtor da classe Dia, responsável por criar e definir os atributos dos objetos de tipo Dia.
+     * @param estadoGerador1 Estado do gerador 1.
+     * @param estadoGerador2 Estado do gerador 2.
+     * @param subestacao Estado da subestação.
+     * @param servicosAuxiliares Estado dos serviços auxiliares.
+     */
     Dia(EstadoUnidadeGeradora estadoGerador1, EstadoUnidadeGeradora estadoGerador2,
             EstadoSubestacao subestacao, EstadoServicosAuxiliares servicosAuxiliares) {
         gerador1 = new UnidadeGeradora(1, "500kv", estadoGerador1);
@@ -28,10 +34,11 @@ public class Dia {
         this.servicosAuxiliares = servicosAuxiliares;
     }
 
+    /**
+     * Método responsável por fazer o término de um turno, gravar os dados do último turno vigente e iniciar o novo turno.
+     */
     public void EncerrarTurno() {
         
-        
-
         switch (turnoAtual.getPeriodo().getPeriodoTurno()) {
 
             case "Manhã":

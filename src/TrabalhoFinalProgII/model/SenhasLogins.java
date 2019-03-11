@@ -6,8 +6,9 @@
 package TrabalhoFinalProgII.model;
 
 /**
- *
- * @author guilh
+ * Classe contendo os comportamentos e atributos dos objetos de tipo SenhasLogins.
+ * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
+ * @since 11/03/2019
  */
 public class SenhasLogins {
     
@@ -15,6 +16,12 @@ public class SenhasLogins {
     private String login;
     private String senha;
     
+    /**
+     * Método construtor dos objetos de tipo SenhasLogins.
+     * @param equipamento Equipamento do qual a senha e o login estão sendo registrados.
+     * @param login Login do equipamento.
+     * @param senha  Senha do equipamento.
+     */
     public SenhasLogins(String equipamento, String login, String senha){
         super();
         this.equipamento=equipamento;

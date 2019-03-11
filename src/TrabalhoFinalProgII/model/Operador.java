@@ -8,8 +8,9 @@ package TrabalhoFinalProgII.model;
 import java.util.Date;
 
 /**
- *
- * @author guilh
+ * Classe contendo os comportamentos e atributos dos objetos de tipo Operador.
+ * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
+ * @since 11/03/2019
  */
 public class Operador {
     
@@ -19,6 +20,14 @@ public class Operador {
     private int telefone;
     private Cargo cargo;
     
+    /**
+     * Método construtor que cria o objeto de tipo Operador.
+     * Note que não há matrícula no método construtor, pois esta será definida automaticamente pelo sistema para que não existam duas matrículas iguais.
+     * @param nome Nome do operador a ser registrado.
+     * @param dataNascimento Data de nascimento do operador a ser registrado.
+     * @param telefone Telefone do operador a ser registrado
+     * @param cargo Cargo a ser definido para o operador que está sendo registrado.
+     */
     public Operador(String nome, Date dataNascimento, int telefone, Cargo cargo) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;

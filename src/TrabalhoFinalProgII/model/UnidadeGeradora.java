@@ -6,8 +6,9 @@
 package TrabalhoFinalProgII.model;
 
 /**
- *
- * @author Guilherme Rafael Deschamps
+ * Classe contendo os comportamentos e atributos das Unidades Geradoras.
+ * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
+ * @since 11/03/2019
  */
 public class UnidadeGeradora {
     
