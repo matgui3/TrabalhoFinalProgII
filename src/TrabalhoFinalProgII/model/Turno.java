@@ -52,10 +52,4 @@ public class Turno {
         ocorrencias.add(ocorrencia);
     }
     
-    public ArrayList PassarOcorrencias(){
-
-        return ocorrencias;
-        
-    }
-    
 }

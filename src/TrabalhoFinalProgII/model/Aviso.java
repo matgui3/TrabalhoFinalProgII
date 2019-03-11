@@ -11,13 +11,13 @@ import java.util.Date;
  *
  * @author guilh
  */
-public class Avisos {
+public class Aviso {
     
     private Date data;
     private String aviso;
     private Operador publisher;
     
-    private Avisos(Date data, Date hora, String aviso, Operador publisher){
+    private Aviso(Date data, Date hora, String aviso, Operador publisher){
         super();
         this.data=data;
         this.aviso=aviso;

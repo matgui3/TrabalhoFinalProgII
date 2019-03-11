@@ -16,30 +16,34 @@ public class Dia {
 
     private UnidadeGeradora gerador1;
     private UnidadeGeradora gerador2;
-    private Turno turno;
-    private List<ArrayList<Ocorrencia>> ocorrenciasDia;
+    private Turno[] turnos;
+    private Turno turnoAtual;
+//    private List<ArrayList<Ocorrencia>> ocorrenciasDia;
 
     Dia() {
         gerador1 = new UnidadeGeradora();
         gerador2 = new UnidadeGeradora();
-        turno = new Turno(PeriodoTurno.MANHA);
-        ocorrenciasDia = new ArrayList<>();
+        turnos = new Turno[3];
+        turnoAtual = new Turno(PeriodoTurno.MANHA);
+//        ocorrenciasDia = new ArrayList<>();
     }
 
     public void EncerrarTurno() {
+        
+        
 
-        switch (turno.getPeriodo().getPeriodoTurno()) {
+        switch (turnoAtual.getPeriodo().getPeriodoTurno()) {
 
             case "Manhã":
-                ocorrenciasDia.add(0, turno.PassarOcorrencias());
-                turno = new Turno(PeriodoTurno.TARDE);
+                turnos[0] = turnoAtual;
+                turnoAtual = new Turno(PeriodoTurno.TARDE);
                 break;
             case "Tarde":
-                ocorrenciasDia.add(1, turno.PassarOcorrencias());
-                turno = new Turno(PeriodoTurno.NOITE);
+                turnos[1] = turnoAtual;
+                turnoAtual = new Turno(PeriodoTurno.NOITE);
                 break;
             case "Noite":
-                ocorrenciasDia.add(2, turno.PassarOcorrencias());
+                turnos[2] = turnoAtual;
 
         }
         
