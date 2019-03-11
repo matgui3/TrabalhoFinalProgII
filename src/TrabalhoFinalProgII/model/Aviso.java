@@ -17,7 +17,7 @@ public class Aviso {
     private String aviso;
     private Operador publisher;
     
-    private Aviso(Date data, Date hora, String aviso, Operador publisher){
+    public Aviso(Date data, String aviso, Operador publisher){
         super();
         this.data=data;
         this.aviso=aviso;
@@ -27,8 +27,7 @@ public class Aviso {
     public Date getData() {
         return data;
     }
-
-
+    
     public String getAviso() {
         return aviso;
     }

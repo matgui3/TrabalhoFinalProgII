@@ -13,6 +13,21 @@ import java.util.List;
  */
 public class RelatorioOcorrencias {
     
-    private List<Dia> dias;
+    private Dia[] dias;
+    private PainelDeAvisos painelAvisos;
+    private Dia diaAtual;
+    private int i = 0;
+    
+    public RelatorioOcorrencias(){
+        dias = new Dia[31];
+        painelAvisos= new PainelDeAvisos();
+        diaAtual = new Dia(EstadoUnidadeGeradora.OPERANDO, EstadoUnidadeGeradora.PARADA_SGI, EstadoSubestacao.LTS2, EstadoServicosAuxiliares.TSA1E2);
+    }
+    
+    public void NovoDia(EstadoUnidadeGeradora estadoGerador1, EstadoUnidadeGeradora estadoGerador2, EstadoSubestacao subestacao, EstadoServicosAuxiliares servicosAuxiliares){
+        dias[i] = (diaAtual);
+        i++;
+        diaAtual = new Dia(estadoGerador1, estadoGerador2, subestacao, servicosAuxiliares);
+    }
     
 }

@@ -17,21 +17,17 @@ public class Operador {
     private String nome;
     private Date dataNascimento;
     private int telefone;
-
-    /* INSERIR DEFINIÇÃO DO CÓDIGO */
+    private Cargo cargo;
     
-    public Operador(String nome, Date dataNascimento, int telefone) {
+    public Operador(String nome, Date dataNascimento, int telefone, Cargo cargo) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.telefone = telefone;
+        this.cargo = cargo;
     }   
     
     public int getMatricula() {
         return matricula;
-    }
-
-    public void setMatricula(int matricula) {
-        this.matricula = matricula;
     }
 
     public String getNome() {

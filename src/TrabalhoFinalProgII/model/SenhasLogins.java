@@ -15,7 +15,7 @@ public class SenhasLogins {
     private String login;
     private String senha;
     
-    private SenhasLogins(String equipamento, String login, String senha){
+    public SenhasLogins(String equipamento, String login, String senha){
         super();
         this.equipamento=equipamento;
         this.login=login;
