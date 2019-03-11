@@ -5,10 +5,14 @@
  */
 package TrabalhoFinalProgII.model;
 
+import java.util.List;
+
 /**
  *
  * @author guilh
  */
 public class RelatorioOcorrencias {
+    
+    private List<Dia> dias;
     
 }
