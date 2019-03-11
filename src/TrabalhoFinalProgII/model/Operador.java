@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Operador {
     
-    private int codigo;
+    private int matricula;
     private String nome;
     private Date dataNascimento;
     private int telefone;
@@ -26,12 +26,12 @@ public class Operador {
         this.telefone = telefone;
     }   
     
-    public int getCodigo() {
-        return codigo;
+    public int getMatricula() {
+        return matricula;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
     }
 
     public String getNome() {

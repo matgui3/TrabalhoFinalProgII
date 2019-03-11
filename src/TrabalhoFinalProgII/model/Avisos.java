@@ -14,14 +14,12 @@ import java.util.Date;
 public class Avisos {
     
     private Date data;
-    private Date hora;
     private String aviso;
     private Operador publisher;
     
     private Avisos(Date data, Date hora, String aviso, Operador publisher){
         super();
         this.data=data;
-        this.hora=hora;
         this.aviso=aviso;
         this.publisher=publisher;
     }
@@ -30,9 +28,6 @@ public class Avisos {
         return data;
     }
 
-    public Date getHora() {
-        return hora;
-    }
 
     public String getAviso() {
         return aviso;
