@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author guilh
+ * Classe contendo os comportamentos e atributos dos objetos de tipo Dia.
+ * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
+ * @since 11/03/2019
  */
 public class Dia {
 
@@ -18,13 +19,15 @@ public class Dia {
     private UnidadeGeradora gerador2;
     private Turno[] turnos;
     private Turno turnoAtual;
+    private EstadoSubestacao subestacao;
 //    private List<ArrayList<Ocorrencia>> ocorrenciasDia;
 
-    Dia() {
-        gerador1 = new UnidadeGeradora();
-        gerador2 = new UnidadeGeradora();
+    Dia(String potGerador1, String potGerador2, EstadoUnidadeGeradora estadoGerador1, EstadoUnidadeGeradora estadoGerador2, EstadoSubestacao subestacao) {
+        gerador1 = new UnidadeGeradora(1, potGerador1, estadoGerador1);
+        gerador2 = new UnidadeGeradora(2, potGerador2, estadoGerador2);
         turnos = new Turno[3];
         turnoAtual = new Turno(PeriodoTurno.MANHA);
+        this.subestacao = subestacao;
 //        ocorrenciasDia = new ArrayList<>();
     }
 
