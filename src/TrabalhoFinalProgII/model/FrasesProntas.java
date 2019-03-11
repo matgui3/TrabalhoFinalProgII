@@ -5,12 +5,27 @@
  */
 package TrabalhoFinalProgII.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author guilh
  */
 public class FrasesProntas {
-    
-    private String frase;
-    
+
+    private ArrayList<String> frases = new ArrayList<String>();
+
+    public void CadastrarFrase(String frase) {
+        frases.add(frase);
+    }
+
+    public String toString() {
+        String texto = "";
+            for (String frase : frases) {
+                texto+= frase + "; ";
+            }
+
+            return texto;
+    }
 }
