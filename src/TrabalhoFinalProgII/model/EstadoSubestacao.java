@@ -9,7 +9,7 @@ package TrabalhoFinalProgII.model;
  *
  * @author guilh
  */
-public enum Subestacao {
+public enum EstadoSubestacao {
     
     LTS1("LTS DE 138 KV RIO DO SUL TIMBO E INDAIAL LIGADAS NA BARRA P 138 KV"),
     LTS2("LTS DE 138 KV RIO DO SUL E TIMBO LIGADAS NA BARRA P 138 KV"),
@@ -18,7 +18,7 @@ public enum Subestacao {
     
     private String subestacao;
     
-    Subestacao(String subestacao){
+    EstadoSubestacao(String subestacao){
         this.subestacao=subestacao;
     }
     

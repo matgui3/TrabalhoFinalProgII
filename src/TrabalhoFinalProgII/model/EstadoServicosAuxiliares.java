@@ -9,7 +9,7 @@ package TrabalhoFinalProgII.model;
  *
  * @author guilh
  */
-public enum ServicosAuxiliares {
+public enum EstadoServicosAuxiliares {
     
     TSA1("ALIMENTADO PELO TRANSFORMADOR AUXILIAR TSA1"),
     TSA2("ALIMENTADO PELO TRANSFORMADOR AUXILIAR TSA2"),
@@ -17,7 +17,7 @@ public enum ServicosAuxiliares {
     
     private String servico;
 
-    private ServicosAuxiliares(String servico) {
+    private EstadoServicosAuxiliares(String servico) {
         this.servico=servico;
     }
     
