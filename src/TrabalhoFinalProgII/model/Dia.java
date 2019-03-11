@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package TrabalhoFinalProgII.model;
 
 import java.util.ArrayList;
@@ -20,15 +15,17 @@ public class Dia {
     private Turno[] turnos;
     private Turno turnoAtual;
     private EstadoSubestacao subestacao;
+    private EstadoServicosAuxiliares servicosAuxiliares;
 //    private List<ArrayList<Ocorrencia>> ocorrenciasDia;
 
-    Dia(String potGerador1, String potGerador2, EstadoUnidadeGeradora estadoGerador1, EstadoUnidadeGeradora estadoGerador2, EstadoSubestacao subestacao) {
+    Dia(String potGerador1, String potGerador2, EstadoUnidadeGeradora estadoGerador1, EstadoUnidadeGeradora estadoGerador2,
+            EstadoSubestacao subestacao, EstadoServicosAuxiliares servicosAuxiliares) {
         gerador1 = new UnidadeGeradora(1, potGerador1, estadoGerador1);
         gerador2 = new UnidadeGeradora(2, potGerador2, estadoGerador2);
         turnos = new Turno[3];
         turnoAtual = new Turno(PeriodoTurno.MANHA);
         this.subestacao = subestacao;
-//        ocorrenciasDia = new ArrayList<>();
+        this.servicosAuxiliares = servicosAuxiliares;
     }
 
     public void EncerrarTurno() {
