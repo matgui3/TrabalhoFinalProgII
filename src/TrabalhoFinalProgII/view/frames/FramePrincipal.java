@@ -17,7 +17,7 @@ import javax.swing.JMenuBar;
  *
  * @author 00783962045
  */
-public class FramePrincipal extends JFrame{
+public class FramePrincipal extends JFrame {
 
     private Dimension dimTela;
     private JDesktopPane desktop;
@@ -31,6 +31,9 @@ public class FramePrincipal extends JFrame{
         addComponents();
 
         setSize(dimTela);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+
     }
 
     private void initializeComponents() {

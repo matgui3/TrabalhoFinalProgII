@@ -31,9 +31,7 @@ public class FrameFrasesProntas extends FrameCRUD {
     private Label lbArea;
     private Label lbFrase;
 
-
     private JTextField tfFrase;
-   
     private JComboBox cbArea;
 
     private JPanel panelFormulario;
@@ -80,7 +78,6 @@ public class FrameFrasesProntas extends FrameCRUD {
     @Override
     public void carregarCampos() {
         tfFrase.setText(novaFrase.toString());
-        
 
         EnumFrases area = novaFrase.getArea();
         if (area != null) {
@@ -110,25 +107,25 @@ public class FrameFrasesProntas extends FrameCRUD {
         cons = new GridBagConstraints();
         cons.gridx = 1;
         cons.gridy = 0;
-        cons.gridwidth = 1;
+        cons.gridwidth = 2;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        cons.ipadx = 50;
-        panelFormulario.add(tfFrase, cons);
+        cons.ipadx = 5;
+        panelFormulario.add(cbArea, cons);
 
         cons = new GridBagConstraints();
-        cons.gridx = 2;
+        cons.gridx = 3;
         cons.gridy = 0;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panelFormulario.add(lbFrase, cons);
 
         cons = new GridBagConstraints();
-        cons.gridx = 1;
-        cons.gridy = 4;
-        cons.gridwidth = 3;
+        cons.gridx = 4;
+        cons.gridy = 0;
+        cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        cons.ipadx = 100;
-        panelFormulario.add(cbArea, cons);
+        cons.ipadx = 50;
+        panelFormulario.add(tfFrase, cons);
 
         super.addFormulario(panelFormulario);
     }

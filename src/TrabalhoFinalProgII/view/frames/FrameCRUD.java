@@ -20,50 +20,52 @@ import javax.swing.JPanel;
  * @author 00783962045
  */
 public abstract class FrameCRUD extends JInternalFrame {
+
     private JPanel panelPrincipal;
     private CRUDActionPanel panelBotoesCRUD;
     private Dimension dimension;
 
     private LayoutManager layout;
-    
+
     public FrameCRUD(String titulo, Dimension dimension) throws HeadlessException {
         this.dimension = dimension;
-        
+
         initializeComponets();
         addComponets();
-        
+
         super.setSize(dimension);
         super.setTitle(titulo);
         super.setLayout(layout);
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+       
+
     }
 
     private void initializeComponets() {
         panelPrincipal = new JPanel();
         panelPrincipal.setSize(dimension);
-        
+
         panelBotoesCRUD = new CRUDActionPanel(this);
-        
+
         layout = new BorderLayout();
         panelPrincipal.setLayout(layout);
-        
+
     }
 
     private void addComponets() {
-       this.setContentPane(panelPrincipal);
-       panelPrincipal.add(panelBotoesCRUD, BorderLayout.SOUTH); 
+        this.setContentPane(panelPrincipal);
+        panelPrincipal.add(panelBotoesCRUD, BorderLayout.SOUTH);
     }
-    
-    public void addFormulario(Container container){
+
+    public void addFormulario(Container container) {
         panelPrincipal.add(container, BorderLayout.CENTER);
     }
 
     public CRUDActionPanel getPanelBotoesCRUD() {
         return panelBotoesCRUD;
     }
- 
+
     public abstract void limparCampos();
-    
+
     public abstract void carregarCampos();
 }

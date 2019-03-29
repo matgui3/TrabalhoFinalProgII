@@ -16,17 +16,16 @@ import javax.swing.JMenuItem;
  * @author 00783962045
  */
 public class MenuPrincipal extends JMenuBar {
-    private JMenu menuCliente;
-    private JMenu menuConta;
+    private JMenu menuBibliotecas;
+    private JMenu menuOperadores;
     private JMenu menuAjuda;
     
-    private JMenuItem menuItemCadCliCliente;
-    private JMenuItem menuItemCadCliEndereco;
-    private JMenuItem menuItemCadAgenca;
-    private JMenuItem menuItemCadContaCorrente;
-    private JMenuItem menuItemCadContaPoupanca;
-    private JMenuItem menuItemCadContaSalario;
+    private JMenuItem menuItemAddFrase;
+    private JMenuItem menuItemAddAjuste;
+    private JMenuItem menuItemAddOperadores;
+    private JMenuItem menuItemVerOperadores;
     private JMenuItem menuItemSobre;
+    private JMenuItem menuItemSair;
     
     private FramePrincipal frameSistema;
 
@@ -39,38 +38,36 @@ public class MenuPrincipal extends JMenuBar {
     }
 
     private void initializeComponents() {
-        menuCliente = new JMenu("Cliente");
-        menuConta = new JMenu("Conta");
+        menuBibliotecas = new JMenu("Bibliotecas");
+        menuOperadores = new JMenu("Operadores");
         menuAjuda = new JMenu("Ajuda");
         
-        menuItemCadCliCliente = new JMenuItem("Cadastro de Cliente");
-        menuItemCadCliEndereco = new JMenuItem("Cadastro de Endereco");
-        menuItemCadAgenca = new JMenuItem("Cadastro de Agencia");
-        menuItemCadContaCorrente = new JMenuItem("Cadastro de Conta Corrente");
-        menuItemCadContaSalario = new JMenuItem("Cadastro de Conta Salario");
-        menuItemCadContaPoupanca = new JMenuItem("Cadastro de Conta Poupanca");
+        menuItemAddFrase = new JMenuItem("Adicionar Frase à Biblioteca");
+        menuItemAddAjuste = new JMenuItem("Adicionar Ajuste à Biblioteca");
+        menuItemAddOperadores = new JMenuItem("Adicionar Operadores");
+        menuItemVerOperadores = new JMenuItem("Operadores Cadastrados");
         menuItemSobre = new JMenuItem("Sobre a Aplicação");
+        menuItemSair = new JMenuItem("Sair");
     }
 
     private void addComponents() {
-        menuCliente.add(menuItemCadCliCliente);
-        menuCliente.add(menuItemCadCliEndereco);
+        menuBibliotecas.add(menuItemAddFrase);
+        menuBibliotecas.add(menuItemAddAjuste);
         
-        menuConta.add(menuItemCadAgenca);
-        menuConta.add(menuItemCadContaCorrente);
-        menuConta.add(menuItemCadContaPoupanca);
-        menuConta.add(menuItemCadContaSalario);
+        menuOperadores.add(menuItemVerOperadores);
+        menuOperadores.add(menuItemAddOperadores);
         
         menuAjuda.add(menuItemSobre);
+        menuAjuda.add(menuItemSair);
         
-        super.add(menuCliente);
-        super.add(menuConta);
+        super.add(menuBibliotecas);
+        super.add(menuOperadores);
         super.add(menuAjuda);
     }
 
     private void addListener() {
         ActionListener listener = new ListenerMenuAplicação(FrameFrasesProntas.class, frameSistema);
-        menuItemCadCliEndereco.addActionListener(listener);
+        menuItemAddAjuste.addActionListener(listener);
     
     }
     
