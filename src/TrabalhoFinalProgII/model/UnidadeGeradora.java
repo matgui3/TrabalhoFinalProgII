@@ -5,11 +5,17 @@
  */
 package TrabalhoFinalProgII.model;
 
+
 /**
  * Classe contendo os comportamentos e atributos das Unidades Geradoras.
  * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
  * @since 11/03/2019
  */
+
+
+
+
+//Comentado para teste de nova classe como ENUM
 public class UnidadeGeradora {
     
     private int numero;
@@ -30,7 +36,8 @@ public class UnidadeGeradora {
      * @param potencia Potência da unidade geradora.
      * @param estadoUg Estado da unidade geradora.
      */
-    public UnidadeGeradora(int numero, String potencia, EstadoUnidadeGeradora estadoUg) {
+   
+public UnidadeGeradora(int numero, String potencia, EstadoUnidadeGeradora estadoUg) {
         super();
         this.numero = numero;
         this.potencia = potencia;

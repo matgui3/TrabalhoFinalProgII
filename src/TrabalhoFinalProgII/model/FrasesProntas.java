@@ -16,6 +16,7 @@ import java.util.List;
 public class FrasesProntas {
 
     private ArrayList<String> frases = new ArrayList<String>();
+    private EnumFrases area;
 
     /**
      * Método que adiciona uma frase à lista de frases prontas.
@@ -23,6 +24,14 @@ public class FrasesProntas {
      */ 
     public void CadastrarFrase(String frase) {
         frases.add(frase);
+    }
+
+    public EnumFrases getArea() {
+        return area;
+    }
+
+    public void setArea(EnumFrases area) {
+        this.area = area;
     }
 
     /**
