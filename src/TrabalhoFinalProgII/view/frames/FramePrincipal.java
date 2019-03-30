@@ -52,5 +52,8 @@ public class FramePrincipal extends JFrame {
         desktop.add(frame);
         frame.setVisible(true);
     }
+    public void fechar() {
+        this.dispose();
+    }
 
 }

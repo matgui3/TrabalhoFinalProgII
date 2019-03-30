@@ -6,16 +6,19 @@
 package TrabalhoFinalProgII.view.frames;
 
 import TrabalhoFinalProgII.view.listener.ListenerMenuAplicação;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.plaf.RootPaneUI;
 
 /**
  *
  * @author 00783962045
  */
-public class MenuPrincipal extends JMenuBar {
+public class MenuPrincipal extends JMenuBar implements ActionListener{
     private JMenu menuBibliotecas;
     private JMenu menuOperadores;
     private JMenu menuAjuda;
@@ -26,6 +29,7 @@ public class MenuPrincipal extends JMenuBar {
     private JMenuItem menuItemVerOperadores;
     private JMenuItem menuItemSobre;
     private JMenuItem menuItemSair;
+    private ConfirmarSaida telaSaida;
     
     private FramePrincipal frameSistema;
 
@@ -48,6 +52,8 @@ public class MenuPrincipal extends JMenuBar {
         menuItemVerOperadores = new JMenuItem("Operadores Cadastrados");
         menuItemSobre = new JMenuItem("Sobre a Aplicação");
         menuItemSair = new JMenuItem("Sair");
+        menuItemSair.addActionListener(this);
+        telaSaida = new ConfirmarSaida(frameSistema);
     }
 
     private void addComponents() {
@@ -68,7 +74,15 @@ public class MenuPrincipal extends JMenuBar {
     private void addListener() {
         ActionListener listener = new ListenerMenuAplicação(FrameFrasesProntas.class, frameSistema);
         menuItemAddFrase.addActionListener(listener);
-    
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        Object obj = evt.getSource();
+        if (obj == menuItemSair) {
+            this.telaSaida.setVisible(true);
+            
+        }
     }
     
     

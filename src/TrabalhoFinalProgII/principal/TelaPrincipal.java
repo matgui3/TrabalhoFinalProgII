@@ -16,6 +16,7 @@ public class TelaPrincipal implements Runnable {
 
     public static void main(String[] args) {
         TelaPrincipal tela = new TelaPrincipal();
+        
         Thread thread = new Thread(tela);
 
         thread.run();
