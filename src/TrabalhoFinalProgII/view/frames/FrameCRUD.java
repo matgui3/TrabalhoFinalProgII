@@ -37,7 +37,6 @@ public abstract class FrameCRUD extends JInternalFrame {
         super.setTitle(titulo);
         super.setLayout(layout);
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       
 
     }
 
@@ -68,4 +67,8 @@ public abstract class FrameCRUD extends JInternalFrame {
     public abstract void limparCampos();
 
     public abstract void carregarCampos();
+
+    public void fechar() {
+        this.dispose();
+    }
 }

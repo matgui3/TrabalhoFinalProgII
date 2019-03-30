@@ -130,4 +130,6 @@ public class FrameFrasesProntas extends FrameCRUD {
         super.addFormulario(panelFormulario);
     }
 
+
+
 }

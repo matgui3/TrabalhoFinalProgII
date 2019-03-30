@@ -67,7 +67,7 @@ public class MenuPrincipal extends JMenuBar {
 
     private void addListener() {
         ActionListener listener = new ListenerMenuAplicação(FrameFrasesProntas.class, frameSistema);
-        menuItemAddAjuste.addActionListener(listener);
+        menuItemAddFrase.addActionListener(listener);
     
     }
     
