@@ -6,17 +6,17 @@
 package TrabalhoFinalProgII.view.frames;
 
 import TrabalhoFinalProgII.view.panels.FrasesAjustesActionPanel;
+import TrabalhoFinalProgII.view.panels.PanelCabecalhoDia;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.LayoutManager;
 import java.awt.Toolkit;
-import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
-import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -29,6 +29,8 @@ public class FramePrincipal extends JFrame {
     private Container contentPane;
     private JMenuBar menuAplicacao;
     private FrasesAjustesActionPanel panelBotoes;
+    private PanelCabecalhoDia cabecalhoDia;
+    private JSeparator separador1;
     
     public FramePrincipal() {
         super("Relatório de Ocorrências");
@@ -47,6 +49,8 @@ public class FramePrincipal extends JFrame {
         contentPane = super.getContentPane();
         menuAplicacao = new MenuPrincipal(this);
         panelBotoes = new FrasesAjustesActionPanel(this);
+        separador1 = new JSeparator(SwingConstants.VERTICAL);
+        cabecalhoDia = new PanelCabecalhoDia(this);
        
     }
 
@@ -54,7 +58,8 @@ public class FramePrincipal extends JFrame {
         contentPane.add(desktop, BorderLayout.CENTER);
         super.setJMenuBar(menuAplicacao);
         contentPane.add(panelBotoes,BorderLayout.NORTH);
-        
+        contentPane.add(separador1, BorderLayout.SOUTH);
+        contentPane.add(cabecalhoDia, BorderLayout.CENTER);
     }
 
 

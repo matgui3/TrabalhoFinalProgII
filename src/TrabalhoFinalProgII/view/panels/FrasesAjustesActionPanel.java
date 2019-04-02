@@ -5,10 +5,8 @@
  */
 package TrabalhoFinalProgII.view.panels;
 
-import TrabalhoFinalProgII.view.frames.FramePrincipal;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -34,8 +32,7 @@ public class FrasesAjustesActionPanel extends JPanel implements ActionListener {
     private Dimension dimensaoPainel;
     private GridBagConstraints cons;
 
-    private Container parent;
-    //private FramePrincipal parent;
+    private final Container parent;
 
     public FrasesAjustesActionPanel(Container parent) {
         this.parent = parent;
