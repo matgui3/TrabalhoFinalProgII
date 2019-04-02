@@ -29,7 +29,6 @@ public class MenuPrincipal extends JMenuBar implements ActionListener{
     private JMenuItem menuItemVerOperadores;
     private JMenuItem menuItemSobre;
     private JMenuItem menuItemSair;
-    private ConfirmarSaida telaSaida;
     
     private FramePrincipal frameSistema;
 
@@ -53,7 +52,6 @@ public class MenuPrincipal extends JMenuBar implements ActionListener{
         menuItemSobre = new JMenuItem("Sobre a Aplicação");
         menuItemSair = new JMenuItem("Sair");
         menuItemSair.addActionListener(this);
-        telaSaida = new ConfirmarSaida(frameSistema);
     }
 
     private void addComponents() {
@@ -80,8 +78,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener{
     public void actionPerformed(ActionEvent evt) {
         Object obj = evt.getSource();
         if (obj == menuItemSair) {
-            this.telaSaida.setVisible(true);
-            
+            JOptionPane telaSaida = new JOptionPane();
         }
     }
     

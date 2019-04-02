@@ -14,12 +14,16 @@ public enum EnumFrases {
     UG2("UG2"),
     SERVIÇOSAUXILIARES("Serviçes Auxiliares"),
     TOMADADAGUA("Tomada D'Água"),
-    SE("Suvestação");
+    SE("Subestação");
     
     private final String enumFrases;
 
     EnumFrases(String enumFrases) {
         this.enumFrases = enumFrases;
+    }
+    
+    public String getValue(){
+        return enumFrases;
     }
 
     @Override

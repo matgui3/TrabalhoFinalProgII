@@ -11,6 +11,10 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.LayoutManager;
+import java.awt.Toolkit;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
@@ -48,7 +52,14 @@ public abstract class FrameCRUD extends JInternalFrame {
 
         layout = new BorderLayout();
         panelPrincipal.setLayout(layout);
+        setPosicao();
 
+    }
+
+    public void setPosicao() {
+        Dimension d = panelPrincipal.getSize();
+        this.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - d.width) / 2,
+                (Toolkit.getDefaultToolkit().getScreenSize().height - d.height) / 4);
     }
 
     private void addComponets() {

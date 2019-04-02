@@ -15,8 +15,8 @@ import java.util.List;
  */
 public class FrasesProntas {
 
-    private ArrayList<String> frases = new ArrayList<String>();
     private EnumFrases area;
+    private ArrayList<String> frases = new ArrayList<String>();
 
     /**
      * Método que adiciona uma frase à lista de frases prontas.
@@ -34,16 +34,9 @@ public class FrasesProntas {
         this.area = area;
     }
 
-    /**
-     * Método toString que retorna todas as frases prontas armazenadas.
-     * @return Retorna todas as frases prontas armazenadas no momento.
-     */
+    @Override
     public String toString() {
-        String texto = "";
-            for (String frase : frases) {
-                texto+= frase + "; ";
-            }
-
-            return texto;
+        return "FrasesProntas{" + "area=" + area + ", frases=" + frases + '}';
     }
+
 }

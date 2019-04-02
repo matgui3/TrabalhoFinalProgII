@@ -5,13 +5,18 @@
  */
 package TrabalhoFinalProgII.view.frames;
 
+import TrabalhoFinalProgII.view.panels.FrasesAjustesActionPanel;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.LayoutManager;
+import java.awt.Toolkit;
+import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
+import javax.swing.JPanel;
 
 /**
  *
@@ -23,7 +28,8 @@ public class FramePrincipal extends JFrame {
     private JDesktopPane desktop;
     private Container contentPane;
     private JMenuBar menuAplicacao;
-
+    private FrasesAjustesActionPanel panelBotoes;
+    
     public FramePrincipal() {
         super("Relatório de Ocorrências");
 
@@ -33,20 +39,24 @@ public class FramePrincipal extends JFrame {
         setSize(dimTela);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-
     }
 
     private void initializeComponents() {
-        dimTela = new Dimension(800, 600);
+        dimTela = Toolkit.getDefaultToolkit().getScreenSize();
         desktop = new JDesktopPane();
         contentPane = super.getContentPane();
         menuAplicacao = new MenuPrincipal(this);
+        panelBotoes = new FrasesAjustesActionPanel(this);
+       
     }
 
     private void addComponents() {
         contentPane.add(desktop, BorderLayout.CENTER);
         super.setJMenuBar(menuAplicacao);
+        contentPane.add(panelBotoes,BorderLayout.NORTH);
+        
     }
+
 
     public void adicionarFormulario(JInternalFrame frame) {
         desktop.add(frame);

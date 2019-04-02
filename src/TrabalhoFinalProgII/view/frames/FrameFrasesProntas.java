@@ -10,18 +10,22 @@ import TrabalhoFinalProgII.model.FrasesProntas;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.Label;
 import java.awt.LayoutManager;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
  *
  * @author 00783962045
  */
-public class FrameFrasesProntas extends FrameCRUD {
+public final class FrameFrasesProntas extends FrameCRUD {
 
     private static final String titulo = "Frases Prontas";
     private static final Dimension dimension = new Dimension(800, 600);
@@ -31,12 +35,13 @@ public class FrameFrasesProntas extends FrameCRUD {
     private Label lbArea;
     private Label lbFrase;
 
-    private JTextField tfFrase;
+    private JTextArea taFrase;
     private JComboBox cbArea;
 
     private JPanel panelFormulario;
     private LayoutManager layout;
     private GridBagConstraints cons;
+    private EnumFrases esseEnum;
 
     public FrameFrasesProntas() {
         super(titulo, dimension);
@@ -46,7 +51,6 @@ public class FrameFrasesProntas extends FrameCRUD {
         initializeComponents();
         addComponents();
 
-        carregarCampos();
     }
 
     public FrameFrasesProntas(FrasesProntas novaFrase) {
@@ -57,14 +61,14 @@ public class FrameFrasesProntas extends FrameCRUD {
         initializeComponents();
         addComponents();
 
-        carregarCampos();
     }
 
     private void initializeComponents() {
         lbArea = new Label("Área:");
         lbFrase = new Label("Frase:");
 
-        tfFrase = new JTextField();
+        taFrase = new JTextArea(5, 45);
+        taFrase.setLineWrap(true);
         cbArea = new JComboBox(EnumFrases.values());
 
         cbArea.setSelectedIndex(-1);
@@ -73,27 +77,15 @@ public class FrameFrasesProntas extends FrameCRUD {
         panelFormulario = new JPanel(layout);
 
         panelFormulario.setBorder(BorderFactory.createTitledBorder("Frases Prontas"));
-    }
-
-    @Override
-    public void carregarCampos() {
-        tfFrase.setText(novaFrase.toString());
-
-        EnumFrases area = novaFrase.getArea();
-        if (area != null) {
-            cbArea.setSelectedIndex(area.ordinal());
-        } else {
-            cbArea.setSelectedIndex(-1);
-        }
-    }
-
-    @Override
-    public void limparCampos() {
-        this.novaFrase = new FrasesProntas();
-
-        carregarCampos();
-
-        super.repaint();
+        //cria um itemListener para saber qual item foi selecionado
+        cbArea.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED){
+                    esseEnum = (EnumFrases) e.getItem();
+                }
+            }
+        });
     }
 
     private void addComponents() {
@@ -109,7 +101,8 @@ public class FrameFrasesProntas extends FrameCRUD {
         cons.gridy = 0;
         cons.gridwidth = 2;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        cons.ipadx = 5;
+        cons.weightx = 0;
+        cons.insets = new Insets(0, 0, 0, 15);
         panelFormulario.add(cbArea, cons);
 
         cons = new GridBagConstraints();
@@ -124,12 +117,29 @@ public class FrameFrasesProntas extends FrameCRUD {
         cons.gridy = 0;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        cons.ipadx = 50;
-        panelFormulario.add(tfFrase, cons);
+        panelFormulario.add(taFrase, cons);
 
         super.addFormulario(panelFormulario);
+       
+    }
+    
+
+    @Override
+    public void carregarCampos() {
+        
+        novaFrase.setArea(esseEnum);
+        novaFrase.CadastrarFrase(taFrase.getText());
+        System.out.println(novaFrase.toString());
+
     }
 
+    @Override
+    public void limparCampos() {
+        this.novaFrase = new FrasesProntas();
+        taFrase.setText("");
+        cbArea.setSelectedIndex(-1);
 
+        super.repaint();
+    }
 
 }
