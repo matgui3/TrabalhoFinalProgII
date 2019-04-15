@@ -57,9 +57,6 @@ public class FramePrincipal extends JFrame {
     private void addComponents() {
         contentPane.add(desktop, BorderLayout.CENTER);
         super.setJMenuBar(menuAplicacao);
-        contentPane.add(panelBotoes,BorderLayout.NORTH);
-        contentPane.add(separador1, BorderLayout.SOUTH);
-        contentPane.add(cabecalhoDia, BorderLayout.CENTER);
     }
 
 
