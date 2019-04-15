@@ -20,10 +20,12 @@ import javax.swing.plaf.RootPaneUI;
  */
 public class MenuPrincipal extends JMenuBar implements ActionListener {
 
+    private JMenu menuAbrirRelatorio;
     private JMenu menuBibliotecas;
     private JMenu menuOperadores;
     private JMenu menuAjuda;
 
+    private JMenuItem menuItemAbrirRelatorio;
     private JMenuItem menuItemAddFrase;
     private JMenuItem menuItemAddAjuste;
     private JMenuItem menuItemAddOperadores;
@@ -43,10 +45,12 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
     }
 
     private void initializeComponents() {
+        menuAbrirRelatorio = new JMenu("Relatório de Ocorrências");
         menuBibliotecas = new JMenu("Bibliotecas");
         menuOperadores = new JMenu("Operadores");
         menuAjuda = new JMenu("Ajuda");
 
+        menuItemAbrirRelatorio = new JMenuItem("Abrir Relatório");
         menuItemAddFrase = new JMenuItem("Adicionar Frase à Biblioteca");
         menuItemAddAjuste = new JMenuItem("Adicionar Ajuste à Biblioteca");
         menuItemAddOperadores = new JMenuItem("Adicionar Operadores");
@@ -59,6 +63,8 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
     }
 
     private void addComponents() {
+        menuAbrirRelatorio.add(menuItemAbrirRelatorio);
+        
         menuBibliotecas.add(menuItemAddFrase);
         menuBibliotecas.add(menuItemAddAjuste);
 
@@ -69,6 +75,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
         menuAjuda.add(menuItemLogOut);
         menuAjuda.add(menuItemSair);
 
+        super.add(menuAbrirRelatorio);
         super.add(menuBibliotecas);
         super.add(menuOperadores);
         super.add(menuAjuda);
