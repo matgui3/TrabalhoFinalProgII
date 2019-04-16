@@ -5,6 +5,7 @@
  */
 package TrabalhoFinalProgII.view.frames;
 
+import TrabalhoFinalProgII.model.RelatorioOcorrencias;
 import TrabalhoFinalProgII.view.listener.ListenerMenuAplicação;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -84,6 +85,9 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
     private void addListener() {
         ActionListener listener = new ListenerMenuAplicação(FrameFrasesProntas.class, frameSistema);
         menuItemAddFrase.addActionListener(listener);
+        
+        listener = new ListenerMenuAplicação(FrameRelatorio.class, frameSistema);
+        menuItemAbrirRelatorio.addActionListener(listener);
     }
 
     @Override

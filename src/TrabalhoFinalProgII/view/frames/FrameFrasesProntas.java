@@ -41,7 +41,7 @@ public final class FrameFrasesProntas extends FrameCRUD {
     private JPanel panelFormulario;
     private LayoutManager layout;
     private GridBagConstraints cons;
-    private EnumFrases esseEnum;
+    private EnumFrases enumFrases;
 
     public FrameFrasesProntas() {
         super(titulo, dimension);
@@ -82,7 +82,7 @@ public final class FrameFrasesProntas extends FrameCRUD {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED){
-                    esseEnum = (EnumFrases) e.getItem();
+                    enumFrases = (EnumFrases) e.getItem();
                 }
             }
         });
@@ -127,7 +127,7 @@ public final class FrameFrasesProntas extends FrameCRUD {
     @Override
     public void carregarCampos() {
         
-        novaFrase.setArea(esseEnum);
+        novaFrase.setArea(enumFrases);
         novaFrase.CadastrarFrase(taFrase.getText());
         System.out.println(novaFrase.toString());
 
