@@ -68,7 +68,7 @@ public abstract class FrameCRUD extends JInternalFrame {
 
     }
     
-    public void addBotaoRelatorio(JButton botao){
+    public void addBotaoInferior(JButton botao){
         panelPrincipal.add(botao, BorderLayout.SOUTH);
     }
 

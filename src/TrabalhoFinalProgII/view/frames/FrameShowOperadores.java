@@ -5,6 +5,7 @@
  */
 package TrabalhoFinalProgII.view.frames;
 
+import TrabalhoFinalProgII.model.Cargo;
 import TrabalhoFinalProgII.model.EnumPeriodo;
 import TrabalhoFinalProgII.model.RelatorioOcorrencias;
 import java.awt.Dimension;
@@ -22,57 +23,51 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+
 
 /**
  *
  * @author guilh
  */
-public final class FrameRelatorio extends FrameCRUD {
-
-    private static final String titulo = "Abrir Relatorio de Ocorrências";
-    private static final Dimension dimension = new Dimension(800, 600);
-    private RelatorioOcorrencias novoRelatorio;
-
-    private int Periodo;
-    private Label lbDtRelatorio;
-    private Label lbPeriodo;
-    private Label lbTurno;
-    private EnumPeriodo enumPeriodo;
-    private JFormattedTextField tfDtRelatorio;
-    private MaskFormatter maskTf;
+public class FrameShowOperadores extends FrameCRUD{
     
-    private JComboBox cbPeriodo;
 
-    private JButton abrirRelatorio;
+    private static final String titulo = "Operadores Cadastrados";
+    private static final Dimension dimension = new Dimension(1000, 800);
+
+    private Label lbTituloFrame;
+    private Label lbNomeOperador;
+    private Label lbCargoOperador;
+    private Cargo enumCargo;
+    private JTable tbExibicao;
+
+    private JButton btVoltar;
 
     private JPanel panelFormulario;
     private LayoutManager layout;
     private GridBagConstraints cons;
 
-    public FrameRelatorio() {
+    public FrameShowOperadores() {
         super(titulo, dimension);
-
-        novoRelatorio = new RelatorioOcorrencias();
 
         initializeComponents();
         addComponents();
     }
 
-    public FrameRelatorio(String titulo, Dimension dimension) {
+    public FrameShowOperadores(String titulo, Dimension dimension) {
         super(titulo, dimension, true);
-
-        novoRelatorio = new RelatorioOcorrencias();
 
         initializeComponents();
         addComponents();
     }
 
     public void initializeComponents() {
-        lbDtRelatorio = new Label("Data do Relatório: ");
-        lbPeriodo = new Label("Período do relatório: ");
-        lbTurno = new Label("Turno desejado: ");
+        lbTituloFrame = new Label("Operadores Cadastrados");
+        lbNomeOperador = new Label("Nome do operador");
+        lbCargoOperador = new Label(enumCargo.OPERADOR1.toString());
 
         cbPeriodo = new JComboBox(enumPeriodo.values());
         cbPeriodo.setSelectedIndex(-1);
@@ -101,7 +96,7 @@ public final class FrameRelatorio extends FrameCRUD {
         }
         );
 
-        abrirRelatorio = new JButton("Abrir Relatório");
+        btVoltar = new JButton("Voltar");
     }
 
     public void addComponents() {
@@ -141,7 +136,7 @@ public final class FrameRelatorio extends FrameCRUD {
         panelFormulario.add(cbPeriodo, cons);
 
         super.addFormulario(panelFormulario);
-        super.addBotaoInferior(abrirRelatorio);
+        super.addBotaoInferior(btVoltar);
     }
 
     @Override
@@ -159,5 +154,5 @@ public final class FrameRelatorio extends FrameCRUD {
     public void carregarCampos() {
         tfDtRelatorio.setText("");
     }
-
+    
 }
