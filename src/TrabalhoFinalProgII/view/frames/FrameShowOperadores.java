@@ -6,26 +6,19 @@
 package TrabalhoFinalProgII.view.frames;
 
 import TrabalhoFinalProgII.model.Cargo;
-import TrabalhoFinalProgII.model.EnumPeriodo;
-import TrabalhoFinalProgII.model.RelatorioOcorrencias;
+import TrabalhoFinalProgII.model.Operador;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Label;
 import java.awt.LayoutManager;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.text.MaskFormatter;
 
 
 /**
@@ -37,12 +30,16 @@ public class FrameShowOperadores extends FrameCRUD{
 
     private static final String titulo = "Operadores Cadastrados";
     private static final Dimension dimension = new Dimension(1000, 800);
+//    private List<Operador> operadores;
 
     private Label lbTituloFrame;
     private Label lbNomeOperador;
     private Label lbCargoOperador;
     private Cargo enumCargo;
-    private JTable tbExibicao;
+    
+//    private JTable tbExibicao;
+//    private OperadorTableModel tableModel;
+//    private JScrollPane scrollTable;
 
     private JButton btVoltar;
 
@@ -52,6 +49,8 @@ public class FrameShowOperadores extends FrameCRUD{
 
     public FrameShowOperadores() {
         super(titulo, dimension);
+        
+//        this.operadores = operadores;
 
         initializeComponents();
         addComponents();
@@ -66,35 +65,17 @@ public class FrameShowOperadores extends FrameCRUD{
 
     public void initializeComponents() {
         lbTituloFrame = new Label("Operadores Cadastrados");
+        lbTituloFrame.setFont(new Font("Times New Roman", Font.PLAIN, 60));
         lbNomeOperador = new Label("Nome do operador");
         lbCargoOperador = new Label(enumCargo.OPERADOR1.toString());
 
-        cbPeriodo = new JComboBox(enumPeriodo.values());
-        cbPeriodo.setSelectedIndex(-1);
-
-        tfDtRelatorio = new JFormattedTextField();
-        tfDtRelatorio.setPreferredSize(new Dimension(70,25));
-        try {
-            maskTf = new MaskFormatter("##/##/####");
-        } catch (ParseException ex) {
-            Logger.getLogger(FrameRelatorio.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        maskTf.install(tfDtRelatorio);
-
         layout = new GridBagLayout();
         panelFormulario = new JPanel(layout);
-        panelFormulario.setBorder(BorderFactory.createTitledBorder("Abrir Relatório de Ocorrências"));
-
-        cbPeriodo.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    enumPeriodo = (EnumPeriodo) e.getItem();
-                }
-            }
-
-        }
-        );
+        panelFormulario.setBorder(BorderFactory.createTitledBorder("Exibir Operadores Cadastrados"));
+        
+//        tableModel = new OperadorTableModel(operadores);
+//        tbExibicao = new JTable(tableModel);
+//        scrollTable = new JScrollPane(tbExibicao);
 
         btVoltar = new JButton("Voltar");
     }
@@ -103,56 +84,28 @@ public class FrameShowOperadores extends FrameCRUD{
         cons = new GridBagConstraints();
         cons.gridx = 0;
         cons.gridy = 0;
-        cons.gridwidth = 1;
+        cons.gridwidth = 2;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(lbDtRelatorio, cons);
-
-        cons = new GridBagConstraints();
-        cons.gridx = 1;
-        cons.gridy = 0;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(tfDtRelatorio, cons);
-
-        cons = new GridBagConstraints();
-        cons.gridx = 2;
-        cons.gridy = 0;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(new Label("            "), cons);
-
-        cons = new GridBagConstraints();
-        cons.gridx = 3;
-        cons.gridy = 0;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(lbPeriodo, cons);
-
-        cons = new GridBagConstraints();
-        cons.gridx = 4;
-        cons.gridy = 0;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(cbPeriodo, cons);
-
+        panelFormulario.add(lbTituloFrame, cons);
+        
+//        cons = new GridBagConstraints();
+//        cons.gridx = 0;
+//        cons.gridy = 2;
+//        cons.gridwidth = 2;
+//        cons.fill = GridBagConstraints.HORIZONTAL;
+//        panelFormulario.add(tbExibicao,cons);
+                
         super.addFormulario(panelFormulario);
         super.addBotaoInferior(btVoltar);
+//        this.getContentPane().add(scrollTable);
     }
 
     @Override
     public void limparCampos() {
-        this.novoRelatorio = new RelatorioOcorrencias();
-        lbDtRelatorio.setText("");
-        lbPeriodo.setText("");
-        lbTurno.setText("");
-        cbPeriodo.setSelectedIndex(-1);
-
-        super.repaint();
     }
 
     @Override
     public void carregarCampos() {
-        tfDtRelatorio.setText("");
     }
     
 }
