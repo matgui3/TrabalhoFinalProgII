@@ -13,6 +13,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -32,10 +33,12 @@ public final class FrameFrasesAjustes extends FrameCRUD {
     private String valorAjusteUg2;
 
     private Label lbArea;
-    private Label lbAjuste;
-
-    private JTextArea taFrase;
+    private Label lbAjusteUg1;
+    private Label lbAjusteUg2;
     private JComboBox cbArea;
+
+    private JFormattedTextField tfUg1;
+    private JFormattedTextField tfUg2;
 
     private JPanel panelFormulario;
     private LayoutManager layout;
@@ -63,14 +66,17 @@ public final class FrameFrasesAjustes extends FrameCRUD {
     }
 
     private void initializeComponents() {
-        lbArea = new Label("Área:");
-        lbAjuste = new Label("Frase:");
+        lbArea = new Label("Área: ");
+        lbAjusteUg1 = new Label("Ajuste na U.G.1: ");
+        lbAjusteUg2 = new Label("Ajuste na U.G.2: ");
 
-        taFrase = new JTextArea(5, 45);
-        taFrase.setLineWrap(true);
+        tfUg1 = new JFormattedTextField();
+        tfUg2 = new JFormattedTextField();
+        
+        tfUg1.setPreferredSize(new Dimension(120, 30));
+        tfUg2.setPreferredSize(new Dimension(120, 30));
+        
         cbArea = new JComboBox(EnumFrases.values());
-
-        cbArea.setSelectedIndex(-1);
 
         layout = new GridBagLayout();
         panelFormulario = new JPanel(layout);
@@ -80,7 +86,7 @@ public final class FrameFrasesAjustes extends FrameCRUD {
         cbArea.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED){
+                if (e.getStateChange() == ItemEvent.SELECTED) {
                     enumFrases = (EnumFrases) e.getItem();
                 }
             }
@@ -109,27 +115,39 @@ public final class FrameFrasesAjustes extends FrameCRUD {
         cons.gridy = 0;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(lbAjuste, cons);
+        panelFormulario.add(lbAjusteUg1, cons);
 
         cons = new GridBagConstraints();
         cons.gridx = 4;
         cons.gridy = 0;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(taFrase, cons);
+        panelFormulario.add(tfUg1, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 5;
+        cons.gridy = 0;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panelFormulario.add(lbAjusteUg2, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 6;
+        cons.gridy = 0;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panelFormulario.add(tfUg2, cons);
 
         super.addFormulario(panelFormulario);
-       
+
     }
-    
 
     @Override
     public void carregarCampos() {
-        
+
 //        novoAjuste.setArea(enumFrases);
 //        novoAjuste.CadastrarFrase(taFrase.getText());
 //        System.out.println(novoAjuste.toString());
-
     }
 
     @Override

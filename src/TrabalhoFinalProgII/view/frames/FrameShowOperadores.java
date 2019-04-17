@@ -29,7 +29,7 @@ public class FrameShowOperadores extends FrameCRUD{
     
 
     private static final String titulo = "Operadores Cadastrados";
-    private static final Dimension dimension = new Dimension(1000, 800);
+    private static final Dimension dimension = new Dimension(800, 600);
 //    private List<Operador> operadores;
 
     private Label lbTituloFrame;
@@ -65,7 +65,7 @@ public class FrameShowOperadores extends FrameCRUD{
 
     public void initializeComponents() {
         lbTituloFrame = new Label("Operadores Cadastrados");
-        lbTituloFrame.setFont(new Font("Times New Roman", Font.PLAIN, 60));
+        lbTituloFrame.setFont(new Font("Times New Roman", Font.PLAIN, 40));
         lbNomeOperador = new Label("Nome do operador");
         lbCargoOperador = new Label(enumCargo.OPERADOR1.toString());
 
