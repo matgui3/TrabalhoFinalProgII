@@ -12,9 +12,7 @@ import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.LayoutManager;
 import java.awt.Toolkit;
-import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
@@ -43,6 +41,20 @@ public abstract class FrameCRUD extends JInternalFrame {
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
+    
+        public FrameCRUD(String titulo, Dimension dimension, boolean relatorio) throws HeadlessException {
+        this.dimension = dimension;
+
+        initializeComponets();
+        
+        this.setContentPane(panelPrincipal);
+
+        super.setSize(dimension);
+        super.setTitle(titulo);
+        super.setLayout(layout);
+        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    }
 
     private void initializeComponets() {
         panelPrincipal = new JPanel();
@@ -54,6 +66,10 @@ public abstract class FrameCRUD extends JInternalFrame {
         panelPrincipal.setLayout(layout);
         setPosicao();
 
+    }
+    
+    public void addBotaoRelatorio(JButton botao){
+        panelPrincipal.add(botao, BorderLayout.SOUTH);
     }
 
     public void setPosicao() {
