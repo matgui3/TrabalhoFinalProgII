@@ -29,7 +29,7 @@ import javax.swing.text.MaskFormatter;
  *
  * @author guilh
  */
-public final class FrameRelatorio extends FrameCRUD {
+public final class FrameBuscarRelatorio extends FrameCRUD {
 
     private static final String titulo = "Abrir Relatorio de Ocorrências";
     private static final Dimension dimension = new Dimension(800, 600);
@@ -51,7 +51,7 @@ public final class FrameRelatorio extends FrameCRUD {
     private LayoutManager layout;
     private GridBagConstraints cons;
 
-    public FrameRelatorio() {
+    public FrameBuscarRelatorio() {
         super(titulo, dimension);
 
         novoRelatorio = new RelatorioOcorrencias();
@@ -60,7 +60,7 @@ public final class FrameRelatorio extends FrameCRUD {
         addComponents();
     }
 
-    public FrameRelatorio(String titulo, Dimension dimension) {
+    public FrameBuscarRelatorio(String titulo, Dimension dimension) {
         super(titulo, dimension, true);
 
         novoRelatorio = new RelatorioOcorrencias();
@@ -82,7 +82,7 @@ public final class FrameRelatorio extends FrameCRUD {
         try {
             maskTf = new MaskFormatter("##/##/####");
         } catch (ParseException ex) {
-            Logger.getLogger(FrameRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrameBuscarRelatorio.class.getName()).log(Level.SEVERE, null, ex);
         }
         maskTf.install(tfDtRelatorio);
 

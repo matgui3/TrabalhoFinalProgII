@@ -11,10 +11,14 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
@@ -28,11 +32,9 @@ public class FramePrincipal extends JFrame {
     private JDesktopPane desktop;
     private Container contentPane;
     private JMenuBar menuAplicacao;
-    private FrasesAjustesActionPanel panelBotoes;
-    private PanelCabecalhoDia cabecalhoDia;
-    private JSeparator separador1;
-    
-    public FramePrincipal() {
+    private FrameRelatorio relatorio;
+
+    public FramePrincipal()  {
         super("Relatório de Ocorrências");
 
         initializeComponents();
@@ -41,29 +43,39 @@ public class FramePrincipal extends JFrame {
         setSize(dimTela);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+
     }
 
-    private void initializeComponents() {
+    private void initializeComponents()  {
         dimTela = Toolkit.getDefaultToolkit().getScreenSize();
         desktop = new JDesktopPane();
         contentPane = super.getContentPane();
         menuAplicacao = new MenuPrincipal(this);
-        panelBotoes = new FrasesAjustesActionPanel(this);
-        separador1 = new JSeparator(SwingConstants.VERTICAL);
-        cabecalhoDia = new PanelCabecalhoDia(this);
-       
+        relatorio = new FrameRelatorio();
+
     }
 
     private void addComponents() {
         contentPane.add(desktop, BorderLayout.CENTER);
         super.setJMenuBar(menuAplicacao);
+        adicionarFormulario(relatorio);
+        try {
+            relatorio.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            System.out.println(ex.toString());
+        }
+        
     }
+
 
 
     public void adicionarFormulario(JInternalFrame frame) {
         desktop.add(frame);
         frame.setVisible(true);
+        
+        
     }
+
     public void fechar() {
         this.dispose();
     }
