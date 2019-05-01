@@ -1,33 +1,22 @@
 package TrabalhoFinalProgII.view.frames;
 
-import TrabalhoFinalProgII.model.EnumFrases;
 import TrabalhoFinalProgII.model.EstadoServicosAuxiliares;
 import TrabalhoFinalProgII.model.EstadoSubestacao;
 import TrabalhoFinalProgII.model.EstadoUnidadeGeradora;
-import TrabalhoFinalProgII.model.FrasesProntas;
-import TrabalhoFinalProgII.model.ValoresAlarmesTrip;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.Label;
 import java.awt.LayoutManager;
-import java.awt.Toolkit;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.BorderFactory;
+import java.awt.TextArea;
+import java.awt.TextField;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.JTable;
 
 /**
  *
@@ -50,12 +39,21 @@ public final class FrameRelatorio extends FrameCRUD {
     private Label lb10;
     private Label lbAjusteUg1;
     private Label lbAjusteUg2;
+    private Label lbHora;
+    private Label lbOcorrencia;
+    private TextField taHora;
+    private TextArea taOcorrencia;
+    private JButton jbGravar;
     private JComboBox cbUgs;
+    private JComboBox cbUgs2;
     private JComboBox cbSA;
     private JComboBox cbSE;
+    private JTable tabela;
 
     private JPanel panel1;
     private JPanel panel2;
+    private JPanel panel3;
+    private JPanel panel4;
 
     private LayoutManager layout;
     private GridBagConstraints cons;
@@ -92,23 +90,36 @@ public final class FrameRelatorio extends FrameCRUD {
         lb7 = new Label("Unidade 1");
         editaFont(lb7);
         cbUgs = new JComboBox(EstadoUnidadeGeradora.values());
+        cbUgs.setPreferredSize(new Dimension(300,20));
 
         lb8 = new Label("Unidade 2");
+        cbUgs2 = new JComboBox(EstadoUnidadeGeradora.values());
         editaFont(lb8);
 
         lb9 = new Label("Subestação");
         editaFont(lb9);
         cbSE = new JComboBox(EstadoSubestacao.values());
 
-        lb10 = new Label("serviços Auxiliares");
+        lb10 = new Label("Serviços Auxiliares");
         editaFont(lb10);
         cbSA = new JComboBox(EstadoServicosAuxiliares.values());
+        
+        lbHora = new Label("Hora");
+        taHora = new TextField("", 20);
+        lbOcorrencia = new Label("Ocorrência");
+        taOcorrencia = new TextArea("", 1 , 60);
+        jbGravar = new JButton("Gravar");
+        tabela = new JTable(2, 2);
 
         cabecalhoLayout1 = new FlowLayout(FlowLayout.CENTER, 100, 10);
 
         layout = new GridBagLayout();
         panel1 = new JPanel(new BorderLayout());
         panel2 = new JPanel(layout);
+        panel3 = new JPanel(cabecalhoLayout1);
+        panel4 = new JPanel(cabecalhoLayout1);
+        
+        panelBotoesCRUD.setVisible(false);
 
     }
 
@@ -119,6 +130,8 @@ public final class FrameRelatorio extends FrameCRUD {
         
         panel1.add(lb4);*/
         panel1.add(panel2, BorderLayout.NORTH);
+        panel1.add(panel3, BorderLayout.CENTER);
+        panel1.add(panel4, BorderLayout.SOUTH);
 
         cons = new GridBagConstraints();
         cons.gridx = 0;
@@ -155,71 +168,81 @@ public final class FrameRelatorio extends FrameCRUD {
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panel2.add(lb5, cons);
-        
+
         cons = new GridBagConstraints();
         cons.gridx = 0;
         cons.gridy = 2;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panel2.add(lb6, cons);
-        
+
         cons = new GridBagConstraints();
         cons.gridx = 0;
         cons.gridy = 3;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panel2.add(lb7, cons);
-        
+
         cons = new GridBagConstraints();
         cons.gridx = 1;
         cons.gridy = 3;
         cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
+        cons.fill = GridBagConstraints.NONE;
         panel2.add(cbUgs, cons);
-        cons = new GridBagConstraints();
         
+        cons = new GridBagConstraints();
         cons.gridx = 0;
         cons.gridy = 4;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panel2.add(lb8, cons);
-        
+
         cons = new GridBagConstraints();
         cons.gridx = 1;
         cons.gridy = 4;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panel2.add(cbUgs, cons);
-        
+        panel2.add(cbUgs2, cons);
+
         cons = new GridBagConstraints();
         cons.gridx = 0;
         cons.gridy = 5;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panel2.add(lb9, cons);
-        
+
         cons = new GridBagConstraints();
         cons.gridx = 1;
         cons.gridy = 5;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panel2.add(cbSE, cons);
-        
+
         cons = new GridBagConstraints();
         cons.gridx = 0;
         cons.gridy = 6;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panel2.add(lb10, cons);
-        
+
         cons = new GridBagConstraints();
         cons.gridx = 1;
         cons.gridy = 6;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panel2.add(cbSA, cons);
+        
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(20); 
+        tabela.setBorder(null);
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(400); 
+        panel3.add(tabela);
+        
+        panel4.add(lbHora);
+        panel4.add(taHora);
+        panel4.add(lbOcorrencia);
+        panel4.add(taOcorrencia);
+        panel4.add(jbGravar);
 
-       
         super.addFormulario(panel1);
 
     }

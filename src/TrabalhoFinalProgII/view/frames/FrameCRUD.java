@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 public abstract class FrameCRUD extends JInternalFrame {
 
     private JPanel panelPrincipal;
-    private CRUDActionPanel panelBotoesCRUD;
+    protected CRUDActionPanel panelBotoesCRUD;
     private Dimension dimension;
 
     private LayoutManager layout;
