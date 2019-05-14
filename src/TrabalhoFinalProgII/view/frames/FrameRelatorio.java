@@ -254,11 +254,12 @@ public final class FrameRelatorio extends FrameCRUD {
         panel2.add(jbFrases, cons);
 
         Color color = UIManager.getColor("Table.gridColor");
-        MatteBorder border = new MatteBorder(1, 1, 0, 0, color);
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(70);
+        MatteBorder border = new MatteBorder(3, 3, 3, 3, color);
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(90);
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(650);
+        tabela.setRowHeight(25);
         tabela.setBorder(border);
         tabela.setAutoscrolls(true);
-        tabela.getColumnModel().getColumn(1).setPreferredWidth(560);
         panel3.add(tabela);
 
         panel4.add(lbHora);
