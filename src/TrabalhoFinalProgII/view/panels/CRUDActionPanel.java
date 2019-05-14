@@ -6,7 +6,6 @@
 package TrabalhoFinalProgII.view.panels;
 
 import TrabalhoFinalProgII.view.frames.FrameCRUD;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;

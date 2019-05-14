@@ -5,22 +5,15 @@
  */
 package TrabalhoFinalProgII.view.frames;
 
-import TrabalhoFinalProgII.view.panels.FrasesAjustesActionPanel;
-import TrabalhoFinalProgII.view.panels.PanelCabecalhoDia;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
 
 /**
  *

@@ -16,13 +16,18 @@ public enum EstadoUnidadeGeradora {
     PARADA("PARADA DEVIDO À BAIXA AFLUÊNCIA"),
     PARADA_SGI("PARADA SGI");
     
-    private String estadoUg;
+    private final String estadoUg;
 
     EstadoUnidadeGeradora(String estadoUg) {
         this.estadoUg=estadoUg;
     }
 
     private String getEstadoUnidadeGeradora(){
+        return this.estadoUg;
+    }
+    
+    @Override
+    public String toString() {
         return this.estadoUg;
     }
     

@@ -16,14 +16,19 @@ public enum EstadoServicosAuxiliares {
     TSA2("ALIMENTADO PELO TRANSFORMADOR AUXILIAR TSA2"),
     TSA1E2("ALIMENTADO PELO TRANSFORMADOR AUXILIAR TSA1 E TSA2");
     
-    private String servico;
+    private final String servico;
 
-    private EstadoServicosAuxiliares(String servico) {
+    EstadoServicosAuxiliares(String servico) {
         this.servico=servico;
     }
     
     public String getServicosAuxiliares(){
         return this.servico;
     }
+    @Override
+    public String toString() {
+        return this.servico;
+    }
+
        
 }

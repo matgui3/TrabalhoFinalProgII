@@ -17,7 +17,7 @@ public enum EstadoSubestacao {
     LTS3("LTS DE 138 KV RIO DO SUL E INDAIAL LIGADAS NA BARRA P 138 KV"),
     LTS4("LTS DE 138 KV TIMBO E INDAIAL LIGADAS NA BARRA P 138 KV");
     
-    private String subestacao;
+    private final String subestacao;
     
     EstadoSubestacao(String subestacao){
         this.subestacao=subestacao;
@@ -26,5 +26,8 @@ public enum EstadoSubestacao {
     public String getSubestacao(){
         return this.subestacao;
     }
-    
+    @Override
+    public String toString() {
+        return this.subestacao;
+    }
 }
