@@ -5,15 +5,30 @@
  */
 package TrabalhoFinalProgII.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Classe contendo os comportamentos e atributos dos Relatórios de Ocorrências.
  * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
  * @since 11/03/2019
  */
+@Entity
+@Table(name = "valores_alarmes_trip")
 public class ValoresAlarmesTrip {
-    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_valores_alarmes_trip")
+    private long id;
+    @Column(name = "nome_ajuste")
     private String nomeAjuste;
+    @Column(name = "valor_ajuste_ug1")
     private String valorAjusteUg1;
+    @Column(name = "valor_ajuste_ug2")
     private String valorAjusteUg2;
 
     /**

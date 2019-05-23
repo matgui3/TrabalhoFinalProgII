@@ -6,16 +6,36 @@
 package TrabalhoFinalProgII.model;
 
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Classe contendo os comportamentos e atributos dos Avisos.
  * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
  * @since 11/03/2019
  */
+@Entity
+@Table(name = "avisos")
 public class Aviso {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_aviso")
+    private long idAviso;
+    @Column(name = "data")
     private Date data;
+    @Column(name = "aviso")
     private String aviso;
+    @ManyToOne
+    @JoinColumn(name = "id_painel", referencedColumnName = "id_painel")
+    private PainelDeAvisos painelDeAvisos;
+    
     private Operador publisher;
     
    /**

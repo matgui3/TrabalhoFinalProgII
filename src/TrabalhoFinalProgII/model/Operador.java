@@ -5,19 +5,35 @@
  */
 package TrabalhoFinalProgII.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Classe contendo os comportamentos e atributos dos objetos de tipo Operador.
  * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
  * @since 11/03/2019
  */
-public class Operador {
+@Entity
+@Table(name = "operador")
+public class Operador implements Serializable{
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "matricula", nullable = false, unique = true)
     private int matricula;
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "data_nascimento")
     private Date dataNascimento;
+    @Column(name = "telefone")
     private int telefone;
+    @Column(name = "cargo")
     private Cargo cargo;
     
     /**

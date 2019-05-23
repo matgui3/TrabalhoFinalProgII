@@ -8,16 +8,33 @@ package TrabalhoFinalProgII.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * Classe contendo os comportamentos e atributos dos objetos de tipo PainelDeAvisos.
  * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
  * @since 11/03/2019
  */
+@Entity
+@Table(name = "painel_de_avisos")
 public class PainelDeAvisos {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_painel")
+    private long idPainel;    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "painelAvisos")
     private List<Aviso> avisos;
+    @OneToMany(cascade = CascadeType.ALL)
     private List<SenhasLogins> senhasLogins;
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ValoresAlarmesTrip> valoresAlarmesTrip;
     
     /**

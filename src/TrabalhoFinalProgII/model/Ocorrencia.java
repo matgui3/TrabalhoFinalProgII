@@ -6,15 +6,29 @@
 package TrabalhoFinalProgII.model;
 
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Classe contendo os comportamentos e atributos dos objetos de tipo Ocorrência.
  * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
  * @since 11/03/2019
  */
+@Entity
+@Table(name = "ocorrencia")
 public class Ocorrencia {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_ocorrencia")
+    private long id;
+    @Column(name = "hora")
     private Date hora;
+    @Column(name = "descricao")
     private String descricao;
 
     /**

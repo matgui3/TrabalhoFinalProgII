@@ -6,16 +6,32 @@
 package TrabalhoFinalProgII.model;
 
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * Classe contendo os comportamentos e atributos dos Relatórios de Ocorrências.
  * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
  * @since 11/03/2019
  */
+@Entity
+@Table(name = "relatorio_ocorrencias")
 public class RelatorioOcorrencias {
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private Dia[] dias;
+    @OneToOne
+    @JoinColumn(name = "id_painel_avisos", referencedColumnName = "id_painel")
     private PainelDeAvisos painelAvisos;
+    @OneToOne
+    @JoinColumn(name = "id_dia", referencedColumnName = "id_dia")
     private Dia diaAtual;
     private int i = 0;
     

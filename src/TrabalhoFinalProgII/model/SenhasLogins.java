@@ -5,15 +5,31 @@
  */
 package TrabalhoFinalProgII.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Classe contendo os comportamentos e atributos dos objetos de tipo SenhasLogins.
  * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
  * @since 11/03/2019
  */
+@Entity
+@Table(name = "senhas_logins")
 public class SenhasLogins {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_equipamento")
+    private long idEquipamento;
+    @Column(name = "desc_equipamento")
     private String equipamento;
+    @Column(name = "login")
     private String login;
+    @Column(name = "senha")
     private String senha;
     
     /**

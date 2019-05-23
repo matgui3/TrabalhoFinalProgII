@@ -7,14 +7,28 @@ package TrabalhoFinalProgII.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Generated;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Classe contendo objetos Frases Prontas onde os Operários podem encontrar frases pré-definidas para avisos.
  * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
  * @since 11/03/2019
  */
+@Entity
+@Table(name = "frases_prontas")
 public class FrasesProntas {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_frase")
+    private long id;
+    @Column(name = "area")
     private EnumFrases area;
     private ArrayList<String> frases = new ArrayList<String>();
 
