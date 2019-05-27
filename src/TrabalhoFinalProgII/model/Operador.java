@@ -25,7 +25,7 @@ public class Operador implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "matricula", nullable = false, unique = true)
+    @Column(name = "matricula")
     private int matricula;
     @Column(name = "nome")
     private String nome;

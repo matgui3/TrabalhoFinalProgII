@@ -43,17 +43,21 @@ public class Dia {
      * Método construtor da classe Dia, responsável por criar e definir os atributos dos objetos de tipo Dia.
      * @param estadoGerador1 Estado do gerador 1.
      * @param estadoGerador2 Estado do gerador 2.
-     * @param subestacao Estado da subestação.
-     * @param servicosAuxiliares Estado dos serviços auxiliares.
+     * @param estadoSubestacao Estado da subestação.
+     * @param estadoServicosAuxiliares Estado dos serviços auxiliares.
      */
     Dia(EstadoUnidadeGeradora estadoGerador1, EstadoUnidadeGeradora estadoGerador2,
-            EstadoSubestacao subestacao, EstadoServicosAuxiliares servicosAuxiliares) {
+            EstadoSubestacao estadoSubestacao, EstadoServicosAuxiliares estadoServicosAuxiliares) {
         gerador1 = new UnidadeGeradora(1, "500kv", estadoGerador1);
         gerador2 = new UnidadeGeradora(2, "450kv", estadoGerador2);
         turnos = new Turno[3];
         turnoAtual = new Turno(PeriodoTurno.MANHA);
-        this.subestacao = subestacao;
-        this.servicosAuxiliares = servicosAuxiliares;
+        this.subestacao = estadoSubestacao;
+        this.servicosAuxiliares = estadoServicosAuxiliares;
+    }
+    
+    Dia(){
+        
     }
 
     /**

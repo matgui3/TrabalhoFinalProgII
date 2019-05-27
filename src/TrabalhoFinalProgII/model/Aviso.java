@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -35,7 +36,8 @@ public class Aviso {
     @ManyToOne
     @JoinColumn(name = "id_painel", referencedColumnName = "id_painel")
     private PainelDeAvisos painelDeAvisos;
-    
+    @OneToOne
+    @JoinColumn(name = "matricula_operador", referencedColumnName = "matricula")
     private Operador publisher;
     
    /**

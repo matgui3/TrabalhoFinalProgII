@@ -8,11 +8,13 @@ package TrabalhoFinalProgII.model;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -26,17 +28,18 @@ public class FrasesProntas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_frase")
+    @Column(name = "id_lista_frases")
     private long id;
     @Column(name = "area")
     private EnumFrases area;
-    private ArrayList<String> frases = new ArrayList<String>();
+    @OneToMany(mappedBy = "frasesProntas", cascade = CascadeType.ALL)
+    private ArrayList<Frase> frases;
 
     /**
      * Método que adiciona uma frase à lista de frases prontas.
      * @param frase Frase a ser adicionada.
      */ 
-    public void CadastrarFrase(String frase) {
+    public void addFrase(Frase frase) {
         frases.add(frase);
     }
 
