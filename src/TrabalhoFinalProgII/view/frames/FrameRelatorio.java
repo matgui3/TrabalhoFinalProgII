@@ -16,6 +16,10 @@ import java.awt.TextArea;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -79,15 +83,32 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     public void editaFont(Label umJl) {
         umJl.setFont(new Font("Serif", Font.PLAIN, 18));
     }
+    public String setDiaDaSemana() {
+    Date d = new Date();
+		Calendar c = new GregorianCalendar();
+		c.setTime(d);
+		String nome = "";
+		int dia = c.get(c.DAY_OF_WEEK);
+		switch(dia){
+		  case Calendar.SUNDAY: nome = "Domingo";break;
+		  case Calendar.MONDAY: nome = "Segunda-feria";break;
+		  case Calendar.TUESDAY: nome = "Terça-feria";break;
+		  case Calendar.WEDNESDAY: nome = "Quarta-feira";break;
+		  case Calendar.THURSDAY: nome = "Quinta-feria";break;
+		  case Calendar.FRIDAY: nome = "Sexta-feria";break;
+		  case Calendar.SATURDAY: nome = "sábado-feria";break;
+		}
+                return nome;
+    }
 
     private void initializeComponents() {
         lb1 = new Label("Dia da Semana ");
         editaFont(lb1);
-        lb2 = new Label("Terça - Feira");
+        lb2 = new Label(setDiaDaSemana());
         editaFont(lb2);
-        lb3 = new Label("Data: DD/MM/AAAA");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        lb3 = new Label("Data: "+ sdf.format(new Date()));
         editaFont(lb3);
-
         lb4 = new Label("Horário");
         editaFont(lb4);
         lb5 = new Label("00:00h");
