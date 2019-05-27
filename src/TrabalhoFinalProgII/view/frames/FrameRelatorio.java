@@ -302,7 +302,6 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             String frase [] = {tfHora.getText(), taOcorrencia.getText()};
             DefaultTableModel modelo = new DefaultTableModel(frase, 0);
             modelo = (DefaultTableModel) tabela.getModel();
-            System.out.println(modelo.getValueAt(0,0));
             if(modelo.getValueAt(0,0)== null){
                 modelo.removeRow(0);
             }
