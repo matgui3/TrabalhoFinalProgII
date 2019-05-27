@@ -14,6 +14,8 @@ import java.awt.Label;
 import java.awt.LayoutManager;
 import java.awt.TextArea;
 import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,12 +23,13 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author 00783962045
  */
-public final class FrameRelatorio extends FrameCRUD {
+public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 
     private static final String titulo = "Relatório de Ocorrências";
     private static Dimension dimension = new Dimension(800, 600);
@@ -45,7 +48,7 @@ public final class FrameRelatorio extends FrameCRUD {
     private Label lbAjusteUg2;
     private Label lbHora;
     private Label lbOcorrencia;
-    private TextField taHora;
+    private TextField tfHora;
     private TextArea taOcorrencia;
     private JButton jbGravar;
     private JButton jbFrases;
@@ -110,13 +113,14 @@ public final class FrameRelatorio extends FrameCRUD {
         cbSA = new JComboBox(EstadoServicosAuxiliares.values());
 
         lbHora = new Label("Hora");
-        taHora = new TextField("", 20);
+        tfHora = new TextField("", 20);
         lbOcorrencia = new Label("Ocorrência");
         taOcorrencia = new TextArea("", 1, 60);
         jbGravar = new JButton("Gravar");
+        jbGravar.addActionListener(this);
         jbFrases = new JButton("Frases");
         jbAjustes = new JButton("Ajustes");
-        tabela = new JTable(2, 2);
+        tabela = new JTable(1, 2);
 
         cabecalhoLayout1 = new FlowLayout(FlowLayout.CENTER, 100, 10);
 
@@ -126,7 +130,8 @@ public final class FrameRelatorio extends FrameCRUD {
         panel3 = new JPanel(cabecalhoLayout1);
         panel4 = new JPanel(cabecalhoLayout1);
 
-        panelBotoesCRUD.setVisible(false);
+        panelBotoesCRUD.setVisible(
+                false);
 
     }
 
@@ -263,7 +268,7 @@ public final class FrameRelatorio extends FrameCRUD {
         panel3.add(tabela);
 
         panel4.add(lbHora);
-        panel4.add(taHora);
+        panel4.add(tfHora);
         panel4.add(lbOcorrencia);
         panel4.add(taOcorrencia);
         panel4.add(jbGravar);
@@ -287,6 +292,26 @@ public final class FrameRelatorio extends FrameCRUD {
 //        cbUgs.setSelectedIndex(-1);
 //
 //        super.repaint();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        Object obj = evt.getSource();
+
+        if (obj == jbGravar) {
+            String frase [] = {tfHora.getText(), taOcorrencia.getText()};
+            DefaultTableModel modelo = new DefaultTableModel(frase, 0);
+            modelo = (DefaultTableModel) tabela.getModel();
+            System.out.println(modelo.getValueAt(0,0));
+            if(modelo.getValueAt(0,0)== null){
+                modelo.removeRow(0);
+            }
+
+            modelo.addRow(frase);
+            
+            tabela.setModel(modelo);
+
+        }
     }
 
 }
