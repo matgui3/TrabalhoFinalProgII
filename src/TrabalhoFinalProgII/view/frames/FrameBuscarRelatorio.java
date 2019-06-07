@@ -12,6 +12,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Label;
 import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.ParseException;
@@ -28,7 +30,7 @@ import javax.swing.text.MaskFormatter;
  *
  * @author guilh
  */
-public final class FrameBuscarRelatorio extends FrameCRUD {
+public final class FrameBuscarRelatorio extends FrameCRUD implements ActionListener {
 
     private static final String titulo = "Abrir Relatorio de Ocorrências";
     private static final Dimension dimension = new Dimension(800, 600);
@@ -41,10 +43,10 @@ public final class FrameBuscarRelatorio extends FrameCRUD {
     private EnumPeriodo enumPeriodo;
     private JFormattedTextField tfDtRelatorio;
     private MaskFormatter maskTf;
-    
+
     private JComboBox cbPeriodo;
 
-    private JButton abrirRelatorio;
+    private JButton jbAbrirRelatorio;
 
     private JPanel panelFormulario;
     private LayoutManager layout;
@@ -57,6 +59,7 @@ public final class FrameBuscarRelatorio extends FrameCRUD {
 
         initializeComponents();
         addComponents();
+        setClosable(true);
     }
 
     public FrameBuscarRelatorio(String titulo, Dimension dimension) {
@@ -66,6 +69,8 @@ public final class FrameBuscarRelatorio extends FrameCRUD {
 
         initializeComponents();
         addComponents();
+        setClosable(true);
+
     }
 
     public void initializeComponents() {
@@ -77,7 +82,7 @@ public final class FrameBuscarRelatorio extends FrameCRUD {
         cbPeriodo.setSelectedIndex(-1);
 
         tfDtRelatorio = new JFormattedTextField();
-        tfDtRelatorio.setPreferredSize(new Dimension(70,25));
+        tfDtRelatorio.setPreferredSize(new Dimension(70, 25));
         try {
             maskTf = new MaskFormatter("##/##/####");
         } catch (ParseException ex) {
@@ -100,7 +105,18 @@ public final class FrameBuscarRelatorio extends FrameCRUD {
         }
         );
 
-        abrirRelatorio = new JButton("Abrir Relatório");
+        jbAbrirRelatorio = new JButton("Abrir Relatório");
+        jbAbrirRelatorio.addActionListener(this);
+    }
+        @Override
+    public void actionPerformed(ActionEvent evt) {
+        Object obj = evt.getSource();
+
+        if (obj == jbAbrirRelatorio) {
+            //Adicionar aqui também o método para buscar os dados dos campos para 
+            //o relatório a ser buscado
+            this.dispose();
+        }
     }
 
     public void addComponents() {
@@ -140,7 +156,7 @@ public final class FrameBuscarRelatorio extends FrameCRUD {
         panelFormulario.add(cbPeriodo, cons);
 
         super.addFormulario(panelFormulario);
-        super.addBotaoInferior(abrirRelatorio);
+        super.addBotaoInferior(jbAbrirRelatorio);
     }
 
     @Override

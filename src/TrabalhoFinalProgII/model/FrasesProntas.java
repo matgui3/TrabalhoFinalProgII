@@ -56,4 +56,8 @@ public class FrasesProntas {
         return "FrasesProntas{" + "area=" + area + ", frases=" + frases + '}';
     }
 
+    public void CadastrarFrase() {
+        //Método criado apenas para eliminar erro de compilação
+    }
+
 }
