@@ -8,20 +8,18 @@ package TrabalhoFinalProgII.view.frames;
 import TrabalhoFinalProgII.model.EnumPeriodo;
 import TrabalhoFinalProgII.model.RelatorioOcorrencias;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Label;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.text.MaskFormatter;
@@ -33,22 +31,22 @@ import javax.swing.text.MaskFormatter;
 public final class FrameBuscarRelatorio extends FrameCRUD implements ActionListener {
 
     private static final String titulo = "Abrir Relatorio de Ocorrências";
-    private static final Dimension dimension = new Dimension(800, 600);
+    private static final Dimension dimension = new Dimension(800, 300);
     private RelatorioOcorrencias novoRelatorio;
 
-    private int Periodo;
+    private FramePrincipal frameSistema;
+
     private Label lbDtRelatorio;
-    private Label lbPeriodo;
     private Label lbTurno;
-    private EnumPeriodo enumPeriodo;
     private JFormattedTextField tfDtRelatorio;
     private MaskFormatter maskTf;
-
-    private JComboBox cbPeriodo;
 
     private JButton jbAbrirRelatorio;
 
     private JPanel panelFormulario;
+    private JPanel panelBotoes;
+    private FlowLayout cabecalhoLayout1;
+
     private LayoutManager layout;
     private GridBagConstraints cons;
 
@@ -59,7 +57,6 @@ public final class FrameBuscarRelatorio extends FrameCRUD implements ActionListe
 
         initializeComponents();
         addComponents();
-        setClosable(true);
     }
 
     public FrameBuscarRelatorio(String titulo, Dimension dimension) {
@@ -69,20 +66,16 @@ public final class FrameBuscarRelatorio extends FrameCRUD implements ActionListe
 
         initializeComponents();
         addComponents();
-        setClosable(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     }
 
     public void initializeComponents() {
         lbDtRelatorio = new Label("Data do Relatório: ");
-        lbPeriodo = new Label("Período do relatório: ");
         lbTurno = new Label("Turno desejado: ");
 
-        cbPeriodo = new JComboBox(enumPeriodo.values());
-        cbPeriodo.setSelectedIndex(-1);
-
         tfDtRelatorio = new JFormattedTextField();
-        tfDtRelatorio.setPreferredSize(new Dimension(70, 25));
+        tfDtRelatorio.setPreferredSize(new Dimension(150, 25));
         try {
             maskTf = new MaskFormatter("##/##/####");
         } catch (ParseException ex) {
@@ -94,32 +87,32 @@ public final class FrameBuscarRelatorio extends FrameCRUD implements ActionListe
         panelFormulario = new JPanel(layout);
         panelFormulario.setBorder(BorderFactory.createTitledBorder("Abrir Relatório de Ocorrências"));
 
-        cbPeriodo.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    enumPeriodo = (EnumPeriodo) e.getItem();
-                }
-            }
-
-        }
-        );
-
         jbAbrirRelatorio = new JButton("Abrir Relatório");
         jbAbrirRelatorio.addActionListener(this);
+
+        panelBotoes = new JPanel(cabecalhoLayout1);
     }
-        @Override
+
+    @Override
     public void actionPerformed(ActionEvent evt) {
         Object obj = evt.getSource();
 
         if (obj == jbAbrirRelatorio) {
             //Adicionar aqui também o método para buscar os dados dos campos para 
             //o relatório a ser buscado
+
+            FrameExibirRelatório tela = new FrameExibirRelatório();
+            this.getParent().add(tela);
+            tela.setVisible(true);
+
             this.dispose();
+
         }
+
     }
 
     public void addComponents() {
+
         cons = new GridBagConstraints();
         cons.gridx = 0;
         cons.gridy = 0;
@@ -141,21 +134,9 @@ public final class FrameBuscarRelatorio extends FrameCRUD implements ActionListe
         cons.fill = GridBagConstraints.HORIZONTAL;
         panelFormulario.add(new Label("            "), cons);
 
-        cons = new GridBagConstraints();
-        cons.gridx = 3;
-        cons.gridy = 0;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(lbPeriodo, cons);
-
-        cons = new GridBagConstraints();
-        cons.gridx = 4;
-        cons.gridy = 0;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(cbPeriodo, cons);
-
         super.addFormulario(panelFormulario);
+        panelBotoes.add(jbAbrirRelatorio);
+
         super.addBotaoInferior(jbAbrirRelatorio);
     }
 
@@ -163,9 +144,7 @@ public final class FrameBuscarRelatorio extends FrameCRUD implements ActionListe
     public void limparCampos() {
         this.novoRelatorio = new RelatorioOcorrencias();
         lbDtRelatorio.setText("");
-        lbPeriodo.setText("");
         lbTurno.setText("");
-        cbPeriodo.setSelectedIndex(-1);
 
         super.repaint();
     }
