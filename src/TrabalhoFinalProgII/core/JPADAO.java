@@ -20,7 +20,7 @@ public class JPADAO<X> implements DAO{
     
     public JPADAO (){
         super();
-        emf = Persistence.createEntityManagerFactory("persistence");
+        emf = Persistence.createEntityManagerFactory("TrabalhoFinalProgIIPU");
         em = emf.createEntityManager();
     }
 
