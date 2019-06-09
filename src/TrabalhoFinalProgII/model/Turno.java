@@ -5,6 +5,7 @@
  */
 package TrabalhoFinalProgII.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -35,22 +38,26 @@ public class Turno {
     @JoinColumn(name = "id_dia", referencedColumnName = "id_dia")
     private Dia dia;
     @OneToMany()
-    private ArrayList<Ocorrencia> ocorrencias;
-    @OneToOne
-    private PeriodoTurno periodo;
-    private Operador[] operadores;
+    private List<Ocorrencia> ocorrencias;
+    @Column(name = "periodo")
+    private String periodo;
+    @ManyToMany()
+    @JoinTable(name = "operadores_turnos", joinColumns = {@JoinColumn(name = "id_turno")}, inverseJoinColumns = {@JoinColumn(name = "matricula")})
+    private List<Operador> operadores;
 
     /**
      * Método construtor da classe Turno.
      * @param periodo Período do turno (Manhã, Tarde, Noite).
      */
-    public Turno(PeriodoTurno periodo) {
+    public Turno(String periodo) {
         ocorrencias = new ArrayList<>();
         this.periodo = periodo;
-        operadores = new Operador[3];
+        operadores = new ArrayList<>();
     }
+    
+    public Turno(){}
 
-    public PeriodoTurno getPeriodo() {
+    public String getPeriodo() {
         return this.periodo;
     }
 
@@ -59,7 +66,7 @@ public class Turno {
      * @param descricao Descrição da ocorrência.
      * @param hora Hora em que a ocorrência foi adicionada.
      */
-    public void addOcorrencia(String descricao, Date hora) {
+    public void addOcorrencia(String descricao, LocalDate hora) {
         Ocorrencia ocorrencia = new Ocorrencia(hora, descricao);
         ocorrencias.add(ocorrencia);
     }

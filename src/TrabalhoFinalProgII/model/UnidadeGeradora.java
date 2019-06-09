@@ -49,5 +49,7 @@ public UnidadeGeradora(int numero, String potencia, EstadoUnidadeGeradora estado
         this.potencia = potencia;
         this.estadoUg = estadoUg;
     }    
+
+public UnidadeGeradora(){}
     
 }

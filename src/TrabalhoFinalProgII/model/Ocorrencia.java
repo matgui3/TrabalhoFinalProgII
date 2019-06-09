@@ -5,6 +5,7 @@
  */
 package TrabalhoFinalProgII.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ public class Ocorrencia {
     @Column(name = "id_ocorrencia")
     private long id;
     @Column(name = "hora")
-    private Date hora;
+    private LocalDate hora;
     @Column(name = "descricao")
     private String descricao;
 
@@ -36,13 +37,15 @@ public class Ocorrencia {
      * @param hora Hora de acontecimento da ocorrência.
      * @param descricao Descrição do que está sendo registrado.
      */
-    public Ocorrencia(Date hora, String descricao) {
+    public Ocorrencia(LocalDate hora, String descricao) {
         super();
         this.hora = hora;
         this.descricao = descricao;
     }  
     
-    public Date getHora() {
+    public Ocorrencia(){}
+    
+    public LocalDate getHora() {
         return hora;
     }
 

@@ -5,6 +5,7 @@
  */
 package TrabalhoFinalProgII.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,7 @@ public class PainelDeAvisos {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_painel")
     private long idPainel;    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "painelAvisos")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "painelDeAvisos")
     private List<Aviso> avisos;
     @OneToMany(cascade = CascadeType.ALL)
     private List<SenhasLogins> senhasLogins;
@@ -52,7 +53,7 @@ public class PainelDeAvisos {
      * @param aviso Conteúdo do aviso em si.
      * @param publisher Operário publicador do aviso.
      */
-    public void addAviso(Date data, String aviso, Operador publisher){
+    public void addAviso(LocalDate data, String aviso, Operador publisher){
         Aviso advice = new Aviso(data, aviso, publisher);
         avisos.add(advice);
     }

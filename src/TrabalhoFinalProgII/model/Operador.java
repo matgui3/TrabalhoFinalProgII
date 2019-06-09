@@ -6,6 +6,7 @@
 package TrabalhoFinalProgII.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +31,7 @@ public class Operador implements Serializable{
     @Column(name = "nome")
     private String nome;
     @Column(name = "data_nascimento")
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
     @Column(name = "telefone")
     private int telefone;
     @Column(name = "cargo")
@@ -44,12 +45,14 @@ public class Operador implements Serializable{
      * @param telefone Telefone do operador a ser registrado
      * @param cargo Cargo a ser definido para o operador que está sendo registrado.
      */
-    public Operador(String nome, Date dataNascimento, int telefone, Cargo cargo) {
+    public Operador(String nome, LocalDate dataNascimento, int telefone, Cargo cargo) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.telefone = telefone;
         this.cargo = cargo;
     }   
+    
+    public Operador(){}
     
     public int getMatricula() {
         return matricula;
@@ -63,11 +66,11 @@ public class Operador implements Serializable{
         this.nome = nome;
     }
 
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

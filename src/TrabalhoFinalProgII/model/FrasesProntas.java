@@ -33,7 +33,7 @@ public class FrasesProntas {
     @Column(name = "area")
     private EnumFrases area;
     @OneToMany(mappedBy = "frasesProntas", cascade = CascadeType.ALL)
-    private ArrayList<Frase> frases;
+    private List<Frase> frases;
 
     /**
      * Método que adiciona uma frase à lista de frases prontas.

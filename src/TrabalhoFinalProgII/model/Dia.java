@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Classe contendo os comportamentos e atributos dos objetos de tipo Dia.
@@ -26,14 +27,13 @@ public class Dia {
     @Column(name = "id_dia")
     private long id;
     @OneToOne
-    @JoinColumn(name = "id_unidade")
+    @JoinColumn(name = "id_unidade1")
     private UnidadeGeradora gerador1;
     @OneToOne
-    @JoinColumn(name = "id_unidade")
+    @JoinColumn(name = "id_unidade2")
     private UnidadeGeradora gerador2;
     @OneToMany(mappedBy = "dia")
-    private Turno[] turnos;
-    private Turno turnoAtual;
+    private List<Turno> turnos;
     @Column(name = "subestacao")
     private EstadoSubestacao subestacao;
     @Column(name = "servicos_auxiliares")
@@ -50,8 +50,8 @@ public class Dia {
             EstadoSubestacao estadoSubestacao, EstadoServicosAuxiliares estadoServicosAuxiliares) {
         gerador1 = new UnidadeGeradora(1, "500kv", estadoGerador1);
         gerador2 = new UnidadeGeradora(2, "450kv", estadoGerador2);
-        turnos = new Turno[3];
-        turnoAtual = new Turno(PeriodoTurno.MANHA);
+        turnos = new ArrayList<>();
+        turnos.add(new Turno(PeriodoTurno.MANHA.getPeriodoTurno()));
         this.subestacao = estadoSubestacao;
         this.servicosAuxiliares = estadoServicosAuxiliares;
     }
@@ -63,23 +63,20 @@ public class Dia {
     /**
      * Método responsável por fazer o término de um turno, gravar os dados do último turno vigente e iniciar o novo turno.
      */
-    public void EncerrarTurno() {
+    public List<Turno> EncerrarTurno() {
         
-        switch (turnoAtual.getPeriodo().getPeriodoTurno()) {
+        switch (turnos.get(turnos.size()-1).getPeriodo()) {
 
             case "Manhã":
-                turnos[0] = turnoAtual;
-                turnoAtual = new Turno(PeriodoTurno.TARDE);
-                break;
+                turnos.add(new Turno(PeriodoTurno.TARDE.getPeriodoTurno()));
+                return turnos;
             case "Tarde":
-                turnos[1] = turnoAtual;
-                turnoAtual = new Turno(PeriodoTurno.NOITE);
-                break;
+                turnos.add(new Turno(PeriodoTurno.NOITE.getPeriodoTurno()));
+                return turnos;
             case "Noite":
-                turnos[2] = turnoAtual;
-
+                return null;
         }
-        
+        return null;        
     }
 
 }

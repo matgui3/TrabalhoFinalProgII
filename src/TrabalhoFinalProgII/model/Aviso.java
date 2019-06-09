@@ -5,6 +5,7 @@
  */
 package TrabalhoFinalProgII.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +31,7 @@ public class Aviso {
     @Column(name = "id_aviso")
     private long idAviso;
     @Column(name = "data")
-    private Date data;
+    private LocalDate data;
     @Column(name = "aviso")
     private String aviso;
     @ManyToOne
@@ -46,14 +47,16 @@ public class Aviso {
     * @param aviso Conteúdo em escrito do aviso em si.
     * @param publisher Operador que publicou o aviso no painel.
     */ 
-    public Aviso(Date data, String aviso, Operador publisher){
+    public Aviso(LocalDate data, String aviso, Operador publisher){
         super();
         this.data=data;
         this.aviso=aviso;
         this.publisher=publisher;
     }
+    
+    public Aviso(){}
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
     

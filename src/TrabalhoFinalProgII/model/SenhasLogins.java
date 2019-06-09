@@ -44,6 +44,8 @@ public class SenhasLogins {
         this.login=login;
         this.senha=senha;
     }
+    
+    public SenhasLogins(){}
 
     public String getEquipamento() {
         return equipamento;

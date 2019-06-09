@@ -42,6 +42,8 @@ public class ValoresAlarmesTrip {
         this.valorAjusteUg1 = valorAjusteUg1;
         this.valorAjusteUg2 = valorAjusteUg2;
     }
+    
+    public ValoresAlarmesTrip(){}
 
     public String getNomeAjuste() {
         return nomeAjuste;

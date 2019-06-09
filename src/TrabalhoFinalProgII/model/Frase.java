@@ -30,4 +30,30 @@ public class Frase {
     @ManyToOne
     @JoinColumn(name = "id_lista_frases", referencedColumnName = "id_lista_frases")
     private FrasesProntas frasesProntas;
+
+    public int getIdFrase() {
+        return idFrase;
+    }
+
+    public void setIdFrase(int idFrase) {
+        this.idFrase = idFrase;
+    }
+
+    public String getFrase() {
+        return frase;
+    }
+
+    public void setFrase(String frase) {
+        this.frase = frase;
+    }
+
+    public FrasesProntas getFrasesProntas() {
+        return frasesProntas;
+    }
+
+    public void setFrasesProntas(FrasesProntas frasesProntas) {
+        this.frasesProntas = frasesProntas;
+    }
+    
+    
 }
