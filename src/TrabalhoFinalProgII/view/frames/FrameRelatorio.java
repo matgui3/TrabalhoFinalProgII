@@ -1,5 +1,6 @@
 package TrabalhoFinalProgII.view.frames;
 
+import TrabalhoFinalProgII.model.EnumTurnos;
 import TrabalhoFinalProgII.model.EstadoServicosAuxiliares;
 import TrabalhoFinalProgII.model.EstadoSubestacao;
 import TrabalhoFinalProgII.model.EstadoUnidadeGeradora;
@@ -68,6 +69,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     private JComboBox cbUgs2;
     private JComboBox cbSA;
     private JComboBox cbSE;
+    private JComboBox cbTurnos;
     private Label lbCabecalhoTurno1;
     private Label lbCabecalhoTurno2;
     private Label lbCabecalhoTurno3;
@@ -78,6 +80,11 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     private Label lbCabecalhoTurno23;
     private Label lbCabecalhoTurno24;
     private Label lbCabecalhoTurno25;
+    private Label lbCabecalhoTurno31;
+    private Label lbCabecalhoTurno32;
+    private Label lbCabecalhoTurno33;
+    private Label lbCabecalhoTurno34;
+    private Label lbCabecalhoTurno35;
     private JTable tabela1;
     private JTable tabela2;
     private JTable tabela3;
@@ -90,6 +97,9 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     private JPanel panel3;
     private JPanel panel4;
     private JPanel panel5;
+    private JPanel panel6;
+    private JPanel panel7;
+    private JPanel panel8;
 
     private LayoutManager layout;
     private GridBagConstraints cons;
@@ -183,6 +193,8 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         lb10 = new Label("Serviços Auxiliares");
         editaFont(lb10);
         cbSA = new JComboBox(EstadoServicosAuxiliares.values());
+        
+        cbTurnos = new JComboBox(EnumTurnos.values());
 
         lbHora = new Label("Hora");
         tfHora = new JFormattedTextField(Mascara("##:##"));
@@ -209,7 +221,11 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         panel3 = new JPanel(cabecalhoLayout1);
         panel4 = new JPanel(layout);
         panel5 = new JPanel(cabecalhoLayout1);
-        panelzaco = new JPanel(new BoxLayout (panelzaco, BoxLayout.Y_AXIS));
+        panel6 = new JPanel(layout);
+        panel7 = new JPanel(cabecalhoLayout1);
+        panel8 = new JPanel(cabecalhoLayout1);
+        panelzaco = new JPanel();
+        panelzaco.setLayout(new BoxLayout(panelzaco, BoxLayout.Y_AXIS));
 
         panelBotoesCRUD.setVisible(
                 false);
@@ -217,19 +233,20 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     }
 
     private void addComponents() {
-       /* panel1.add(panel3, BorderLayout.CENTER);
+        /* panel1.add(panel3, BorderLayout.CENTER);
         panel1.add(panel2, BorderLayout.NORTH);
         panel1.add(panel3, BorderLayout.CENTER);
-        panel1.add(panel5, BorderLayout.SOUTH);*/
-       panelzaco.add(panel2);
-       panelzaco.add(panel3);
-       panelzaco.add(panel4);
-       panelzaco.add(panel5);
-       panel1.add(panelzaco);
+        panel1.add(panel8, BorderLayout.SOUTH);*/
+        panelzaco.add(panel2, BorderLayout.NORTH);
+        panelzaco.add(panel3);
+        panelzaco.add(panel4);
+        panelzaco.add(panel5);
+        panelzaco.add(panel6);
+        panelzaco.add(panel7);
+        //panelzaco.add(panel8);
+        panel1.add(panelzaco);
         barra = new JScrollPane(panel1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-      
-        
         cons = new GridBagConstraints();
         cons.gridx = 0;
         cons.gridy = 1;
@@ -344,14 +361,16 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 
         adicionarBlocoTurno();
 
-        panel5.add(lbHora);
-        panel5.add(tfHora);
-        panel5.add(lbOcorrencia);
-        panel5.add(taOcorrencia);
-        panel5.add(jbGravar);
-        panel5.add(jbFimTurno);
+        panel8.add(lbHora);
+        panel8.add(tfHora);
+        panel8.add(lbOcorrencia);
+        panel8.add(taOcorrencia);
+        panel8.add(cbTurnos);
+        panel8.add(jbGravar);
+        panel8.add(jbFimTurno);
 
         super.addFormulario(barra);
+        super.addFormularioRodape(panel8);
 
     }
 
@@ -407,7 +426,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         iniciarTabela(tabela1);
         panel3.add(tabela1);
 //Falta adicionar panel abaixo de panel
-       /* lbCabecalhoTurno21 = new Label("2º Turno");
+        lbCabecalhoTurno21 = new Label("2º Turno");
         editaFont(lbCabecalhoTurno21);
         lbCabecalhoTurno22 = new Label("15:30");
         editaFont(lbCabecalhoTurno22);
@@ -422,6 +441,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         cons.gridx = 0;
         cons.gridy = 9;
         cons.gridwidth = 1;
+        cons.ipadx = 80;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panel4.add(lbCabecalhoTurno21, cons);
 
@@ -429,34 +449,87 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         cons.gridx = 1;
         cons.gridy = 9;
         cons.gridwidth = 1;
+        cons.ipadx = 393;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panel4.add(lbCabecalhoTurno2, cons);
-
+        panel4.add(lbCabecalhoTurno22, cons);
 
         cons = new GridBagConstraints();
         cons.gridx = 2;
         cons.gridy = 9;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panel4.add(lbCabecalhoTurno3, cons);
+        panel4.add(lbCabecalhoTurno23, cons);
 
         cons = new GridBagConstraints();
         cons.gridx = 0;
         cons.gridy = 10;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panel4.add(lbCabecalhoTurno4, cons);
+        panel4.add(lbCabecalhoTurno24, cons);
 
         cons = new GridBagConstraints();
         cons.gridx = 1;
         cons.gridy = 10;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panel4.add(lbCabecalhoTurno5, cons);*/
+        panel4.add(lbCabecalhoTurno25, cons);
+
+        iniciarTabela(tabela2);
+        panel5.add(tabela2);
+
+        lbCabecalhoTurno31 = new Label("3º Turno");
+        editaFont(lbCabecalhoTurno31);
+        lbCabecalhoTurno32 = new Label("23:30");
+        editaFont(lbCabecalhoTurno32);
+        lbCabecalhoTurno33 = new Label("Data: " + sdf.format(new Date()));
+        editaFont(lbCabecalhoTurno33);
+        lbCabecalhoTurno34 = new Label("Operadores");
+        editaFont(lbCabecalhoTurno34);
+        lbCabecalhoTurno35 = new Label("Nomes");
+        editaFont(lbCabecalhoTurno35);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 9;
+        cons.gridwidth = 1;
+        cons.ipadx = 80;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panel6.add(lbCabecalhoTurno31, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 1;
+        cons.gridy = 9;
+        cons.gridwidth = 1;
+        cons.ipadx = 393;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panel6.add(lbCabecalhoTurno32, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 2;
+        cons.gridy = 9;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panel6.add(lbCabecalhoTurno33, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 10;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panel6.add(lbCabecalhoTurno34, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 1;
+        cons.gridy = 10;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panel6.add(lbCabecalhoTurno35, cons);
+
+        iniciarTabela(tabela3);
+        panel7.add(tabela3);
     }
 
     public void iniciarTabela(JTable tabela) {
-        tabela1 = tabela;
         Color color = UIManager.getColor("Table.gridColor");
         MatteBorder border = new MatteBorder(3, 3, 3, 3, color);
         tabela.getColumnModel().getColumn(0).setPreferredWidth(90);
@@ -499,18 +572,53 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         Object obj = evt.getSource();
 
         if (obj == jbGravar) {
+            
+            if (obj == jbGravar) {
+            int combo = cbTurnos.getSelectedIndex();
+            System.out.println(combo);
             String frase[] = {tfHora.getText(), taOcorrencia.getText()};
             DefaultTableModel modelo = new DefaultTableModel(frase, 0);
-            modelo = (DefaultTableModel) tabela1.getModel();
-            if (modelo.getValueAt(0, 0) == null) {
-                modelo.removeRow(0);
+            switch (combo) {
+                case 0:
+
+                    modelo = (DefaultTableModel) tabela1.getModel();
+                    if (modelo.getValueAt(0, 0) == null) {
+                        modelo.removeRow(0);
+
+                    }
+                        modelo.addRow(frase);
+
+                        tabela1.setModel(modelo);
+
+                        alinhaTableCentro(tabela1);
+                    break;
+                case 1:
+                    modelo = (DefaultTableModel) tabela2.getModel();
+                    if (modelo.getValueAt(0, 0) == null) {
+                        modelo.removeRow(0);
+
+                    }
+                        modelo.addRow(frase);
+
+                        tabela2.setModel(modelo);
+
+                        alinhaTableCentro(tabela2);
+                    break;
+                case 2:
+                    modelo = (DefaultTableModel) tabela3.getModel();
+                    if (modelo.getValueAt(0, 0) == null) {
+                        modelo.removeRow(0);
+
+                    }
+                        modelo.addRow(frase);
+
+                        tabela3.setModel(modelo);
+
+                        alinhaTableCentro(tabela3);
+                    break;
             }
 
-            modelo.addRow(frase);
-
-            tabela1.setModel(modelo);
-
-            alinhaTableCentro(tabela1);
+        }
 
         }
         if (obj == jbFimTurno) {

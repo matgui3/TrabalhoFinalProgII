@@ -90,6 +90,10 @@ public abstract class FrameCRUD extends JInternalFrame {
     public void addFormulario(Container container) {
         panelPrincipal.add(container, BorderLayout.CENTER);
     }
+    
+    public void addFormularioRodape(Container container) {
+        panelPrincipal.add(container, BorderLayout.SOUTH);
+    }
 
     public CRUDActionPanel getPanelBotoesCRUD() {
         return panelBotoesCRUD;
