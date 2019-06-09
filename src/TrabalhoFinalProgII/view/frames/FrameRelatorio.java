@@ -22,6 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -83,6 +84,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     private JButton jbFimTurno;
     private JScrollPane barra;
 
+    private JPanel panelzaco;
     private JPanel panel1;
     private JPanel panel2;
     private JPanel panel3;
@@ -207,6 +209,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         panel3 = new JPanel(cabecalhoLayout1);
         panel4 = new JPanel(layout);
         panel5 = new JPanel(cabecalhoLayout1);
+        panelzaco = new JPanel(new BoxLayout (panelzaco, BoxLayout.Y_AXIS));
 
         panelBotoesCRUD.setVisible(
                 false);
@@ -214,16 +217,19 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     }
 
     private void addComponents() {
-        /*panel1.add(lb1);
-        panel1.add(lb2);
-        panel1.add(lb3);
-        
-        panel1.add(lb4);*/
+       /* panel1.add(panel3, BorderLayout.CENTER);
         panel1.add(panel2, BorderLayout.NORTH);
         panel1.add(panel3, BorderLayout.CENTER);
-        panel1.add(panel5, BorderLayout.SOUTH);
+        panel1.add(panel5, BorderLayout.SOUTH);*/
+       panelzaco.add(panel2);
+       panelzaco.add(panel3);
+       panelzaco.add(panel4);
+       panelzaco.add(panel5);
+       panel1.add(panelzaco);
         barra = new JScrollPane(panel1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
+      
+        
         cons = new GridBagConstraints();
         cons.gridx = 0;
         cons.gridy = 1;
@@ -236,7 +242,6 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         cons.gridy = 1;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-
         panel2.add(lb2, cons);
 
         cons = new GridBagConstraints();
