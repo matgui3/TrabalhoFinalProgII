@@ -25,9 +25,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javafx.scene.control.ScrollBar;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
@@ -119,6 +121,7 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
     }
 
     private void initializeComponents() {
+
         lb1 = new Label("Dia da Semana ");
         editaFont(lb1);
         lb2 = new Label(setDiaDaSemana());
@@ -166,17 +169,14 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
         panel3 = new JPanel(cabecalhoLayout1);
         panel4 = new JPanel(cabecalhoLayout1);
 
+
         panelBotoesCRUD.setVisible(
                 false);
 
     }
 
     private void addComponents() {
-        /*panel1.add(lb1);
-        panel1.add(lb2);
-        panel1.add(lb3);
-        
-        panel1.add(lb4);*/
+       
         panel1.add(panel2, BorderLayout.NORTH);
         panel1.add(panel3, BorderLayout.CENTER);
         panel1.add(panel4, BorderLayout.SOUTH);
@@ -320,9 +320,4 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
         }
     }
 
-    @Override
-    public void addScroll(Container container) {
-    }
-
-    
 }

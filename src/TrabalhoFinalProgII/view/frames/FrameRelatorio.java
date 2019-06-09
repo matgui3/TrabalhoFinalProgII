@@ -72,13 +72,22 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     private Label lbCabecalhoTurno3;
     private Label lbCabecalhoTurno4;
     private Label lbCabecalhoTurno5;
-    private JTable tabela;
+    private Label lbCabecalhoTurno21;
+    private Label lbCabecalhoTurno22;
+    private Label lbCabecalhoTurno23;
+    private Label lbCabecalhoTurno24;
+    private Label lbCabecalhoTurno25;
+    private JTable tabela1;
+    private JTable tabela2;
+    private JTable tabela3;
     private JButton jbFimTurno;
+    private JScrollPane barra;
 
     private JPanel panel1;
     private JPanel panel2;
     private JPanel panel3;
     private JPanel panel4;
+    private JPanel panel5;
 
     private LayoutManager layout;
     private GridBagConstraints cons;
@@ -91,7 +100,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         addComponents();
         setBorder(null);
         setClosable(true);
-        System.out.println("janela"+getComponentZOrder(this));
+        System.out.println("janela" + getComponentZOrder(this));
     }
 
     public void editaFont(Label umJl) {
@@ -186,13 +195,18 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         jbFrases = new JButton("Frases");
         jbAjustes = new JButton("Ajustes");
 
+        tabela1 = new JTable(1, 2);
+        tabela2 = new JTable(1, 2);
+        tabela3 = new JTable(1, 2);
+
         cabecalhoLayout1 = new FlowLayout(FlowLayout.CENTER, 50, 10);
 
         layout = new GridBagLayout();
         panel1 = new JPanel(new BorderLayout());
         panel2 = new JPanel(layout);
         panel3 = new JPanel(cabecalhoLayout1);
-        panel4 = new JPanel(cabecalhoLayout1);
+        panel4 = new JPanel(layout);
+        panel5 = new JPanel(cabecalhoLayout1);
 
         panelBotoesCRUD.setVisible(
                 false);
@@ -207,7 +221,8 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         panel1.add(lb4);*/
         panel1.add(panel2, BorderLayout.NORTH);
         panel1.add(panel3, BorderLayout.CENTER);
-        panel1.add(panel4, BorderLayout.SOUTH);
+        panel1.add(panel5, BorderLayout.SOUTH);
+        barra = new JScrollPane(panel1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         cons = new GridBagConstraints();
         cons.gridx = 0;
@@ -324,24 +339,25 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 
         adicionarBlocoTurno();
 
-        panel4.add(lbHora);
-        panel4.add(tfHora);
-        panel4.add(lbOcorrencia);
-        panel4.add(taOcorrencia);
-        panel4.add(jbGravar);
-        panel4.add(jbFimTurno);
+        panel5.add(lbHora);
+        panel5.add(tfHora);
+        panel5.add(lbOcorrencia);
+        panel5.add(taOcorrencia);
+        panel5.add(jbGravar);
+        panel5.add(jbFimTurno);
 
-        super.addFormulario(panel1);
+        super.addFormulario(barra);
 
     }
 
     public void adicionarBlocoTurno() {
 
-        lbCabecalhoTurno1 = new Label("Turno");
+        lbCabecalhoTurno1 = new Label("1º Turno");
         editaFont(lbCabecalhoTurno1);
-        lbCabecalhoTurno2 = new Label("horário");
+        lbCabecalhoTurno2 = new Label("07:30");
         editaFont(lbCabecalhoTurno2);
-        lbCabecalhoTurno3 = new Label("Data");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        lbCabecalhoTurno3 = new Label("Data: " + sdf.format(new Date()));
         editaFont(lbCabecalhoTurno3);
         lbCabecalhoTurno4 = new Label("Operadores");
         editaFont(lbCabecalhoTurno4);
@@ -383,13 +399,59 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         cons.fill = GridBagConstraints.HORIZONTAL;
         panel2.add(lbCabecalhoTurno5, cons);
 
-        iniciarTabela();
-        panel3.add(tabela);
+        iniciarTabela(tabela1);
+        panel3.add(tabela1);
+//Falta adicionar panel abaixo de panel
+       /* lbCabecalhoTurno21 = new Label("2º Turno");
+        editaFont(lbCabecalhoTurno21);
+        lbCabecalhoTurno22 = new Label("15:30");
+        editaFont(lbCabecalhoTurno22);
+        lbCabecalhoTurno23 = new Label("Data: " + sdf.format(new Date()));
+        editaFont(lbCabecalhoTurno23);
+        lbCabecalhoTurno24 = new Label("Operadores");
+        editaFont(lbCabecalhoTurno24);
+        lbCabecalhoTurno25 = new Label("Nomes");
+        editaFont(lbCabecalhoTurno25);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 9;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panel4.add(lbCabecalhoTurno21, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 1;
+        cons.gridy = 9;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panel4.add(lbCabecalhoTurno2, cons);
+
+
+        cons = new GridBagConstraints();
+        cons.gridx = 2;
+        cons.gridy = 9;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panel4.add(lbCabecalhoTurno3, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 10;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panel4.add(lbCabecalhoTurno4, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 1;
+        cons.gridy = 10;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panel4.add(lbCabecalhoTurno5, cons);*/
     }
 
-    public void iniciarTabela() {
-        tabela = new JTable(1, 2);
-        
+    public void iniciarTabela(JTable tabela) {
+        tabela1 = tabela;
         Color color = UIManager.getColor("Table.gridColor");
         MatteBorder border = new MatteBorder(3, 3, 3, 3, color);
         tabela.getColumnModel().getColumn(0).setPreferredWidth(90);
@@ -399,60 +461,6 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         tabela.setAutoscrolls(true);
         DefaultTableCellRenderer cellRender = new DefaultTableCellRenderer();
         cellRender.setHorizontalAlignment(SwingConstants.CENTER);
-    }
-
-    public void finalizaTurno() {
-        JPanel panelTurno = new JPanel(cabecalhoLayout1);
-
-        Label lbCabecalhoTurno21 = new Label("Turno");
-        editaFont(lbCabecalhoTurno21);
-        Label lbCabecalhoTurno22 = new Label("cu");
-        editaFont(lbCabecalhoTurno22);
-        Label lbCabecalhoTurno23 = new Label("Data");
-        editaFont(lbCabecalhoTurno23);
-        Label lbCabecalhoTurno24 = new Label("cuzão");
-        editaFont(lbCabecalhoTurno24);
-        Label lbCabecalhoTurno25 = new Label("Nomes");
-        editaFont(lbCabecalhoTurno25);
-        
-           
-        cons = new GridBagConstraints();
-        cons.gridx = 0;
-        cons.gridy = 1;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panelTurno.add(lbCabecalhoTurno21, cons);
-
-        cons = new GridBagConstraints();
-        cons.gridx = 1;
-        cons.gridy = 1;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panelTurno.add(lbCabecalhoTurno22, cons);
-
-        cons = new GridBagConstraints();
-        cons.gridx = 2;
-        cons.gridy = 1;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panelTurno.add(lbCabecalhoTurno23, cons);
-
-        cons = new GridBagConstraints();
-        cons.gridx = 0;
-        cons.gridy = 2;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panelTurno.add(lbCabecalhoTurno24, cons);
-
-        cons = new GridBagConstraints();
-        cons.gridx = 1;
-        cons.gridy = 2;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panelTurno.add(lbCabecalhoTurno25, cons);
-
-        panel3.add(panelTurno);
-
     }
 
     @Override
@@ -488,29 +496,20 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         if (obj == jbGravar) {
             String frase[] = {tfHora.getText(), taOcorrencia.getText()};
             DefaultTableModel modelo = new DefaultTableModel(frase, 0);
-            modelo = (DefaultTableModel) tabela.getModel();
+            modelo = (DefaultTableModel) tabela1.getModel();
             if (modelo.getValueAt(0, 0) == null) {
                 modelo.removeRow(0);
             }
 
             modelo.addRow(frase);
 
-            tabela.setModel(modelo);
+            tabela1.setModel(modelo);
 
-            alinhaTableCentro(tabela);
-            dispose();
+            alinhaTableCentro(tabela1);
 
         }
         if (obj == jbFimTurno) {
-            finalizaTurno();
         }
     }
-
-    @Override
-    public void addScroll(Container container){
-        this.scroll = scroll;
-        container.add(scroll);
-    }
-    
 
 }

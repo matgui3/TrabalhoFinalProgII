@@ -156,10 +156,4 @@ public final class FrameBuscarRelatorio extends FrameCRUD implements ActionListe
         tfDtRelatorio.setText("");
     }
 
-    @Override
-    public void addScroll(Container container) {
-        this.scroll = scroll;
-        container.add(scroll);
-    }
-
 }

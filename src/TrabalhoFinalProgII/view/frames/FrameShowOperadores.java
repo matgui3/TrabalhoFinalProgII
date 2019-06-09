@@ -109,9 +109,4 @@ public class FrameShowOperadores extends FrameCRUD{
     public void carregarCampos() {
     }
     
-    @Override
-    public void addScroll(Container container) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

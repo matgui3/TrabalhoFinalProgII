@@ -83,10 +83,9 @@ public abstract class FrameCRUD extends JInternalFrame {
     private void addComponets() {
         this.setContentPane(panelPrincipal);
         panelPrincipal.add(panelBotoesCRUD, BorderLayout.SOUTH);
-        scroll = new JScrollPane(panelPrincipal);
+        //scroll = new JScrollPane(panelPrincipal);
     }
     
-    public abstract void addScroll(Container container);
 
     public void addFormulario(Container container) {
         panelPrincipal.add(container, BorderLayout.CENTER);
