@@ -3,6 +3,7 @@ package TrabalhoFinalProgII.view.frames;
 import TrabalhoFinalProgII.model.EnumFrases;
 import TrabalhoFinalProgII.model.FrasesProntas;
 import TrabalhoFinalProgII.model.ValoresAlarmesTrip;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -157,6 +158,11 @@ public final class FrameFrasesAjustes extends FrameCRUD {
 //        cbArea.setSelectedIndex(-1);
 //
 //        super.repaint();
+    }
+
+    @Override
+    public void addScroll(Container container) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

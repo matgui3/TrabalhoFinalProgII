@@ -52,11 +52,13 @@ public class FramePrincipal extends JFrame {
         contentPane.add(desktop, BorderLayout.CENTER);
         super.setJMenuBar(menuAplicacao);
         adicionarFormulario(relatorio);
-        try {
+        relatorio.addScroll(contentPane);
+        System.out.println(relatorio.getComponentZOrder(this));
+        /*try {
             relatorio.setMaximum(true);
         } catch (PropertyVetoException ex) {
             System.out.println(ex.toString());
-        }
+        }*/
         
     }
 

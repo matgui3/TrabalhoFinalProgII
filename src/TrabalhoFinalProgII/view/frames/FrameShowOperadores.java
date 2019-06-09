@@ -7,6 +7,7 @@ package TrabalhoFinalProgII.view.frames;
 
 import TrabalhoFinalProgII.model.Cargo;
 import TrabalhoFinalProgII.model.Operador;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -106,6 +107,11 @@ public class FrameShowOperadores extends FrameCRUD{
 
     @Override
     public void carregarCampos() {
+    }
+    
+    @Override
+    public void addScroll(Container container) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

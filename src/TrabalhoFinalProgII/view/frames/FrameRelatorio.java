@@ -5,6 +5,7 @@ import TrabalhoFinalProgII.model.EstadoSubestacao;
 import TrabalhoFinalProgII.model.EstadoUnidadeGeradora;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -25,6 +26,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -89,6 +91,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         addComponents();
         setBorder(null);
         setClosable(true);
+        System.out.println("janela"+getComponentZOrder(this));
     }
 
     public void editaFont(Label umJl) {
@@ -188,7 +191,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         layout = new GridBagLayout();
         panel1 = new JPanel(new BorderLayout());
         panel2 = new JPanel(layout);
-        panel3 = new JPanel(layout);
+        panel3 = new JPanel(cabecalhoLayout1);
         panel4 = new JPanel(cabecalhoLayout1);
 
         panelBotoesCRUD.setVisible(
@@ -495,11 +498,19 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             tabela.setModel(modelo);
 
             alinhaTableCentro(tabela);
+            dispose();
 
         }
         if (obj == jbFimTurno) {
             finalizaTurno();
         }
     }
+
+    @Override
+    public void addScroll(Container container){
+        this.scroll = scroll;
+        container.add(scroll);
+    }
+    
 
 }

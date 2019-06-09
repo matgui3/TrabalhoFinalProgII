@@ -10,6 +10,7 @@ import TrabalhoFinalProgII.model.EstadoSubestacao;
 import TrabalhoFinalProgII.model.EstadoUnidadeGeradora;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -27,6 +28,7 @@ import java.util.GregorianCalendar;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
@@ -318,4 +320,9 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
         }
     }
 
+    @Override
+    public void addScroll(Container container) {
+    }
+
+    
 }

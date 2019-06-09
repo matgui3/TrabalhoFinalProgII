@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -26,6 +27,7 @@ public abstract class FrameCRUD extends JInternalFrame {
     private JPanel panelPrincipal;
     protected CRUDActionPanel panelBotoesCRUD;
     private Dimension dimension;
+    protected JScrollPane scroll;
 
     private LayoutManager layout;
 
@@ -81,7 +83,10 @@ public abstract class FrameCRUD extends JInternalFrame {
     private void addComponets() {
         this.setContentPane(panelPrincipal);
         panelPrincipal.add(panelBotoesCRUD, BorderLayout.SOUTH);
+        scroll = new JScrollPane(panelPrincipal);
     }
+    
+    public abstract void addScroll(Container container);
 
     public void addFormulario(Container container) {
         panelPrincipal.add(container, BorderLayout.CENTER);

@@ -7,6 +7,7 @@ package TrabalhoFinalProgII.view.frames;
 
 import TrabalhoFinalProgII.model.EnumPeriodo;
 import TrabalhoFinalProgII.model.RelatorioOcorrencias;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -22,6 +23,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -152,6 +154,12 @@ public final class FrameBuscarRelatorio extends FrameCRUD implements ActionListe
     @Override
     public void carregarCampos() {
         tfDtRelatorio.setText("");
+    }
+
+    @Override
+    public void addScroll(Container container) {
+        this.scroll = scroll;
+        container.add(scroll);
     }
 
 }
