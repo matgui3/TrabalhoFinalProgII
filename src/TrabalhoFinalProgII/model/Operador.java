@@ -87,6 +87,14 @@ public class Operador implements Serializable{
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
     
     
     
