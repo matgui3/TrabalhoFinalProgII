@@ -5,13 +5,11 @@
  */
 package TrabalhoFinalProgII.view.frames;
 
-import TrabalhoFinalProgII.model.EnumTurnos;
 import TrabalhoFinalProgII.model.EstadoServicosAuxiliares;
 import TrabalhoFinalProgII.model.EstadoSubestacao;
 import TrabalhoFinalProgII.model.EstadoUnidadeGeradora;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -19,34 +17,28 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Label;
 import java.awt.LayoutManager;
-import java.awt.TextArea;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import javafx.scene.control.ScrollBar;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author tasso
  */
-public class FrameExibirRelatório extends FrameCRUD implements ActionListener{
+public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
 
     private static final String titulo = "Relatório de Ocorrências";
     private static Dimension dimension = new Dimension(800, 600);
@@ -61,9 +53,7 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener{
     private Label lb8;
     private Label lb9;
     private Label lb10;
-    private Label lbAjusteUg1;
-    private Label lbAjusteUg2;
-    
+
     private Label lbCabecalhoTurno1;
     private Label lbCabecalhoTurno2;
     private Label lbCabecalhoTurno3;
@@ -79,9 +69,7 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener{
     private Label lbCabecalhoTurno33;
     private Label lbCabecalhoTurno34;
     private Label lbCabecalhoTurno35;
-    
-    
-    private TextField tfHora;
+
     private JComboBox cbUgs;
     private JComboBox cbUgs2;
     private JComboBox cbSA;
@@ -153,7 +141,7 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener{
     }
 
     private void initializeComponents() {
- lb1 = new Label("Dia da Semana ");
+        lb1 = new Label("Dia da Semana ");
         editaFont(lb1);
         lb2 = new Label(setDiaDaSemana());
         editaFont(lb2);
@@ -184,8 +172,6 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener{
         editaFont(lb10);
         cbSA = new JComboBox(EstadoServicosAuxiliares.values());
 
-
-
         tabela1 = new JTable(1, 2) {
             @Override
             public boolean isCellEditable(int rowIndex, int mColIndex) {
@@ -204,7 +190,7 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener{
                 return false;
             }
         };
-        
+
         jbSair = new JButton("Sair");
         jbSair.addActionListener(this);
 
@@ -226,11 +212,7 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener{
                 false);
     }
 
-     private void addComponents() {
-        /* panel1.add(panel3, BorderLayout.CENTER);
-        panel1.add(panel2, BorderLayout.NORTH);
-        panel1.add(panel3, BorderLayout.CENTER);
-        panel1.add(panel8, BorderLayout.SOUTH);*/
+    private void addComponents() {
         panelzaco.add(panel2, BorderLayout.NORTH);
         panelzaco.add(panel3);
         panelzaco.add(panel4);
@@ -399,7 +381,6 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener{
 
         iniciarTabela(tabela1);
         panel3.add(tabela1);
-//Falta adicionar panel abaixo de panel
         lbCabecalhoTurno21 = new Label("2º Turno");
         editaFont(lbCabecalhoTurno21);
         lbCabecalhoTurno22 = new Label("15:30");
@@ -541,6 +522,7 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener{
         table.getColumnModel().getColumn(0).setCellRenderer(
                 cellRender);
     }
+
     @Override
     public void actionPerformed(ActionEvent evt) {
         Object obj = evt.getSource();
@@ -548,7 +530,7 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener{
         if (obj == jbSair) {
             dispose();
         }
-            
-        }
+
+    }
 
 }
