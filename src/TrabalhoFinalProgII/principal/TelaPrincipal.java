@@ -22,11 +22,6 @@ public class TelaPrincipal implements Runnable {
         Thread thread = new Thread(tela);
 
         thread.run();
-        
-        JPADAO dao = new JPADAO();
-        
-        Frase frase = new Frase();
-        frase.setFrase("oi");
     }
 
     @Override

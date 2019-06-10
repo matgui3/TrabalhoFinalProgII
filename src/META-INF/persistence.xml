@@ -5,7 +5,6 @@
     <class>TrabalhoFinalProgII.model.Aviso</class>
     <class>TrabalhoFinalProgII.model.Dia</class>
     <class>TrabalhoFinalProgII.model.Frase</class>
-    <class>TrabalhoFinalProgII.model.FrasesProntas</class>
     <class>TrabalhoFinalProgII.model.Ocorrencia</class>
     <class>TrabalhoFinalProgII.model.Operador</class>
     <class>TrabalhoFinalProgII.model.PainelDeAvisos</class>

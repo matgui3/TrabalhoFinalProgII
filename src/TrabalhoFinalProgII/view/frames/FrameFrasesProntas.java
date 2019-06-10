@@ -6,7 +6,7 @@
 package TrabalhoFinalProgII.view.frames;
 
 import TrabalhoFinalProgII.model.EnumFrases;
-import TrabalhoFinalProgII.model.FrasesProntas;
+import TrabalhoFinalProgII.model.Frase;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -31,7 +31,7 @@ public final class FrameFrasesProntas extends FrameCRUD {
     private static final String titulo = "Frases Prontas";
     private static final Dimension dimension = new Dimension(800, 600);
 
-    private FrasesProntas novaFrase;
+    private Frase novaFrase;
 
     private Label lbArea;
     private Label lbFrase;
@@ -47,14 +47,14 @@ public final class FrameFrasesProntas extends FrameCRUD {
     public FrameFrasesProntas() {
         super(titulo, dimension);
 
-        novaFrase = new FrasesProntas();
+        novaFrase = new Frase();
 
         initializeComponents();
         addComponents();
 
     }
 
-    public FrameFrasesProntas(FrasesProntas novaFrase) {
+    public FrameFrasesProntas(Frase novaFrase) {
         super(titulo, dimension);
 
         this.novaFrase = novaFrase;
@@ -128,7 +128,7 @@ public final class FrameFrasesProntas extends FrameCRUD {
     @Override
     public void carregarCampos() {
         
-        novaFrase.setArea(enumFrases);
+//        novaFrase.setArea(enumFrases);
         novaFrase.CadastrarFrase(taFrase.getText());
         System.out.println(novaFrase.toString());
 
@@ -136,7 +136,7 @@ public final class FrameFrasesProntas extends FrameCRUD {
 
     @Override
     public void limparCampos() {
-        this.novaFrase = new FrasesProntas();
+        this.novaFrase = new Frase();
         taFrase.setText("");
         cbArea.setSelectedIndex(-1);
 

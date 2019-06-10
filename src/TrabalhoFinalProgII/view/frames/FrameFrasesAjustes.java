@@ -1,7 +1,7 @@
 package TrabalhoFinalProgII.view.frames;
 
 import TrabalhoFinalProgII.model.EnumFrases;
-import TrabalhoFinalProgII.model.FrasesProntas;
+import TrabalhoFinalProgII.model.Frase;
 import TrabalhoFinalProgII.model.ValoresAlarmesTrip;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -146,18 +146,16 @@ public final class FrameFrasesAjustes extends FrameCRUD {
     @Override
     public void carregarCampos() {
 
-//        novoAjuste.setArea(enumFrases);
+//        novoAjuste.set(enumFrases);
 //        novoAjuste.CadastrarFrase(taFrase.getText());
 //        System.out.println(novoAjuste.toString());
     }
 
     @Override
     public void limparCampos() {
-//        this.novoAjuste = new FrasesProntas();
-//        taFrase.setText("");
-//        cbArea.setSelectedIndex(-1);
-//
-//        super.repaint();
+        cbArea.setSelectedIndex(-1);
+
+        super.repaint();
     }
 
 }

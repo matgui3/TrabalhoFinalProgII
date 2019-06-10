@@ -5,13 +5,13 @@
  */
 package TrabalhoFinalProgII.core;
 
-import TrabalhoFinalProgII.model.FrasesProntas;
+import TrabalhoFinalProgII.model.Frase;
 
 /**
  *
  * @author guilh
  */
-public class FrasesProntasDAO extends JPADAO<FrasesProntas> {
+public class FrasesProntasDAO extends JPADAO<Frase> {
     
     
     

@@ -24,40 +24,35 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "frases_prontas")
-public class FrasesProntas {
+public class Frase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_lista_frases")
+    @Column(name = "id_frase")
     private long id;
     @Column(name = "area")
-    private EnumFrases area;
-    @OneToMany(mappedBy = "frasesProntas", cascade = CascadeType.ALL)
-    private List<Frase> frases;
+    private String area;
+    @Column(name = "frase")
+    private String texto;
 
-    /**
-     * Método que adiciona uma frase à lista de frases prontas.
-     * @param frase Frase a ser adicionada.
-     */ 
-    public void addFrase(Frase frase) {
-        frases.add(frase);
-    }
-
-    public EnumFrases getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(EnumFrases area) {
+    public void setArea(String area) {
         this.area = area;
     }
 
-    @Override
-    public String toString() {
-        return "FrasesProntas{" + "area=" + area + ", frases=" + frases + '}';
+    public String getTexto() {
+        return texto;
     }
 
-    public void CadastrarFrase(String string) {
-        //Método criado apenas para eliminar erro de compilação
+    public void setTexto(String texto) {
+        this.texto = texto;
     }
 
+    public void CadastrarFrase(String text) {
+        //Classe criada para fugir de erro de compilação. 
+    }
+    
 }
