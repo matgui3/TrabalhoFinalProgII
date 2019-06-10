@@ -14,7 +14,7 @@ public enum EnumFrases {
     UG2("UG2"),
     SERVIÇOSAUXILIARES("Serviçes Auxiliares"),
     TOMADADAGUA("Tomada D'Água"),
-    SE("Subestação");
+    SUBESTACAO("Subestação");
     
     private final String enumFrases;
 

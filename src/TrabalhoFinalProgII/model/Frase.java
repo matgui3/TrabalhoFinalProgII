@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,6 +26,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "frases_prontas")
+@NamedQueries({
+        @NamedQuery(name = "Frase.buscarFrases",
+            query = "SELECT f FROM Frase f")
+})
 public class Frase {
 
     @Id
@@ -31,15 +37,15 @@ public class Frase {
     @Column(name = "id_frase")
     private long id;
     @Column(name = "area")
-    private String area;
+    private EnumFrases area;
     @Column(name = "frase")
     private String texto;
 
-    public String getArea() {
+    public EnumFrases getArea() {
         return area;
     }
 
-    public void setArea(String area) {
+    public void setArea(EnumFrases area) {
         this.area = area;
     }
 
