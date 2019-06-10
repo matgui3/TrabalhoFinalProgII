@@ -33,7 +33,7 @@ public class Operador implements Serializable{
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
     @Column(name = "telefone")
-    private int telefone;
+    private String telefone;
     @Column(name = "cargo")
     private Cargo cargo;
     
@@ -45,7 +45,7 @@ public class Operador implements Serializable{
      * @param telefone Telefone do operador a ser registrado
      * @param cargo Cargo a ser definido para o operador que está sendo registrado.
      */
-    public Operador(String nome, LocalDate dataNascimento, int telefone, Cargo cargo) {
+    public Operador(String nome, LocalDate dataNascimento, String telefone, Cargo cargo) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.telefone = telefone;
@@ -74,11 +74,11 @@ public class Operador implements Serializable{
         this.dataNascimento = dataNascimento;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
     
