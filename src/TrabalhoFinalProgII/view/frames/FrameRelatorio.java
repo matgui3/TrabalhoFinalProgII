@@ -1,9 +1,11 @@
 package TrabalhoFinalProgII.view.frames;
 
+import TrabalhoFinalProgII.model.Cargo;
 import TrabalhoFinalProgII.model.EnumTurnos;
 import TrabalhoFinalProgII.model.EstadoServicosAuxiliares;
 import TrabalhoFinalProgII.model.EstadoSubestacao;
 import TrabalhoFinalProgII.model.EstadoUnidadeGeradora;
+import TrabalhoFinalProgII.model.Operador;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -19,9 +21,12 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -45,6 +50,8 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 
     private static final String titulo = "Relatório de Ocorrências";
     private static Dimension dimension = new Dimension(800, 600);
+    
+    private List <Operador> operadores = new ArrayList<Operador>();
 
     private Label lb1;
     private Label lb2;
@@ -65,11 +72,19 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     private JButton jbGravar;
     private JButton jbFrases;
     private JButton jbAjustes;
+    private JButton jbEditar;
+    private JButton jbExcluir;
     private JComboBox cbUgs;
     private JComboBox cbUgs2;
     private JComboBox cbSA;
     private JComboBox cbSE;
     private JComboBox cbTurnos;
+    private JComboBox cbOp1Turno1;
+    private JComboBox cbOp1Turno2;
+    private JComboBox cbOp1Turno3;
+    private JComboBox cbOp2Turno1;
+    private JComboBox cbOp2Turno2;
+    private JComboBox cbOp2Turno3;
     private Label lbCabecalhoTurno1;
     private Label lbCabecalhoTurno2;
     private Label lbCabecalhoTurno3;
@@ -88,6 +103,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     private JTable tabela1;
     private JTable tabela2;
     private JTable tabela3;
+    private JTable tabteste;
     private JButton jbFimTurno;
     private JScrollPane barra;
 
@@ -108,11 +124,20 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     public FrameRelatorio() {
         super(titulo, dimension);
 
+        Operador op1 = new Operador("Rodrigo", LocalDate.of(1983, 03, 14), "47992402517", Cargo.OPERADOR3);
+        Operador op2 = new Operador("Giovani", LocalDate.of(1987, 03, 14), "47999999999", Cargo.OPERADOR2);
+        addOperador(op1);
+        addOperador(op2);
         initializeComponents();
         addComponents();
         setBorder(null);
         setClosable(true);
-        System.out.println("janela" + getComponentZOrder(this));
+        getNomeOperadores();
+        
+    }
+    
+    public void addOperador(Operador op){
+        operadores.add(op);
     }
 
     public void editaFont(Label umJl) {
@@ -161,6 +186,17 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         }
         return F_Mascara;
     }
+    
+    public String [] getNomeOperadores(){
+        int i = 0;
+        String nomes[] = new String [12];
+        for(Operador op : operadores){
+            nomes[i] = (op.getNome());
+            i++;
+        }
+        System.out.println(nomes[0]);
+        return nomes;
+    }
 
     private void initializeComponents() {
         lb1 = new Label("Dia da Semana ");
@@ -193,8 +229,16 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         lb10 = new Label("Serviços Auxiliares");
         editaFont(lb10);
         cbSA = new JComboBox(EstadoServicosAuxiliares.values());
-        
+
         cbTurnos = new JComboBox(EnumTurnos.values());
+        cbOp1Turno1 = new JComboBox(getNomeOperadores());
+        tabteste = new JTable(1,3);
+        cbOp1Turno1.setMaximumSize(new Dimension(100, 100));
+        cbOp1Turno2 = new JComboBox(getNomeOperadores());
+        cbOp1Turno3 = new JComboBox(getNomeOperadores());
+        cbOp2Turno1 = new JComboBox(getNomeOperadores());
+        cbOp2Turno2 = new JComboBox(getNomeOperadores());
+        cbOp2Turno3 = new JComboBox(getNomeOperadores());
 
         lbHora = new Label("Hora");
         tfHora = new JFormattedTextField(Mascara("##:##"));
@@ -204,14 +248,35 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         taOcorrencia = new TextArea("", 1, 60);
         jbGravar = new JButton("Gravar");
         jbGravar.addActionListener(this);
-        jbFimTurno = new JButton("Finaliza Turno");
+        jbFimTurno = new JButton("Finaliza Dia");
         jbFimTurno.addActionListener(this);
         jbFrases = new JButton("Frases");
+        jbFrases.addActionListener(this);
         jbAjustes = new JButton("Ajustes");
+        jbAjustes.addActionListener(this);
+        jbEditar = new JButton("Editar");
+        jbEditar.addActionListener(this);
+        jbExcluir = new JButton("Excluir");
+        jbExcluir.addActionListener(this);
 
-        tabela1 = new JTable(1, 2);
-        tabela2 = new JTable(1, 2);
-        tabela3 = new JTable(1, 2);
+        tabela1 = new JTable(1, 2) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int mColIndex) {
+                return false;
+            }
+        };
+        tabela2 = new JTable(1, 2) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int mColIndex) {
+                return false;
+            }
+        };
+        tabela3 = new JTable(1, 2) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int mColIndex) {
+                return false;
+            }
+        };
 
         cabecalhoLayout1 = new FlowLayout(FlowLayout.CENTER, 50, 10);
 
@@ -367,6 +432,8 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         panel8.add(taOcorrencia);
         panel8.add(cbTurnos);
         panel8.add(jbGravar);
+        panel8.add(jbEditar);
+        panel8.add(jbExcluir);
         panel8.add(jbFimTurno);
 
         super.addFormulario(barra);
@@ -385,8 +452,6 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         editaFont(lbCabecalhoTurno3);
         lbCabecalhoTurno4 = new Label("Operadores");
         editaFont(lbCabecalhoTurno4);
-        lbCabecalhoTurno5 = new Label("Nomes");
-        editaFont(lbCabecalhoTurno5);
 
         cons = new GridBagConstraints();
         cons.gridx = 0;
@@ -421,8 +486,8 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         cons.gridy = 10;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panel2.add(lbCabecalhoTurno5, cons);
-
+        panel2.add(tabteste, cons);
+        
         iniciarTabela(tabela1);
         panel3.add(tabela1);
 //Falta adicionar panel abaixo de panel
@@ -434,8 +499,6 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         editaFont(lbCabecalhoTurno23);
         lbCabecalhoTurno24 = new Label("Operadores");
         editaFont(lbCabecalhoTurno24);
-        lbCabecalhoTurno25 = new Label("Nomes");
-        editaFont(lbCabecalhoTurno25);
 
         cons = new GridBagConstraints();
         cons.gridx = 0;
@@ -472,7 +535,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         cons.gridy = 10;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panel4.add(lbCabecalhoTurno25, cons);
+        panel4.add(cbOp1Turno2, cons);
 
         iniciarTabela(tabela2);
         panel5.add(tabela2);
@@ -485,8 +548,6 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         editaFont(lbCabecalhoTurno33);
         lbCabecalhoTurno34 = new Label("Operadores");
         editaFont(lbCabecalhoTurno34);
-        lbCabecalhoTurno35 = new Label("Nomes");
-        editaFont(lbCabecalhoTurno35);
 
         cons = new GridBagConstraints();
         cons.gridx = 0;
@@ -523,7 +584,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         cons.gridy = 10;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panel6.add(lbCabecalhoTurno35, cons);
+        panel6.add(cbOp1Turno3, cons);
 
         iniciarTabela(tabela3);
         panel7.add(tabela3);
@@ -539,6 +600,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         tabela.setAutoscrolls(true);
         DefaultTableCellRenderer cellRender = new DefaultTableCellRenderer();
         cellRender.setHorizontalAlignment(SwingConstants.CENTER);
+
     }
 
     @Override
@@ -558,13 +620,21 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 //        super.repaint();
     }
 
-    public static void alinhaTableCentro(JTable table) {
+    public static void alinhaTableCentro(JTable tabela) {
 
         DefaultTableCellRenderer cellRender = new DefaultTableCellRenderer();
         cellRender.setHorizontalAlignment(SwingConstants.CENTER);
 
-        table.getColumnModel().getColumn(0).setCellRenderer(
+        tabela.getColumnModel().getColumn(0).setCellRenderer(
                 cellRender);
+    }
+
+    public void removeLinha(JTable tabela) {
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+        int[] rows = tabela.getSelectedRows();
+        for (int i = 0; i < rows.length; i++) {
+            model.removeRow(rows[i] - i);
+        }
     }
 
     @Override
@@ -572,10 +642,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         Object obj = evt.getSource();
 
         if (obj == jbGravar) {
-            
-            if (obj == jbGravar) {
             int combo = cbTurnos.getSelectedIndex();
-            System.out.println(combo);
             String frase[] = {tfHora.getText(), taOcorrencia.getText()};
             DefaultTableModel modelo = new DefaultTableModel(frase, 0);
             switch (combo) {
@@ -586,11 +653,11 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                         modelo.removeRow(0);
 
                     }
-                        modelo.addRow(frase);
+                    modelo.addRow(frase);
 
-                        tabela1.setModel(modelo);
+                    tabela1.setModel(modelo);
 
-                        alinhaTableCentro(tabela1);
+                    alinhaTableCentro(tabela1);
                     break;
                 case 1:
                     modelo = (DefaultTableModel) tabela2.getModel();
@@ -598,11 +665,11 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                         modelo.removeRow(0);
 
                     }
-                        modelo.addRow(frase);
+                    modelo.addRow(frase);
 
-                        tabela2.setModel(modelo);
+                    tabela2.setModel(modelo);
 
-                        alinhaTableCentro(tabela2);
+                    alinhaTableCentro(tabela2);
                     break;
                 case 2:
                     modelo = (DefaultTableModel) tabela3.getModel();
@@ -610,18 +677,73 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                         modelo.removeRow(0);
 
                     }
-                        modelo.addRow(frase);
+                    modelo.addRow(frase);
 
-                        tabela3.setModel(modelo);
+                    tabela3.setModel(modelo);
 
-                        alinhaTableCentro(tabela3);
+                    alinhaTableCentro(tabela3);
                     break;
             }
 
-        }
+            tfHora.setText("");
+            taOcorrencia.setText(" ");
 
         }
         if (obj == jbFimTurno) {
+        }
+        if (obj == jbEditar) {
+
+            String hora = tfHora.getText();
+            String frase = taOcorrencia.getText();
+            int linha = tabela1.getSelectedRow();
+
+            int combo = cbTurnos.getSelectedIndex();
+            switch (combo) {
+                case 0:
+
+                    hora = tfHora.getText();
+                    frase = taOcorrencia.getText();
+
+                    tabela1.setValueAt(hora, linha, 0);
+                    tabela1.setValueAt(frase, linha, 1);
+                    break;
+                case 1:
+                    hora = tfHora.getText();
+                    frase = taOcorrencia.getText();
+
+                    tabela2.setValueAt(hora, linha, 0);
+                    tabela2.setValueAt(frase, linha, 1);
+                    break;
+                case 2:
+                    hora = tfHora.getText();
+                    frase = taOcorrencia.getText();
+
+                    tabela3.setValueAt(hora, linha, 0);
+                    tabela3.setValueAt(frase, linha, 1);
+                    break;
+            }
+
+            tfHora.setText("");
+            taOcorrencia.setText(" ");
+        }
+        if (obj == jbExcluir) {
+
+            int combo = cbTurnos.getSelectedIndex();
+            switch (combo) {
+                case 0:
+
+                    removeLinha(tabela1);
+
+                    break;
+                case 1:
+                    removeLinha(tabela2);
+
+                    break;
+                case 2:
+                    removeLinha(tabela3);
+
+                    break;
+            }
         }
     }
 

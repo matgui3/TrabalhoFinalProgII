@@ -59,6 +59,7 @@ public final class FrameBuscarRelatorio extends FrameCRUD implements ActionListe
 
         initializeComponents();
         addComponents();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     public FrameBuscarRelatorio(String titulo, Dimension dimension) {
