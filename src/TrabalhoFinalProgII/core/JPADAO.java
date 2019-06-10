@@ -5,6 +5,8 @@
  */
 package TrabalhoFinalProgII.core;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

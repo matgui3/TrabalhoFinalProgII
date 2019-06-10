@@ -7,6 +7,7 @@ package TrabalhoFinalProgII.view.frames;
 
 import TrabalhoFinalProgII.model.Cargo;
 import TrabalhoFinalProgII.model.Operador;
+import TrabalhoFinalProgII.service.OperadorService;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -39,7 +40,7 @@ public class FrameShowOperadores extends FrameCRUD{
     private Cargo enumCargo;
     
 //    private JTable tbExibicao;
-//    private OperadorTableModel tableModel;
+    private OperadorTableModel tableModel;
 //    private JScrollPane scrollTable;
 
     private JButton btVoltar;
@@ -47,6 +48,8 @@ public class FrameShowOperadores extends FrameCRUD{
     private JPanel panelFormulario;
     private LayoutManager layout;
     private GridBagConstraints cons;
+    
+    OperadorService operadorService = new OperadorService();
 
     public FrameShowOperadores() {
         super(titulo, dimension);
@@ -74,7 +77,7 @@ public class FrameShowOperadores extends FrameCRUD{
         panelFormulario = new JPanel(layout);
         panelFormulario.setBorder(BorderFactory.createTitledBorder("Exibir Operadores Cadastrados"));
         
-//        tableModel = new OperadorTableModel(operadores);
+        tableModel = new OperadorTableModel(operadorService.buscarOperadores());
 //        tbExibicao = new JTable(tableModel);
 //        scrollTable = new JScrollPane(tbExibicao);
 

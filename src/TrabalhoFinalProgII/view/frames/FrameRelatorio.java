@@ -6,6 +6,7 @@ import TrabalhoFinalProgII.model.EstadoServicosAuxiliares;
 import TrabalhoFinalProgII.model.EstadoSubestacao;
 import TrabalhoFinalProgII.model.EstadoUnidadeGeradora;
 import TrabalhoFinalProgII.model.Operador;
+import TrabalhoFinalProgII.service.OperadorService;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -53,7 +54,9 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     private static final String titulo = "Relatório de Ocorrências";
     private static Dimension dimension = new Dimension(800, 600);
     
-    private List <Operador> operadores = new ArrayList<Operador>();
+    OperadorService operadorService = new OperadorService();
+    
+    private List <Operador> operadores = operadorService.buscarOperadores();
 
     private Label lb1;
     private Label lb2;
@@ -128,10 +131,10 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     public FrameRelatorio() {
         super(titulo, dimension);
 
-        Operador op1 = new Operador("Rodrigo", LocalDate.of(1983, 03, 14), "47992402517", Cargo.OPERADOR3);
-        Operador op2 = new Operador("Giovani", LocalDate.of(1987, 03, 14), "47999999999", Cargo.OPERADOR2);
-        addOperador(op1);
-        addOperador(op2);
+//        Operador op1 = new Operador("Rodrigo", LocalDate.of(1983, 03, 14), "47992402517", Cargo.OPERADOR3);
+//        Operador op2 = new Operador("Giovani", LocalDate.of(1987, 03, 14), "47999999999", Cargo.OPERADOR2);
+//        addOperador(op1);
+//        addOperador(op2);
         initializeComponents();
         addComponents();
         setBorder(null);

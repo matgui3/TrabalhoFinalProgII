@@ -5,6 +5,8 @@
  */
 package TrabalhoFinalProgII.core;
 
+import java.util.List;
+
 /**
  *
  * @author guilh
