@@ -136,7 +136,7 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
     }
 
     @Override
-    public void carregarCampos() {
+    public void gravarCampos() {
 
 //        novoAjuste.setArea(enumFrases);
 //        novoAjuste.CadastrarFrase(taFrase.getText());
@@ -169,6 +169,11 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
             dispose();
         }
 
+    }
+
+    @Override
+    public void excluirRegistro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

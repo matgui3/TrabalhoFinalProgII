@@ -5,10 +5,12 @@
  */
 package TrabalhoFinalProgII.view.frames;
 
+import TrabalhoFinalProgII.model.Cargo;
 import TrabalhoFinalProgII.model.Operador;
 import TrabalhoFinalProgII.model.RelatorioOcorrencias;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Label;
@@ -19,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.ComboBox;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -31,13 +34,12 @@ import javax.swing.text.MaskFormatter;
  *
  * @author 00783962045
  */
-public class FrameCadastrarOperadores extends FrameCRUD implements ActionListener {
+public class FrameCadastrarOperadores extends FrameCRUD {
 
-    private static final String titulo = "Abrir Relatorio de Ocorrências";
+    private static final String titulo = "Cadastro de Operadores";
     private static final Dimension dimension = new Dimension(800, 300);
     private Operador novoOperador;
 
-    private FramePrincipal frameSistema;
 
     private Label lbNome;
     private Label lbDataNasc;
@@ -50,11 +52,7 @@ public class FrameCadastrarOperadores extends FrameCRUD implements ActionListene
     private MaskFormatter maskTf;
     private MaskFormatter maskTf1;
 
-    private JButton jbCadastrar;
-
     private JPanel panelFormulario;
-    private JPanel panelBotoes;
-    private FlowLayout cabecalhoLayout1;
 
     private LayoutManager layout;
     private GridBagConstraints cons;
@@ -82,7 +80,16 @@ public class FrameCadastrarOperadores extends FrameCRUD implements ActionListene
 
     public void initializeComponents() {
         lbNome = new Label("Nome: ");
+        editaFont(lbNome);
         lbDataNasc = new Label("Data de Nascimento: ");
+        editaFont(lbDataNasc);
+        lbTelefone = new Label("Telefone :");
+        editaFont(lbTelefone);
+        lbCargo = new Label("Cargo:");
+        editaFont(lbCargo);
+
+        tfNome = new TextField();
+        cbCargo = new JComboBox(Cargo.values());
 
         fTfDataNasc = new JFormattedTextField();
         fTfDataNasc.setPreferredSize(new Dimension(150, 25));
@@ -92,7 +99,7 @@ public class FrameCadastrarOperadores extends FrameCRUD implements ActionListene
             Logger.getLogger(FrameBuscarRelatorio.class.getName()).log(Level.SEVERE, null, ex);
         }
         maskTf.install(fTfDataNasc);
-        
+
         fTfTelefone = new JFormattedTextField();
         fTfTelefone.setPreferredSize(new Dimension(150, 25));
         try {
@@ -104,22 +111,12 @@ public class FrameCadastrarOperadores extends FrameCRUD implements ActionListene
 
         layout = new GridBagLayout();
         panelFormulario = new JPanel(layout);
-        panelFormulario.setBorder(BorderFactory.createTitledBorder("Abrir Relatório de Ocorrências"));
+        panelFormulario.setBorder(BorderFactory.createTitledBorder("Cadastrar Operadores"));
 
-        jbCadastrar = new JButton("Abrir Relatório");
-        jbCadastrar.addActionListener(this);
-
-        panelBotoes = new JPanel(cabecalhoLayout1);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent evt) {
-        Object obj = evt.getSource();
-
-        if (obj == jbCadastrar) {
-            
-        }
-
+    public void editaFont(Label umJl) {
+        umJl.setFont(new Font("Serif", Font.PLAIN, 18));
     }
 
     public void addComponents() {
@@ -128,6 +125,7 @@ public class FrameCadastrarOperadores extends FrameCRUD implements ActionListene
         cons.gridx = 0;
         cons.gridy = 0;
         cons.gridwidth = 1;
+        cons.ipadx = 100;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panelFormulario.add(lbNome, cons);
 
@@ -135,31 +133,73 @@ public class FrameCadastrarOperadores extends FrameCRUD implements ActionListene
         cons.gridx = 1;
         cons.gridy = 0;
         cons.gridwidth = 1;
+        cons.ipadx = 400;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panelFormulario.add(tfNome, cons);
 
         cons = new GridBagConstraints();
-        cons.gridx = 2;
-        cons.gridy = 0;
+        cons.gridx = 0;
+        cons.gridy = 1;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(new Label("            "), cons);
+        panelFormulario.add(lbDataNasc, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 1;
+        cons.gridy = 1;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panelFormulario.add(fTfDataNasc, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 2;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panelFormulario.add(lbTelefone, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 1;
+        cons.gridy = 2;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panelFormulario.add(fTfTelefone, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 3;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panelFormulario.add(lbCargo, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 1;
+        cons.gridy = 3;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panelFormulario.add(cbCargo, cons);
 
         super.addFormulario(panelFormulario);
-        panelBotoes.add(jbCadastrar);
-
-        super.addBotaoInferior(jbCadastrar);
     }
 
     @Override
     public void limparCampos() {
-        
-        super.repaint();
+
+        tfNome.setText(" ");
+        fTfDataNasc.setText("");
+        fTfTelefone.setText("");
     }
 
     @Override
-    public void carregarCampos() {
-        
+    public void gravarCampos() {
+
+    }
+
+    @Override
+    public void excluirRegistro() {
+        tfNome.setText(" ");
+        fTfDataNasc.setText("");
+        fTfTelefone.setText("");
     }
 
 }

@@ -618,7 +618,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     }
 
     @Override
-    public void carregarCampos() {
+    public void gravarCampos() {
 
 //        novoAjuste.setArea(enumFrases);
 //        novoAjuste.CadastrarFrase(taFrase.getText());
@@ -769,6 +769,11 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             this.getParent().add(tela);
             tela.setVisible(true);
         }
+    }
+
+    @Override
+    public void excluirRegistro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

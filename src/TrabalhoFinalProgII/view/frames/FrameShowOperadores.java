@@ -109,7 +109,12 @@ public class FrameShowOperadores extends FrameCRUD{
     }
 
     @Override
-    public void carregarCampos() {
+    public void gravarCampos() {
     }
-    
+
+    @Override
+    public void excluirRegistro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

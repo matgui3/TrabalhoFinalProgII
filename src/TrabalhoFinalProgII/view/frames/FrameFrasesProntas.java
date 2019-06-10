@@ -28,7 +28,7 @@ import javax.swing.JTextField;
  */
 public final class FrameFrasesProntas extends FrameCRUD {
 
-    private static final String titulo = "Frases Prontas";
+    private static final String titulo = "Cadastro de Frases Prontas";
     private static final Dimension dimension = new Dimension(800, 600);
 
     private Frase novaFrase;
@@ -77,7 +77,7 @@ public final class FrameFrasesProntas extends FrameCRUD {
         layout = new GridBagLayout();
         panelFormulario = new JPanel(layout);
 
-        panelFormulario.setBorder(BorderFactory.createTitledBorder("Frases Prontas"));
+        panelFormulario.setBorder(BorderFactory.createTitledBorder("Cadastrar Frases Prontas"));
         //cria um itemListener para saber qual item foi selecionado
         cbArea.addItemListener(new ItemListener() {
             @Override
@@ -126,7 +126,7 @@ public final class FrameFrasesProntas extends FrameCRUD {
     
 
     @Override
-    public void carregarCampos() {
+    public void gravarCampos() {
         
 //        novaFrase.setArea(enumFrases);
         novaFrase.CadastrarFrase(taFrase.getText());
@@ -141,6 +141,11 @@ public final class FrameFrasesProntas extends FrameCRUD {
         cbArea.setSelectedIndex(-1);
 
         super.repaint();
+    }
+
+    @Override
+    public void excluirRegistro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

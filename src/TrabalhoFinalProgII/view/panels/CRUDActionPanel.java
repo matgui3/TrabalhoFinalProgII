@@ -21,7 +21,6 @@ import javax.swing.JPanel;
 public class CRUDActionPanel extends JPanel implements ActionListener {
 
     private JButton btLimpar;
-    private JButton btNovo;
     private JButton btGravar;
     private JButton btExcluir;
     private JButton btSair;
@@ -60,13 +59,9 @@ public class CRUDActionPanel extends JPanel implements ActionListener {
 
         layout = new FlowLayout(FlowLayout.CENTER);
 
-        btLimpar = new JButton("Cancelar");
+        btLimpar = new JButton("Limpar");
         btLimpar.addActionListener(this);
         btLimpar.setSize(dimensaoBotao);
-
-        btNovo = new JButton("Novo");
-        btNovo.addActionListener(this);
-        btNovo.setSize(dimensaoBotao);
 
         btGravar = new JButton("Gravar");
         btGravar.addActionListener(this);
@@ -84,7 +79,6 @@ public class CRUDActionPanel extends JPanel implements ActionListener {
     private void addComponents() {
         this.setLayout(layout);
         this.add(btLimpar);
-        this.add(btNovo);
         this.add(btExcluir);
         this.add(btGravar);
         this.add(btSair);
@@ -96,10 +90,6 @@ public class CRUDActionPanel extends JPanel implements ActionListener {
 
     public JButton getbtLimpar() {
         return btLimpar;
-    }
-
-    public JButton getBtNovo() {
-        return btNovo;
     }
 
     public JButton getBtGravar() {
@@ -118,10 +108,13 @@ public class CRUDActionPanel extends JPanel implements ActionListener {
             this.parent.fechar();
         }
         if (obj == btGravar) {
-            this.parent.carregarCampos();
+            this.parent.gravarCampos();
         }
         if (obj == btLimpar) {
             this.parent.limparCampos();
+        }
+        if (obj == btExcluir) {
+            this.parent.excluirRegistro();
         }
         
     }

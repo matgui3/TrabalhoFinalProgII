@@ -101,8 +101,10 @@ public abstract class FrameCRUD extends JInternalFrame {
 
     public abstract void limparCampos();
 
-    public abstract void carregarCampos();
-
+    public abstract void gravarCampos();
+    
+    public abstract void excluirRegistro();
+    
     public void fechar() {
         this.dispose();
     }

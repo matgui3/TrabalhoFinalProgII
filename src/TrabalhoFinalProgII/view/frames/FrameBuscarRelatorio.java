@@ -153,8 +153,13 @@ public final class FrameBuscarRelatorio extends FrameCRUD implements ActionListe
     }
 
     @Override
-    public void carregarCampos() {
+    public void gravarCampos() {
         tfDtRelatorio.setText("");
+    }
+
+    @Override
+    public void excluirRegistro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

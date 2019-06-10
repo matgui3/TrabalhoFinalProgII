@@ -144,7 +144,7 @@ public final class FrameFrasesAjustes extends FrameCRUD {
     }
 
     @Override
-    public void carregarCampos() {
+    public void gravarCampos() {
 
 //        novoAjuste.set(enumFrases);
 //        novoAjuste.CadastrarFrase(taFrase.getText());
@@ -156,6 +156,11 @@ public final class FrameFrasesAjustes extends FrameCRUD {
         cbArea.setSelectedIndex(-1);
 
         super.repaint();
+    }
+
+    @Override
+    public void excluirRegistro() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
