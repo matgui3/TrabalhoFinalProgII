@@ -5,55 +5,59 @@
  */
 package TrabalhoFinalProgII.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- *
- * @author guilh
+ * Classe contendo objetos Frases Prontas onde os Operários podem encontrar frases pré-definidas para avisos.
+ * @author Guilherme Rafael Deschamps e Rodrigo Souza Tassoni
+ * @since 11/03/2019
  */
 @Entity
-@Table(name = "frases")
-public class Frase {
+@Table(name = "frases_prontas")
+public class FrasesProntas {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_frase")
-    private int idFrase;
-    @Column(name = "frase")
-    private String frase;
-    @ManyToOne
-    @JoinColumn(name = "id_lista_frases", referencedColumnName = "id_lista_frases")
-    private FrasesProntas frasesProntas;
+    @Column(name = "id_lista_frases")
+    private long id;
+    @Column(name = "area")
+    private EnumFrases area;
+    @OneToMany(mappedBy = "frasesProntas", cascade = CascadeType.ALL)
+    private List<Frase> frases;
 
-    public int getIdFrase() {
-        return idFrase;
+    /**
+     * Método que adiciona uma frase à lista de frases prontas.
+     * @param frase Frase a ser adicionada.
+     */ 
+    public void addFrase(Frase frase) {
+        frases.add(frase);
     }
 
-    public void setIdFrase(int idFrase) {
-        this.idFrase = idFrase;
+    public EnumFrases getArea() {
+        return area;
     }
 
-    public String getFrase() {
-        return frase;
+    public void setArea(EnumFrases area) {
+        this.area = area;
     }
 
-    public void setFrase(String frase) {
-        this.frase = frase;
+    @Override
+    public String toString() {
+        return "FrasesProntas{" + "area=" + area + ", frases=" + frases + '}';
     }
 
-    public FrasesProntas getFrasesProntas() {
-        return frasesProntas;
+    public void CadastrarFrase(String string) {
+        //Método criado apenas para eliminar erro de compilação
     }
 
-    public void setFrasesProntas(FrasesProntas frasesProntas) {
-        this.frasesProntas = frasesProntas;
-    }
-    
-    
 }
