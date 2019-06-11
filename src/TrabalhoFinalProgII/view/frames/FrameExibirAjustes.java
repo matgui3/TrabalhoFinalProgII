@@ -133,12 +133,16 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
 
     public void mostrarFrases() {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
         String frasesBanco[][] = {
             {"SETPOINT", "96 MW", "96 MW"},
             {"SETPOINT", "Potencia liquida 190,45 MW\n"
                 + "Limite de transmissão 193 MW", "Potencia liquida 190,45 MW"},
             {"SETPOINT", "96 MW", "96 MW"}
         };
+<<<<<<< HEAD
 =======
         AjustesDAO dao = new AjustesDAO();
         
@@ -147,6 +151,8 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
         modelo = (DefaultTableModel) tabela1.getModel();
         if (modelo.getValueAt(0, 0) == null) {
             modelo.removeRow(0);
+>>>>>>> master
+=======
 >>>>>>> master
 
         int cont = 0;
