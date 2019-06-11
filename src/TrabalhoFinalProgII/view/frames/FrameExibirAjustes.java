@@ -126,7 +126,7 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
     public void mostrarFrases() {
         AjustesDAO dao = new AjustesDAO();
         
-        List<String> frases = dao.buscarAjustes().stream().forEach(frase -> frases.add(frase.getNomeAjuste()));
+        String frase[] = {"Esse bixo ae meu!!!"};
         DefaultTableModel modelo = new DefaultTableModel(frase, 0);
         modelo = (DefaultTableModel) tabela1.getModel();
         if (modelo.getValueAt(0, 0) == null) {
