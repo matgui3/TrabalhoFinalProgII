@@ -7,23 +7,17 @@ package TrabalhoFinalProgII.view.frames;
 
 import TrabalhoFinalProgII.model.Cargo;
 import TrabalhoFinalProgII.model.Operador;
-import TrabalhoFinalProgII.model.RelatorioOcorrencias;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Label;
 import java.awt.LayoutManager;
 import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.control.ComboBox;
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
@@ -112,6 +106,7 @@ public class FrameCadastrarOperadores extends FrameCRUD {
         layout = new GridBagLayout();
         panelFormulario = new JPanel(layout);
         panelFormulario.setBorder(BorderFactory.createTitledBorder("Cadastrar Operadores"));
+        removeExcluir();
 
     }
 

@@ -7,7 +7,7 @@ package TrabalhoFinalProgII.view.frames;
 
 import TrabalhoFinalProgII.model.EnumFrases;
 import TrabalhoFinalProgII.model.Frase;
-import java.awt.Container;
+import TrabalhoFinalProgII.view.panels.CRUDActionPanel;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -20,7 +20,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 /**
  *
@@ -87,6 +86,7 @@ public final class FrameFrasesProntas extends FrameCRUD {
                 }
             }
         });
+    removeExcluir();
     }
 
     private void addComponents() {

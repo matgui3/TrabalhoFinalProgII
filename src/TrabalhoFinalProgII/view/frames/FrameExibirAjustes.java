@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -33,8 +33,9 @@ import javax.swing.table.DefaultTableModel;
 public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
 
     private static final String titulo = "Ajustes";
-    private static Dimension dimension = new Dimension(800, 600);
+    private static Dimension dimension = new Dimension(1000, 600);
     private JTable tabela1;
+    private DefaultTableModel modelo;
 
     private JButton jbSair;
 
@@ -43,6 +44,7 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
     private JPanel panel3;
     private JPanel panelzaco;
     private JScrollPane barra;
+    private JScrollPane scr;
 
     private GridBagLayout layout;
     private GridBagConstraints cons;
@@ -63,14 +65,19 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
     }
 
     private void initializeComponents() {
+        modelo = new DefaultTableModel();
 
-        tabela1 = new JTable(1, 1) {
+        tabela1 = new JTable(modelo);
+
+        /*{
             @Override
             public boolean isCellEditable(int rowIndex, int mColIndex) {
                 return false;
             }
-        };
-
+        };*/
+        //tabela1.getColumnModel().getColumn(0).setPreferredWidth(55);
+        //scr = new JScrollPane(tabela1);
+        //scr.setSize(new Dimension(900, 600));
         jbSair = new JButton("Sair");
         jbSair.addActionListener(this);
 
@@ -80,35 +87,36 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
 
         layout = new GridBagLayout();
         panel2 = new JPanel(cabecalhoLayout1);
-        panel3 = new JPanel(cabecalhoLayout1);
+        // panel3 = new JPanel(cabecalhoLayout1);
         panelzaco = new JPanel();
         panelzaco.setLayout(new BoxLayout(panelzaco, BoxLayout.Y_AXIS));
 
-        panelBotoesCRUD.setVisible(
-                false);
+        //panelBotoesCRUD.setVisible(false);
     }
 
     private void addComponents() {
-
         iniciarTabela(tabela1);
         panel2.add(tabela1);
 
         panelzaco.add(panel2);
-        panelzaco.add(panel3);
+        //panelzaco.add(panel3);
         panel1.add(panelzaco);
         barra = new JScrollPane(panel1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        panel3.add(jbSair);
-
+        //panel3.add(jbSair);
         super.addFormulario(barra);
-        super.addFormularioRodape(panel3);
+        //super.addFormularioRodape(panel3);
 
     }
 
     public void iniciarTabela(JTable tabela) {
+        modelo.addColumn("AJUSTES");
+        modelo.addColumn("UG1");
+        modelo.addColumn("UG2");
+        String a[] = {"AJUSTES", "UG1", "UG2"};
+        modelo.addRow(a);
         Color color = UIManager.getColor("Table.gridColor");
         MatteBorder border = new MatteBorder(3, 3, 3, 3, color);
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(650);
         tabela.setRowHeight(25);
         tabela.setBorder(border);
         tabela.setAutoscrolls(true);
@@ -120,18 +128,32 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
     }
 
     public void mostrarFrases() {
-        String frase[] = {"Esse bixo ae meu!!!"};
-        DefaultTableModel modelo = new DefaultTableModel(frase, 0);
-        modelo = (DefaultTableModel) tabela1.getModel();
-        if (modelo.getValueAt(0, 0) == null) {
-            modelo.removeRow(0);
+        String frasesBanco[][] = {
+            {"SETPOINT", "96 MW", "96 MW"},
+            {"SETPOINT", "Potencia liquida 190,45 MW\n"
+                + "Limite de transmissão 193 MW", "Potencia liquida 190,45 MW"},
+            {"SETPOINT", "96 MW", "96 MW"}
+        };
 
+        int cont = 0;
+        for (String a[] : frasesBanco) {
+            a = frasesBanco[cont];
+            modelo.addRow(a);
+            if (cont > 0) {
+                tabela1.getColumnModel().getColumn(1).setPreferredWidth(350);
+                tabela1.getColumnModel().getColumn(2).setPreferredWidth(350);
+            }
+            cont++;
         }
-        modelo.addRow(frase);
-
-        tabela1.setModel(modelo);
-
         alinhaTableCentro(tabela1);
+    }
+
+    public void removeLinha(JTable tabela) {
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+        int[] rows = tabela.getSelectedRows();
+        for (int i = 0; i < rows.length; i++) {
+            model.removeRow(rows[i] - i);
+        }
     }
 
     @Override
@@ -151,14 +173,19 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
 //        super.repaint();
     }
 
+    @Override
+    public void excluirRegistro() {
+        removeLinha(tabela1);
+    }
+
     public static void alinhaTableCentro(JTable table) {
 
         DefaultTableCellRenderer cellRender = new DefaultTableCellRenderer();
         cellRender.setHorizontalAlignment(SwingConstants.CENTER);
 
-        table.getColumnModel().getColumn(0).setCellRenderer(
-                cellRender);
+        table.getColumnModel().getColumn(0).setCellRenderer(cellRender);
     }
+   
 
     @Override
     public void actionPerformed(ActionEvent evt) {
@@ -168,11 +195,6 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
             dispose();
         }
 
-    }
-
-    @Override
-    public void excluirRegistro() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

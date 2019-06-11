@@ -337,7 +337,6 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         cons.gridx = 1;
         cons.gridy = 1;
         cons.gridwidth = 1;
-        cons.ipadx = 900;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panel2.add(lb2, cons);
 
