@@ -5,8 +5,10 @@
  */
 package TrabalhoFinalProgII.service;
 
+import TrabalhoFinalProgII.core.AjustesDAO;
 import TrabalhoFinalProgII.core.JPADAO;
 import TrabalhoFinalProgII.model.ValoresAlarmesTrip;
+import java.util.List;
 
 /**
  *
@@ -15,6 +17,7 @@ import TrabalhoFinalProgII.model.ValoresAlarmesTrip;
 public class AjustesService {
     
     JPADAO<ValoresAlarmesTrip> dao = new JPADAO();
+    AjustesDAO ajustesDao = new AjustesDAO();
     
     public ValoresAlarmesTrip criarAjuste(String nomeAjuste, String valorAjusteUg1, String valorAjusteUg2) throws Exception{
         if(nomeAjuste == null | valorAjusteUg1 == null | valorAjusteUg2 == null)
@@ -28,6 +31,10 @@ public class AjustesService {
         dao.inserir(ajuste);
         
         return ajuste;
+    }
+    
+    public List<ValoresAlarmesTrip> buscarAjustes(){
+        return ajustesDao.buscarAjustes();
     }
     
 }

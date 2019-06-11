@@ -34,8 +34,6 @@ public class PainelDeAvisos {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "painelDeAvisos")
     private List<Aviso> avisos;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<SenhasLogins> senhasLogins;
-    @OneToMany(cascade = CascadeType.ALL)
     private List<ValoresAlarmesTrip> valoresAlarmesTrip;
     
     /**
@@ -43,7 +41,6 @@ public class PainelDeAvisos {
      */
     PainelDeAvisos(){
         avisos = new ArrayList<>();
-        senhasLogins = new ArrayList<>();
         valoresAlarmesTrip = new ArrayList<>();
     }
     
@@ -56,17 +53,6 @@ public class PainelDeAvisos {
     public void addAviso(LocalDate data, String aviso, Operador publisher){
         Aviso advice = new Aviso(data, aviso, publisher);
         avisos.add(advice);
-    }
-    
-    /**
-     * Adiciona um novo registro do tipo SenhasLogins à lista.
-     * @param equipamento Equipamento do qual está sendo colocado login e senha.
-     * @param login Login para acesso aos dados do equipamento.
-     * @param senha  Senha para acesso aos dados do equipamento.
-     */
-    public void addSenhasLogins(String equipamento, String login, String senha){
-        SenhasLogins acesso = new SenhasLogins(equipamento, login, senha);
-        senhasLogins.add(acesso);
     }
     
     /**
