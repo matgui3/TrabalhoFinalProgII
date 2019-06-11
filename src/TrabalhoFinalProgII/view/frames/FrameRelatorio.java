@@ -8,6 +8,7 @@ import TrabalhoFinalProgII.model.Operador;
 import TrabalhoFinalProgII.service.OperadorService;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -31,6 +32,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
@@ -263,10 +265,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         jbExcluir.addActionListener(this);
 
         tabela1 = new JTable(1, 2) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int mColIndex) {
-                return false;
-            }
+            
         };
         tabela2 = new JTable(1, 2) {
             @Override
@@ -310,6 +309,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         op1Column.setCellEditor(new DefaultCellEditor(cbT));
         op2Column.setCellEditor(new DefaultCellEditor(cbT));
     }
+  
 
     private void addComponents() {
         /* panel1.add(panel3, BorderLayout.CENTER);
@@ -337,6 +337,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         cons.gridx = 1;
         cons.gridy = 1;
         cons.gridwidth = 1;
+        cons.ipadx = 900;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panel2.add(lb2, cons);
 
@@ -608,6 +609,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         Color color = UIManager.getColor("Table.gridColor");
         MatteBorder border = new MatteBorder(3, 3, 3, 3, color);
         tabela.getColumnModel().getColumn(0).setPreferredWidth(90);
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(90);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(650);
         tabela.setRowHeight(25);
         tabela.setBorder(border);
@@ -650,14 +652,24 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             model.removeRow(rows[i] - i);
         }
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent evt) {
         Object obj = evt.getSource();
 
         if (obj == jbGravar) {
             int combo = cbTurnos.getSelectedIndex();
-            String frase[] = {tfHora.getText(), taOcorrencia.getText()};
+
+            String ocorrencia = taOcorrencia.getText();
+            if (ocorrencia.length() > 20) {
+                StringBuilder stringBuilder = new StringBuilder(ocorrencia);
+                stringBuilder.insert(ocorrencia.length() - 20, '\n');
+                System.out.println(stringBuilder.toString());
+                ocorrencia = stringBuilder.toString();
+            }
+            System.out.println(ocorrencia);
+
+            String frase[] = {tfHora.getText(), ocorrencia};
             DefaultTableModel modelo = new DefaultTableModel(frase, 0);
             switch (combo) {
                 case 0:
