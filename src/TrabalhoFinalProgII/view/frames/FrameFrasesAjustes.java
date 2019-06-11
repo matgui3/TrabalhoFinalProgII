@@ -20,13 +20,10 @@ import javax.swing.border.MatteBorder;
  */
 public final class FrameFrasesAjustes extends FrameCRUD {
 
-    private static final String titulo = "Painel de Ajustes";
+    private static final String titulo = "Adicionar Ajuste";
     private static final Dimension dimension = new Dimension(800, 600);
 
     private ValoresAlarmesTrip novoAjuste;
-    private String nomeAjuste;
-    private String valorAjusteUg1;
-    private String valorAjusteUg2;
 
     private Label lbAjuste;
     private Label lbAjusteUg1;
@@ -92,6 +89,7 @@ public final class FrameFrasesAjustes extends FrameCRUD {
         panelFormulario = new JPanel(layout);
 
         panelFormulario.setBorder(BorderFactory.createTitledBorder("Ajustes"));
+        removeExcluir();
 
     }
 

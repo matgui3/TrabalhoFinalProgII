@@ -94,6 +94,7 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
         // panel3 = new JPanel(cabecalhoLayout1);
         panelzaco = new JPanel();
         panelzaco.setLayout(new BoxLayout(panelzaco, BoxLayout.Y_AXIS));
+        removeJbts();
 
         //panelBotoesCRUD.setVisible(false);
     }
@@ -132,30 +133,15 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
     }
 
     public void mostrarFrases() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> master
+
         String frasesBanco[][] = {
             {"SETPOINT", "96 MW", "96 MW"},
             {"SETPOINT", "Potencia liquida 190,45 MW\n"
                 + "Limite de transmissão 193 MW", "Potencia liquida 190,45 MW"},
             {"SETPOINT", "96 MW", "96 MW"}
         };
-<<<<<<< HEAD
-=======
-        AjustesDAO dao = new AjustesDAO();
-        
-        String frase[] = {"Esse bixo ae meu!!!"};
-        DefaultTableModel modelo = new DefaultTableModel(frase, 0);
-        modelo = (DefaultTableModel) tabela1.getModel();
-        if (modelo.getValueAt(0, 0) == null) {
-            modelo.removeRow(0);
->>>>>>> master
-=======
->>>>>>> master
 
-        int cont = 0;
+               int cont = 0;
         for (String a[] : frasesBanco) {
             a = frasesBanco[cont];
             modelo.addRow(a);
@@ -166,6 +152,7 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
             cont++;
         }
         alinhaTableCentro(tabela1);
+    
     }
 
     public void removeLinha(JTable tabela) {
