@@ -34,7 +34,7 @@ import javax.swing.table.DefaultTableModel;
 public class FrameExibirFrases extends FrameCRUD implements ActionListener {
 
     private static final String titulo = "Frases";
-    private static Dimension dimension = new Dimension(800, 600);
+    private static Dimension dimension = new Dimension(1000, 600);
     private JTable tabela1;
 
     private JButton jbSair;
@@ -72,8 +72,6 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
             }
         };
 
-        jbSair = new JButton("Sair");
-        jbSair.addActionListener(this);
 
         cabecalhoLayout1 = new FlowLayout(FlowLayout.CENTER, 50, 10);
 
@@ -81,12 +79,10 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
 
         layout = new GridBagLayout();
         panel2 = new JPanel(cabecalhoLayout1);
-        panel3 = new JPanel(cabecalhoLayout1);
         panelzaco = new JPanel();
         panelzaco.setLayout(new BoxLayout(panelzaco, BoxLayout.Y_AXIS));
 
-        panelBotoesCRUD.setVisible(
-                false);
+        removeJbts();
     }
 
     private void addComponents() {
@@ -95,21 +91,18 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
         panel2.add(tabela1);
 
         panelzaco.add(panel2);
-        panelzaco.add(panel3);
         panel1.add(panelzaco);
         barra = new JScrollPane(panel1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        panel3.add(jbSair);
 
         super.addFormulario(barra);
-        super.addFormularioRodape(panel3);
 
     }
 
     public void iniciarTabela(JTable tabela) {
         Color color = UIManager.getColor("Table.gridColor");
         MatteBorder border = new MatteBorder(3, 3, 3, 3, color);
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(650);
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(900);
         tabela.setRowHeight(25);
         tabela.setBorder(border);
         tabela.setAutoscrolls(true);
@@ -160,6 +153,13 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
         table.getColumnModel().getColumn(0).setCellRenderer(
                 cellRender);
     }
+    public void removeLinha(JTable tabela) {
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+        int[] rows = tabela.getSelectedRows();
+        for (int i = 0; i < rows.length; i++) {
+            model.removeRow(rows[i] - i);
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
@@ -173,7 +173,7 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
 
     @Override
     public void excluirRegistro() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        removeLinha(tabela1);
     }
 
 }

@@ -1,23 +1,18 @@
 package TrabalhoFinalProgII.view.frames;
 
-import TrabalhoFinalProgII.model.EnumFrases;
-import TrabalhoFinalProgII.model.Frase;
 import TrabalhoFinalProgII.model.ValoresAlarmesTrip;
-import java.awt.Container;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.Label;
 import java.awt.LayoutManager;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.MatteBorder;
 
 /**
  *
@@ -33,23 +28,20 @@ public final class FrameFrasesAjustes extends FrameCRUD {
     private String valorAjusteUg1;
     private String valorAjusteUg2;
 
-    private Label lbArea;
+    private Label lbAjuste;
     private Label lbAjusteUg1;
     private Label lbAjusteUg2;
-    private JComboBox cbArea;
 
-    private JFormattedTextField tfUg1;
-    private JFormattedTextField tfUg2;
+    private JTextArea tfAjuste;
+    private JTextArea tfUg1;
+    private JTextArea tfUg2;
 
     private JPanel panelFormulario;
     private LayoutManager layout;
     private GridBagConstraints cons;
-    private EnumFrases enumFrases;
 
     public FrameFrasesAjustes() {
         super(titulo, dimension);
-
-        novoAjuste = new ValoresAlarmesTrip(nomeAjuste, valorAjusteUg1, valorAjusteUg2);
 
         initializeComponents();
         addComponents();
@@ -66,32 +58,41 @@ public final class FrameFrasesAjustes extends FrameCRUD {
 
     }
 
-    private void initializeComponents() {
-        lbArea = new Label("Área: ");
-        lbAjusteUg1 = new Label("Ajuste na U.G.1: ");
-        lbAjusteUg2 = new Label("Ajuste na U.G.2: ");
+    public void setAjuste(String nome, String Ug1, String Ug2) {
+        novoAjuste = new ValoresAlarmesTrip(nome, Ug1, Ug2);
 
-        tfUg1 = new JFormattedTextField();
-        tfUg2 = new JFormattedTextField();
-        
-        tfUg1.setPreferredSize(new Dimension(120, 30));
-        tfUg2.setPreferredSize(new Dimension(120, 30));
-        
-        cbArea = new JComboBox(EnumFrases.values());
+    }
+
+    public void editaFont(Label umJl) {
+        umJl.setFont(new Font("Serif", Font.PLAIN, 18));
+    }
+
+    private void editaTa(JTextArea ta) {
+        Color color = UIManager.getColor("Table.gridColor");
+        MatteBorder border = new MatteBorder(3, 3, 3, 3, color);
+        ta.setBorder(border);
+    }
+
+    private void initializeComponents() {
+        lbAjuste = new Label("AJUSTE : ");
+        editaFont(lbAjuste);
+        lbAjusteUg1 = new Label("UG1: ");
+        editaFont(lbAjusteUg1);
+        lbAjusteUg2 = new Label("UG2: ");
+        editaFont(lbAjusteUg2);
+
+        tfUg1 = new JTextArea(10, 300);
+        editaTa(tfUg1);
+        tfUg2 = new JTextArea(10, 300);
+        editaTa(tfUg2);
+        tfAjuste = new JTextArea(10, 300);
+        editaTa(tfAjuste);
 
         layout = new GridBagLayout();
         panelFormulario = new JPanel(layout);
 
         panelFormulario.setBorder(BorderFactory.createTitledBorder("Ajustes"));
-        //cria um itemListener para saber qual item foi selecionado
-        cbArea.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    enumFrases = (EnumFrases) e.getItem();
-                }
-            }
-        });
+
     }
 
     private void addComponents() {
@@ -99,42 +100,43 @@ public final class FrameFrasesAjustes extends FrameCRUD {
         cons.gridx = 0;
         cons.gridy = 0;
         cons.gridwidth = 1;
+        cons.ipadx = 50;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(lbArea, cons);
+        panelFormulario.add(lbAjuste, cons);
 
         cons = new GridBagConstraints();
         cons.gridx = 1;
         cons.gridy = 0;
-        cons.gridwidth = 2;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        cons.weightx = 0;
-        cons.insets = new Insets(0, 0, 0, 15);
-        panelFormulario.add(cbArea, cons);
-
-        cons = new GridBagConstraints();
-        cons.gridx = 3;
-        cons.gridy = 0;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
+        cons.ipadx = 200;
         panelFormulario.add(lbAjusteUg1, cons);
 
         cons = new GridBagConstraints();
-        cons.gridx = 4;
+        cons.gridx = 2;
         cons.gridy = 0;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        cons.ipadx = 200;
+        panelFormulario.add(lbAjusteUg2, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 1;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panelFormulario.add(tfAjuste, cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 1;
+        cons.gridy = 1;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panelFormulario.add(tfUg1, cons);
 
         cons = new GridBagConstraints();
-        cons.gridx = 5;
-        cons.gridy = 0;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(lbAjusteUg2, cons);
-
-        cons = new GridBagConstraints();
-        cons.gridx = 6;
-        cons.gridy = 0;
+        cons.gridx = 2;
+        cons.gridy = 1;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panelFormulario.add(tfUg2, cons);
@@ -145,17 +147,14 @@ public final class FrameFrasesAjustes extends FrameCRUD {
 
     @Override
     public void gravarCampos() {
-
-//        novoAjuste.set(enumFrases);
-//        novoAjuste.CadastrarFrase(taFrase.getText());
-//        System.out.println(novoAjuste.toString());
+        setAjuste(tfAjuste.getText(), tfUg1.getText(), tfUg2.getText());
     }
 
     @Override
     public void limparCampos() {
-        cbArea.setSelectedIndex(-1);
-
-        super.repaint();
+        tfAjuste.setText("");
+        tfUg1.setText("");
+        tfUg2.setText("");
     }
 
     @Override
