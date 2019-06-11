@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -19,6 +21,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "valores_alarmes_trip")
+@NamedQueries({
+        @NamedQuery(name = "ValoresAlarmesTrip.buscarAjustes",
+            query = "SELECT a FROM ValoresAlarmesTrip a")
+})
 public class ValoresAlarmesTrip {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

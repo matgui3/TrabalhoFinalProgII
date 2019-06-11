@@ -5,6 +5,8 @@
  */
 package TrabalhoFinalProgII.view.frames;
 
+import TrabalhoFinalProgII.core.AjustesDAO;
+import TrabalhoFinalProgII.model.ValoresAlarmesTrip;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,6 +17,8 @@ import java.awt.GridBagLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -120,7 +124,9 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
     }
 
     public void mostrarFrases() {
-        String frase[] = {"Esse bixo ae meu!!!"};
+        AjustesDAO dao = new AjustesDAO();
+        
+        List<String> frases = dao.buscarAjustes().stream().forEach(frase -> frases.add(frase.getNomeAjuste()));
         DefaultTableModel modelo = new DefaultTableModel(frase, 0);
         modelo = (DefaultTableModel) tabela1.getModel();
         if (modelo.getValueAt(0, 0) == null) {
