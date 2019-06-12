@@ -184,13 +184,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     }
 
     public String[] getNomeOperadores() {
-        int i = 0;
-        String nomes[] = new String[12];
-        /*        for(Operador op : operadores){
-            nomes[i] = (op.getNome());
-            i++;
-        }
-        System.out.println(nomes[0]);*/
+        String[] nomes = operadorService.buscarNomesOperadores();
         return nomes;
     }
 

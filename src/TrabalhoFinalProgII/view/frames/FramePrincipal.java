@@ -62,12 +62,9 @@ public class FramePrincipal extends JFrame {
     }
 
 
-
     public void adicionarFormulario(JInternalFrame frame) {
         desktop.add(frame);
         frame.setVisible(true);
-        
-        
     }
 
     public void fechar() {

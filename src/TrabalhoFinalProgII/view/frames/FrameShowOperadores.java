@@ -19,6 +19,7 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,6 +42,7 @@ public class FrameShowOperadores extends FrameCRUD implements ActionListener{
     private static final String titulo = "Cadastro de Operadores";
     private static final Dimension dimension = new Dimension(800, 300);
     private Operador novoOperador;
+    private OperadorService operadorService;
 
     private Label lbNome;
     private Label lbDataNasc;
@@ -63,6 +65,7 @@ public class FrameShowOperadores extends FrameCRUD implements ActionListener{
         super(titulo, dimension);
 
         novoOperador = new Operador();
+        operadorService = new OperadorService();
 
         initializeComponents();
         addComponents();
@@ -91,7 +94,7 @@ public class FrameShowOperadores extends FrameCRUD implements ActionListener{
         editaFont(lbCargo);
 
         //String para obter nomes dos operadores
-        String nomes[] = {"EU", "TU", "ELES"};
+        String[] nomes = operadorService.buscarNomesOperadores();
 
         cbOpenadores = new JComboBox(nomes);
         editaFont(cbOpenadores);

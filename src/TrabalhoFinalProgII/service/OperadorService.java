@@ -22,12 +22,6 @@ public class OperadorService {
     JPADAO<Operador> dao = new JPADAO();
     OperadorDAO operadorDAO = new OperadorDAO();
 
-    public List<Operador> buscarOperadores() {
-        List<Operador> operadores;
-        operadores = operadorDAO.buscarTodosOperadores();
-        return operadores;
-    }
-
     public Operador cadastrarOperador(String nome, LocalDate dataNascimento, String telefone, Cargo cargo) throws Exception {
         if (nome == null || nome.equals("")) {
             throw new IOException("O nome do operador não pode ser nulo.");
@@ -51,6 +45,25 @@ public class OperadorService {
 
         dao.inserir(operador);
         return operador;
+    }
+
+    public List<Operador> buscarOperadores() {
+        List<Operador> operadores;
+        operadores = operadorDAO.buscarTodosOperadores();
+        return operadores;
+    }
+    
+    public String[] buscarNomesOperadores(){
+        List<Operador> operadores = buscarOperadores();
+        String[] nomes = new String[operadores.size()];
+        int i = 0;
+        
+        for(Operador o : operadores){
+            nomes[i] = o.getNome();
+            i++;
+        }
+        
+        return nomes;
     }
 
 //    public Operador editarOperador(long matricula, String nome, LocalDate dataNascimento, String telefone, Cargo cargo) throws Exception {
