@@ -5,6 +5,7 @@
  */
 package TrabalhoFinalProgII.view.frames;
 
+import TrabalhoFinalProgII.service.FrasesService;
 import static TrabalhoFinalProgII.view.frames.FrameRelatorio.alinhaTableCentro;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -36,6 +37,7 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
     private static final String titulo = "Frases";
     private static Dimension dimension = new Dimension(1000, 600);
     private JTable tabela1;
+    private FrasesService frasesService;
 
     private JButton jbSair;
 
@@ -64,6 +66,7 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
     }
 
     private void initializeComponents() {
+        frasesService = new FrasesService();
 
         tabela1 = new JTable(1, 1) {
             @Override
@@ -71,7 +74,6 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
                 return false;
             }
         };
-
 
         cabecalhoLayout1 = new FlowLayout(FlowLayout.CENTER, 50, 10);
 
@@ -94,7 +96,6 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
         panel1.add(panelzaco);
         barra = new JScrollPane(panel1, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-
         super.addFormulario(barra);
 
     }
@@ -114,14 +115,13 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
     }
 
     public void mostrarFrases() {
-        String frase[] = {"Esse bixo ae meu!!!"};
-        DefaultTableModel modelo = new DefaultTableModel(frase, 0);
+        String frases[] = frasesService.buscarFrases();
+        DefaultTableModel modelo = new DefaultTableModel(frases, 0);
         modelo = (DefaultTableModel) tabela1.getModel();
         if (modelo.getValueAt(0, 0) == null) {
             modelo.removeRow(0);
-
         }
-        modelo.addRow(frase);
+        modelo.addRow(frases);
 
         tabela1.setModel(modelo);
 
@@ -153,6 +153,7 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
         table.getColumnModel().getColumn(0).setCellRenderer(
                 cellRender);
     }
+
     public void removeLinha(JTable tabela) {
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         int[] rows = tabela.getSelectedRows();
