@@ -36,7 +36,7 @@ public class Operador implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "matricula")
-    private int matricula;
+    private long matricula;
     @Column(name = "nome")
     private String nome;
     @Column(name = "data_nascimento")
@@ -67,7 +67,7 @@ public class Operador implements Serializable {
     public Operador() {
     }
 
-    public int getMatricula() {
+    public long getMatricula() {
         return matricula;
     }
 

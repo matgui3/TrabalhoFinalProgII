@@ -197,6 +197,8 @@ public class FrameCadastrarOperadores extends FrameCRUD {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         try {
             LocalDate dtNascimento = LocalDate.parse(fTfDataNasc.getText(), formatter);
+            if(dtNascimento.isAfter(LocalDate.now()) | dtNascimento.isEqual(LocalDate.now()))
+                throw new DateTimeParseException("Invalid value","",0);
             operadorService.cadastrarOperador(nome, dtNascimento, telefone, cargo);
             System.out.println("Operador cadastrado com sucesso!");
         } catch (DateTimeParseException ex) {
