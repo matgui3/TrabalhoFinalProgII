@@ -56,7 +56,7 @@ public class FramePrincipal extends JFrame {
         try {
             relatorio.setMaximum(true);
         } catch (PropertyVetoException ex) {
-            System.out.println(ex.toString());
+            System.out.println(ex.getMessage());
         }
         
     }

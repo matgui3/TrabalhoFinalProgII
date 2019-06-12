@@ -24,4 +24,14 @@ public class OperadorDAO extends JPADAO<Operador>{
         return operadores;
     }
     
+//    public Operador buscarOperadorPorMatricula(Long matricula){ 
+//        Operador operador = null; 
+//         
+//        Query query = em.createNamedQuery("Operador.buscarPorMatricula", Operador.class); 
+//        query.setParameter("matricula", matricula); 
+//        operador = (Operador) query.getResultList().get(0); 
+//         
+//        return operador; 
+//    } 
+    
 }
