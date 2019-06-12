@@ -20,21 +20,17 @@ public class FrasesService {
     JPADAO<Frase> dao = new JPADAO();
     FrasesDAO frasesDAO = new FrasesDAO();
 
-    public Frase criarFrase(String texto, EnumFrases area) throws NoSuchFieldException, Exception {
+    public Frase criarFrase(String texto, EnumFrases area) throws Exception {
         Frase frase = new Frase();
 
         frase.setTexto(texto);
-        if (!area.equals(EnumFrases.UG1) | !area.equals(EnumFrases.UG2) | !area.equals(EnumFrases.SERVIÇOSAUXILIARES) | !area.equals(EnumFrases.TOMADADAGUA) | !area.equals(EnumFrases.SUBESTACAO)  ) 
-            throw new NoSuchFieldException("Área inválida, tente novamente!");
-        else
-            frase.setArea(area);
-        
+        frase.setArea(area);
         dao.inserir(frase);
-        
+
         return frase;
     }
-    
-    public List<Frase> buscarFrases(){
+
+    public List<Frase> buscarFrases() {
         return frasesDAO.buscarFrases();
     }
 }

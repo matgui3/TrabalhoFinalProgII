@@ -7,6 +7,7 @@ package TrabalhoFinalProgII.view.frames;
 
 import TrabalhoFinalProgII.model.EnumFrases;
 import TrabalhoFinalProgII.model.Frase;
+import TrabalhoFinalProgII.service.FrasesService;
 import TrabalhoFinalProgII.view.panels.CRUDActionPanel;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -29,6 +30,7 @@ public final class FrameFrasesProntas extends FrameCRUD {
 
     private static final String titulo = "Cadastro de Frases Prontas";
     private static final Dimension dimension = new Dimension(800, 600);
+    private FrasesService frasesService;
 
     private Frase novaFrase;
 
@@ -64,6 +66,7 @@ public final class FrameFrasesProntas extends FrameCRUD {
     }
 
     private void initializeComponents() {
+        frasesService = new FrasesService();
         lbArea = new Label("Área:");
         lbFrase = new Label("Frase:");
 
@@ -81,12 +84,12 @@ public final class FrameFrasesProntas extends FrameCRUD {
         cbArea.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED){
+                if (e.getStateChange() == ItemEvent.SELECTED) {
                     enumFrases = (EnumFrases) e.getItem();
                 }
             }
         });
-    removeExcluir();
+        removeExcluir();
     }
 
     private void addComponents() {
@@ -121,17 +124,23 @@ public final class FrameFrasesProntas extends FrameCRUD {
         panelFormulario.add(taFrase, cons);
 
         super.addFormulario(panelFormulario);
-       
+
     }
-    
 
     @Override
     public void gravarCampos() {
         
-//        novaFrase.setArea(enumFrases);
-        novaFrase.CadastrarFrase(taFrase.getText());
-        System.out.println(novaFrase.toString());
-
+        String frase = taFrase.getText();
+        EnumFrases area = (EnumFrases) cbArea.getSelectedItem();
+        try {
+            if (cbArea.getSelectedIndex() == -1) {
+                throw new Exception("Selecione a área de aplicação da nova frase.");
+            }
+            frasesService.criarFrase(frase, area);
+            System.out.println("Frase criada com sucesso!");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     @Override

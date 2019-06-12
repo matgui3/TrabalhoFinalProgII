@@ -37,16 +37,16 @@ public class Frase {
     @Column(name = "id_frase")
     private long id;
     @Column(name = "area")
-    private EnumFrases area;
+    private String area;
     @Column(name = "frase")
     private String texto;
 
-    public EnumFrases getArea() {
+    public String getArea() {
         return area;
     }
 
     public void setArea(EnumFrases area) {
-        this.area = area;
+        this.area = area.getValue();
     }
 
     public String getTexto() {
@@ -55,10 +55,6 @@ public class Frase {
 
     public void setTexto(String texto) {
         this.texto = texto;
-    }
-
-    public void CadastrarFrase(String text) {
-        //Classe criada para fugir de erro de compilação. 
     }
     
 }
