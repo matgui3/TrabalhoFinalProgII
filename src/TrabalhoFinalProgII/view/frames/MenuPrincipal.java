@@ -29,9 +29,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
     private JMenuItem menuItemAddAjuste;
     private JMenuItem menuItemAddOperadores;
     private JMenuItem menuItemVerOperadores;
-    private JMenuItem menuItemSobre;
     private JMenuItem menuItemSair;
-    private JMenuItem menuItemLogOut;
 
     private FramePrincipal frameSistema;
 
@@ -54,10 +52,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
         menuItemAddAjuste = new JMenuItem("Adicionar Ajuste à Biblioteca");
         menuItemAddOperadores = new JMenuItem("Adicionar Operadores");
         menuItemVerOperadores = new JMenuItem("Operadores Cadastrados");
-        menuItemSobre = new JMenuItem("Sobre a Aplicação");
         menuItemSair = new JMenuItem("Sair");
-        menuItemLogOut = new JMenuItem("Efetuar logout");
-        menuItemLogOut.addActionListener(this);
         menuItemSair.addActionListener(this);
     }
 
@@ -70,8 +65,6 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
         menuOperadores.add(menuItemVerOperadores);
         menuOperadores.add(menuItemAddOperadores);
 
-        menuAjuda.add(menuItemSobre);
-        menuAjuda.add(menuItemLogOut);
         menuAjuda.add(menuItemSair);
 
         super.add(menuAbrirRelatorio);
