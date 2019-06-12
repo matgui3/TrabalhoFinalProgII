@@ -1,6 +1,7 @@
 package TrabalhoFinalProgII.view.frames;
 
 import TrabalhoFinalProgII.model.ValoresAlarmesTrip;
+import TrabalhoFinalProgII.service.AjustesService;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -8,6 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Label;
 import java.awt.LayoutManager;
+import java.util.NoSuchElementException;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -22,6 +24,7 @@ public final class FrameFrasesAjustes extends FrameCRUD {
 
     private static final String titulo = "Adicionar Ajuste";
     private static final Dimension dimension = new Dimension(800, 600);
+    private AjustesService ajustesService;
 
     private ValoresAlarmesTrip novoAjuste;
 
@@ -55,11 +58,6 @@ public final class FrameFrasesAjustes extends FrameCRUD {
 
     }
 
-    public void setAjuste(String nome, String Ug1, String Ug2) {
-        novoAjuste = new ValoresAlarmesTrip(nome, Ug1, Ug2);
-
-    }
-
     public void editaFont(Label umJl) {
         umJl.setFont(new Font("Serif", Font.PLAIN, 18));
     }
@@ -71,6 +69,7 @@ public final class FrameFrasesAjustes extends FrameCRUD {
     }
 
     private void initializeComponents() {
+        ajustesService = new AjustesService();
         lbAjuste = new Label("AJUSTE : ");
         editaFont(lbAjuste);
         lbAjusteUg1 = new Label("UG1: ");
@@ -145,7 +144,15 @@ public final class FrameFrasesAjustes extends FrameCRUD {
 
     @Override
     public void gravarCampos() {
-        setAjuste(tfAjuste.getText(), tfUg1.getText(), tfUg2.getText());
+        String nomeAjuste = tfAjuste.getText();
+        String textoUg1 = tfUg1.getText();
+        String textoUg2 = tfUg2.getText();
+        try {
+            ajustesService.criarAjuste(nomeAjuste, textoUg1, textoUg2);
+            System.out.println("Ajuste cadastrado com sucesso!");
+        } catch (Exception ex ){
+            System.out.println(ex.getMessage());
+        }
     }
 
     @Override

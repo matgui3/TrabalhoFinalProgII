@@ -7,6 +7,7 @@ package TrabalhoFinalProgII.view.frames;
 
 import TrabalhoFinalProgII.core.AjustesDAO;
 import TrabalhoFinalProgII.model.ValoresAlarmesTrip;
+import TrabalhoFinalProgII.service.AjustesService;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -40,6 +41,7 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
     private static Dimension dimension = new Dimension(1000, 600);
     private JTable tabela1;
     private DefaultTableModel modelo;
+    private AjustesService ajustesService;
 
     private JButton jbSair;
 
@@ -69,8 +71,8 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
     }
 
     private void initializeComponents() {
+        ajustesService = new AjustesService();
         modelo = new DefaultTableModel();
-
         tabela1 = new JTable(modelo);
 
         /*{
@@ -135,14 +137,8 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
     public void mostrarFrases() {
         AjustesDAO dao = new AjustesDAO();
 
-        String frasesBanco[][] = {
-            {"SETPOINT", "96 MW", "96 MW"},
-            {"SETPOINT", "Potencia liquida 190,45 MW\n"
-                + "Limite de transmissão 193 MW", "Potencia liquida 190,45 MW"},
-            {"SETPOINT", "96 MW", "96 MW"}
-        };
-
-               int cont = 0;
+        String frasesBanco[][] = ajustesService.buscarAjustes();
+        int cont = 0;
         for (String a[] : frasesBanco) {
             a = frasesBanco[cont];
             modelo.addRow(a);
@@ -153,7 +149,7 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
             cont++;
         }
         alinhaTableCentro(tabela1);
-    
+
     }
 
     public void removeLinha(JTable tabela) {
@@ -193,7 +189,6 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
 
         table.getColumnModel().getColumn(0).setCellRenderer(cellRender);
     }
-   
 
     @Override
     public void actionPerformed(ActionEvent evt) {

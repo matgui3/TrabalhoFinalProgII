@@ -9,6 +9,7 @@ import TrabalhoFinalProgII.core.AjustesDAO;
 import TrabalhoFinalProgII.core.JPADAO;
 import TrabalhoFinalProgII.model.ValoresAlarmesTrip;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -21,7 +22,7 @@ public class AjustesService {
     
     public ValoresAlarmesTrip criarAjuste(String nomeAjuste, String valorAjusteUg1, String valorAjusteUg2) throws Exception{
         if(nomeAjuste == null | valorAjusteUg1 == null | valorAjusteUg2 == null)
-            throw new Exception("Preencha todos os campos do formulário e tente novamente.");
+            throw new NoSuchElementException("Preencha todos os campos do formulário e tente novamente.");
         
         ValoresAlarmesTrip ajuste = new ValoresAlarmesTrip();
         ajuste.setNomeAjuste(nomeAjuste);
@@ -33,8 +34,18 @@ public class AjustesService {
         return ajuste;
     }
     
-    public List<ValoresAlarmesTrip> buscarAjustes(){
-        return ajustesDao.buscarAjustes();
+    public String[][] buscarAjustes(){
+        List<ValoresAlarmesTrip> ajustes = ajustesDao.buscarAjustes();
+        
+        String[][] ajustesTexto = new String[ajustes.size()][3];
+        
+        for(int i=0; i<ajustes.size(); i++){
+            ajustesTexto[i][0] = ajustes.get(i).getNomeAjuste();
+            ajustesTexto[i][1] = ajustes.get(i).getValorAjusteUg1();
+            ajustesTexto[i][2] = ajustes.get(i).getValorAjusteUg2();
+        }
+        
+        return ajustesTexto;
     }
     
 }
