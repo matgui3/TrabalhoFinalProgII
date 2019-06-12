@@ -6,6 +6,7 @@
 package TrabalhoFinalProgII.view.frames;
 
 import TrabalhoFinalProgII.service.FrasesService;
+import static TrabalhoFinalProgII.view.frames.FrameExibirAjustes.alinhaTableCentro;
 import static TrabalhoFinalProgII.view.frames.FrameRelatorio.alinhaTableCentro;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -115,18 +116,35 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
     }
 
     public void mostrarFrases() {
+        //String frases[] = frasesService.buscarFrases();
+        //System.out.println(frases[0]);
+        //DefaultTableModel modelo = new DefaultTableModel(frases, 0);
+        //modelo = (DefaultTableModel) tabela1.getModel();
+        //if (modelo.getValueAt(0, 0) == null) {
+        //    modelo.removeRow(0);
+        //}
+        //modelo.addRow(frases);
+
+        //tabela1.setModel(modelo);
+
+        //alinhaTableCentro(tabela1);
+        
         String frases[] = frasesService.buscarFrases();
-        System.out.println(frases[0]);
         DefaultTableModel modelo = new DefaultTableModel(frases, 0);
         modelo = (DefaultTableModel) tabela1.getModel();
         if (modelo.getValueAt(0, 0) == null) {
             modelo.removeRow(0);
         }
-        modelo.addRow(frases);
-
+        
+        for (int i = 0; i< frases.length; i++) {
+            String a[] = {frases[i]};
+            modelo.addRow(a);
+            
+            
+        }
         tabela1.setModel(modelo);
-
         alinhaTableCentro(tabela1);
+        
     }
 
     @Override

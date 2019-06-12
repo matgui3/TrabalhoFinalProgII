@@ -34,12 +34,10 @@ public class JPADAO<X> implements DAO{
         try{
             em.persist(obj);
             em.getTransaction().commit();
-            JOptionPane.showMessageDialog(null, "Frase Cadastrada");
             return true;
         } catch (Exception e){
             e.printStackTrace();
             em.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Erro!!!\nFrase não Cadastrada");
         }
         
         return false;

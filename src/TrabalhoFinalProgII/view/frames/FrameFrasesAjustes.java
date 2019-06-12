@@ -11,6 +11,7 @@ import java.awt.Label;
 import java.awt.LayoutManager;
 import java.util.NoSuchElementException;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
@@ -149,9 +150,10 @@ public final class FrameFrasesAjustes extends FrameCRUD {
         String textoUg2 = tfUg2.getText();
         try {
             ajustesService.criarAjuste(nomeAjuste, textoUg1, textoUg2);
-            System.out.println("Ajuste cadastrado com sucesso!");
-        } catch (Exception ex ){
+            JOptionPane.showMessageDialog(null, "Ajuste cadastrado com sucesso!");
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Algo deu errado!\nAjuste não cadastrado!");
         }
     }
 

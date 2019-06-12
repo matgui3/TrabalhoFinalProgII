@@ -19,6 +19,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -137,9 +138,10 @@ public final class FrameFrasesProntas extends FrameCRUD {
                 throw new Exception("Selecione a área de aplicação da nova frase.");
             }
             frasesService.criarFrase(frase, area);
-            System.out.println("Frase criada com sucesso!");
+                JOptionPane.showMessageDialog(null, "Frase criada com sucesso!");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Algo deu errado!\nFrase não cadastrado!");
         }
     }
 
