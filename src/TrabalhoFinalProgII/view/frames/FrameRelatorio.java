@@ -646,6 +646,8 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         }
     }
     
+    
+    
     @Override
     public void actionPerformed(ActionEvent evt) {
         Object obj = evt.getSource();
@@ -653,11 +655,15 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         if (obj == jbGravar) {
             int combo = cbTurnos.getSelectedIndex();
 
-            String ocorrencia = taOcorrencia.getText();
-            if (ocorrencia.length() > 20) {
+            String ocorrencia = "<html>"+ taOcorrencia.getText()+"</html>";
+            int cont = 0;
+                int height = 20;
+            if (ocorrencia.length() > 60) {
+                cont++;
+                height = height+20;
+            tabela1.setRowHeight(40);
                 StringBuilder stringBuilder = new StringBuilder(ocorrencia);
-                stringBuilder.insert(ocorrencia.length() - 20, '\n');
-                System.out.println(stringBuilder.toString());
+                stringBuilder.insert(60, "<br>");
                 ocorrencia = stringBuilder.toString();
             }
             System.out.println(ocorrencia);
