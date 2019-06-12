@@ -116,6 +116,7 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
 
     public void mostrarFrases() {
         String frases[] = frasesService.buscarFrases();
+        System.out.println(frases[0]);
         DefaultTableModel modelo = new DefaultTableModel(frases, 0);
         modelo = (DefaultTableModel) tabela1.getModel();
         if (modelo.getValueAt(0, 0) == null) {
