@@ -30,7 +30,14 @@ public class FrasesService {
         return frase;
     }
 
-    public List<Frase> buscarFrases() {
-        return frasesDAO.buscarFrases();
+    public String[] buscarFrases() {
+        List<Frase> frases = frasesDAO.buscarFrases();
+        String[] textoFrases = new String[frases.size()];
+        
+        for(int i=0; i<frases.size(); i++){
+            textoFrases[i] = frases.get(i).getTexto();
+        }
+        
+        return textoFrases;
     }
 }
