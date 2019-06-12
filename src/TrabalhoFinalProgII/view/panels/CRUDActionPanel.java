@@ -75,6 +75,14 @@ public class CRUDActionPanel extends JPanel implements ActionListener {
         btSair.addActionListener(this);
         btSair.setSize(dimensaoBotao);
     }
+    public void removeJbExcluir(){
+        this.remove(btExcluir);
+    }
+    
+    public void removeJbts(){
+        this.remove(btLimpar);
+        this.remove(btGravar);
+    }
 
     private void addComponents() {
         this.setLayout(layout);

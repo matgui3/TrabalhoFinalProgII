@@ -86,7 +86,12 @@ public abstract class FrameCRUD extends JInternalFrame {
         //scroll = new JScrollPane(panelPrincipal);
     }
     
-
+   public void removeExcluir(){
+        panelBotoesCRUD.removeJbExcluir();
+    }
+   public void removeJbts(){
+        panelBotoesCRUD.removeJbts();
+    }
     public void addFormulario(Container container) {
         panelPrincipal.add(container, BorderLayout.CENTER);
     }
