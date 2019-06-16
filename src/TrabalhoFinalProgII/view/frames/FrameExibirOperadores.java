@@ -37,7 +37,7 @@ import javax.swing.text.MaskFormatter;
  *
  * @author guilh
  */
-public class FrameShowOperadores extends FrameCRUD implements ActionListener{
+public class FrameExibirOperadores extends FrameCRUD implements ActionListener{
 
     private static final String titulo = "Cadastro de Operadores";
     private static final Dimension dimension = new Dimension(800, 300);
@@ -61,7 +61,7 @@ public class FrameShowOperadores extends FrameCRUD implements ActionListener{
     private LayoutManager layout;
     private GridBagConstraints cons;
 
-    public FrameShowOperadores() {
+    public FrameExibirOperadores() {
         super(titulo, dimension);
 
         novoOperador = new Operador();
@@ -72,7 +72,7 @@ public class FrameShowOperadores extends FrameCRUD implements ActionListener{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    public FrameShowOperadores(String titulo, Dimension dimension) {
+    public FrameExibirOperadores(String titulo, Dimension dimension) {
         super(titulo, dimension, true);
 
         novoOperador = new Operador();
