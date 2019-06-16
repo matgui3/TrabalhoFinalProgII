@@ -27,7 +27,7 @@ import javax.swing.JTextArea;
  *
  * @author 00783962045
  */
-public final class FrameFrasesProntas extends FrameCRUD {
+public final class FrameCadastrarFrases extends FrameCRUD {
 
     private static final String titulo = "Cadastro de Frases Prontas";
     private static final Dimension dimension = new Dimension(800, 600);
@@ -46,7 +46,7 @@ public final class FrameFrasesProntas extends FrameCRUD {
     private GridBagConstraints cons;
     private EnumFrases enumFrases;
 
-    public FrameFrasesProntas() {
+    public FrameCadastrarFrases() {
         super(titulo, dimension);
 
         novaFrase = new Frase();
@@ -56,7 +56,7 @@ public final class FrameFrasesProntas extends FrameCRUD {
 
     }
 
-    public FrameFrasesProntas(Frase novaFrase) {
+    public FrameCadastrarFrases(Frase novaFrase) {
         super(titulo, dimension);
 
         this.novaFrase = novaFrase;

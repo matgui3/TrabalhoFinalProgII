@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.text.MaskFormatter;
@@ -200,13 +201,14 @@ public class FrameCadastrarOperadores extends FrameCRUD {
             if(dtNascimento.isAfter(LocalDate.now()) | dtNascimento.isEqual(LocalDate.now()))
                 throw new DateTimeParseException("Invalid value","",0);
             operadorService.cadastrarOperador(nome, dtNascimento, telefone, cargo);
-            System.out.println("Operador cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Operador cadastrado com sucesso!");
         } catch (DateTimeParseException ex) {
             if (ex.getMessage().contains("Invalid value"))
-                System.out.println("Dia, Mês ou Ano informado é inválido. Tente novamente.");
+                JOptionPane.showMessageDialog(null, "Dia, Mês ou Ano informado é inválido. Tente novamente.");
             else 
-                System.out.println("Informe sua data de nascimento.");
+            JOptionPane.showMessageDialog(null, "Informe sua data de nascimento.");
         } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro!!!\nOperador não cadastrado.");
             System.out.println(ex.getMessage());
         }
     }

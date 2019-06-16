@@ -77,13 +77,13 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
         ActionListener listener = new ListenerMenuAplicação(FrameBuscarRelatorio.class, frameSistema);
         menuItemAbrirRelatorio.addActionListener(listener);
 
-        listener = new ListenerMenuAplicação(FrameFrasesProntas.class, frameSistema);
+        listener = new ListenerMenuAplicação(FrameCadastrarFrases.class, frameSistema);
         menuItemAddFrase.addActionListener(listener);
         
         listener = new ListenerMenuAplicação(FrameCadastrarOperadores.class, frameSistema);
         menuItemAddOperadores.addActionListener(listener);
 
-        listener = new ListenerMenuAplicação(FrameFrasesAjustes.class, frameSistema);
+        listener = new ListenerMenuAplicação(FrameCadastrarAjustes.class, frameSistema);
         menuItemAddAjuste.addActionListener(listener);
 
         listener = new ListenerMenuAplicação(FrameExibirOperadores.class, frameSistema);

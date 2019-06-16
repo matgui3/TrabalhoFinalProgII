@@ -221,15 +221,16 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         cbSA = new JComboBox(EstadoServicosAuxiliares.values());
 
         cbTurnos = new JComboBox(EnumTurnos.values());
-        cbOp1Turno1 = new JComboBox(getNomeOperadores());
+        String[] nomes = operadorService.buscarNomesOperadores();
+        cbOp1Turno1 = new JComboBox(nomes);
         tabtOps1 = new JTable(1, 2);
         tabtOps2 = new JTable(1, 2);
         tabtOps3 = new JTable(1, 2);
 
         cbOp1Turno1.setMaximumSize(new Dimension(100, 100));
-        cbOp1Turno2 = new JComboBox(getNomeOperadores());
-        cbOp1Turno3 = new JComboBox(getNomeOperadores());
-        cbOp2Turno1 = new JComboBox(getNomeOperadores());
+        cbOp1Turno2 = new JComboBox(nomes);
+        cbOp1Turno3 = new JComboBox(nomes);
+        cbOp2Turno1 = new JComboBox(nomes);
         cbOp2Turno2 = new JComboBox(getNomeOperadores());
         cbOp2Turno3 = new JComboBox(getNomeOperadores());
         tabelaOps(tabtOps1, cbOp1Turno1);

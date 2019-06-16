@@ -21,7 +21,7 @@ import javax.swing.border.MatteBorder;
  *
  * @author 00783962045
  */
-public final class FrameFrasesAjustes extends FrameCRUD {
+public final class FrameCadastrarAjustes extends FrameCRUD {
 
     private static final String titulo = "Adicionar Ajuste";
     private static final Dimension dimension = new Dimension(800, 600);
@@ -41,7 +41,7 @@ public final class FrameFrasesAjustes extends FrameCRUD {
     private LayoutManager layout;
     private GridBagConstraints cons;
 
-    public FrameFrasesAjustes() {
+    public FrameCadastrarAjustes() {
         super(titulo, dimension);
 
         initializeComponents();
@@ -49,7 +49,7 @@ public final class FrameFrasesAjustes extends FrameCRUD {
 
     }
 
-    public FrameFrasesAjustes(ValoresAlarmesTrip novoAjuste) {
+    public FrameCadastrarAjustes(ValoresAlarmesTrip novoAjuste) {
         super(titulo, dimension);
 
         this.novoAjuste = novoAjuste;
