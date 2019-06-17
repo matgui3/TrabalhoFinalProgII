@@ -71,4 +71,30 @@ public class Turno {
         ocorrencias.add(ocorrencia);
     }
 
+    public Dia getDia() {
+        return dia;
+    }
+
+    public void setDia(Dia dia) {
+        this.dia = dia;
+    }
+
+    public List<Ocorrencia> getOcorrencias() {
+        return ocorrencias;
+    }
+
+    public void setOcorrencias(List<Ocorrencia> ocorrencias) {
+        this.ocorrencias = ocorrencias;
+    }
+
+    public List<Operador> getOperadores() {
+        return operadores;
+    }
+
+    public void setOperadores(List<Operador> operadores) {
+        this.operadores = operadores;
+    }
+    
+    
+
 }

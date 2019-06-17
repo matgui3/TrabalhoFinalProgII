@@ -70,7 +70,7 @@ public class Dia {
     }
 
     public Dia() {
-
+        turnos = new ArrayList<>();
     }
 
     public String getData() {

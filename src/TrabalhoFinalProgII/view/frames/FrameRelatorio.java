@@ -8,6 +8,8 @@ import TrabalhoFinalProgII.model.EstadoSubestacao;
 import TrabalhoFinalProgII.model.EstadoUnidadeGeradora;
 import TrabalhoFinalProgII.model.Ocorrencia;
 import TrabalhoFinalProgII.model.Operador;
+import TrabalhoFinalProgII.model.PeriodoTurno;
+import TrabalhoFinalProgII.model.Turno;
 import TrabalhoFinalProgII.service.DiaService;
 import TrabalhoFinalProgII.service.OperadorService;
 import java.awt.BorderLayout;
@@ -164,13 +166,13 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                 nome = "Quarta-feira";
                 break;
             case Calendar.THURSDAY:
-                nome = "Quinta-feria";
+                nome = "Quinta-feira";
                 break;
             case Calendar.FRIDAY:
                 nome = "Sexta-feria";
                 break;
             case Calendar.SATURDAY:
-                nome = "sábado-feria";
+                nome = "Sábado";
                 break;
         }
         return nome;
@@ -194,21 +196,8 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 
     private void initializeComponents() {
         diaService = new DiaService();
+        criarDia();
         operadorService = new OperadorService();
-
-        dia = diaService.pesquisarDiaPorData(LocalDate.now());
-        if (dia == null) {
-            dia = new Dia();
-            LocalDate data = LocalDate.now();
-            String dataFormatada = data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            dia.setData(dataFormatada);
-            try {
-                diaService.novoDia(dia);
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
-
         operadores = operadorService.buscarOperadores();
 
         lb1 = new Label("Dia da Semana ");
@@ -814,6 +803,28 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     @Override
     public void excluirRegistro() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void criarDia() {
+        dia = diaService.pesquisarDiaPorData(LocalDate.now());
+        if (dia == null) {
+            dia = new Dia();
+            LocalDate data = LocalDate.now();
+            String dataFormatada = data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            dia.setData(dataFormatada);
+            
+            dia.getTurnos().add(new Turno(PeriodoTurno.MANHA.getPeriodoTurno()));
+            dia.getTurnos().get(0).setDia(dia);
+            dia.getTurnos().add(new Turno(PeriodoTurno.TARDE.getPeriodoTurno()));
+            dia.getTurnos().get(1).setDia(dia);
+            dia.getTurnos().add(new Turno(PeriodoTurno.NOITE.getPeriodoTurno()));
+            dia.getTurnos().get(2).setDia(dia);
+            try {
+                diaService.novoDia(dia);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 
 }
