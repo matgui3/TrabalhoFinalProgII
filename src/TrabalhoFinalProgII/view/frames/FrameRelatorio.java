@@ -684,7 +684,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                 stringBuilder.insert(60, "<br>");
                 descricao = stringBuilder.toString();
             }
-            System.out.println(ocorrencia);
+            System.out.println(descricao);
 
             String frase[] = {tfHora.getText(), descricao};
             DefaultTableModel modelo = new DefaultTableModel(frase, 0);
