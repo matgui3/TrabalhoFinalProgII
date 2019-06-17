@@ -13,6 +13,7 @@ import TrabalhoFinalProgII.model.Ocorrencia;
 import TrabalhoFinalProgII.model.Operador;
 import TrabalhoFinalProgII.model.Turno;
 import TrabalhoFinalProgII.service.DiaService;
+import static TrabalhoFinalProgII.view.frames.FrameRelatorio.alinhaTableCentro;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -40,6 +41,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -99,14 +101,16 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
     private JPanel panel8;
     private JPanel panelzaco;
     private JScrollPane barra;
+    private LocalDate date;
 
     private LayoutManager layout;
     private GridBagConstraints cons;
     private FlowLayout cabecalhoLayout1;
 
-    public FrameExibirRelatório() {
+    public FrameExibirRelatório(LocalDate date) {
         super(titulo, dimension);
 
+        this.date = date;
         initializeComponents();
         addComponents();
         setMaximizable(true);
@@ -225,6 +229,7 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
 
         panelBotoesCRUD.setVisible(
                 false);
+        defineValoresRelatorio(date);
     }
 
     private void addComponents() {
@@ -553,6 +558,28 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
     public void excluirRegistro() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    public void povoarjTables(List<Ocorrencia> list, JTable tabela ){
+         int cont = 0;
+     
+        String frases[] = {};
+
+        for (Ocorrencia ocor : list) {
+            String hora = ocor.getHora().toString();
+            String fraseT1[] = {hora, ocor.getDescricao()};
+            
+        DefaultTableModel modelo = new DefaultTableModel(fraseT1, 0);
+        modelo = (DefaultTableModel) tabela.getModel();
+        if (modelo.getValueAt(0, 0) == null) {
+            modelo.removeRow(0);
+        }
+        modelo.addRow(fraseT1);
+
+        tabela.setModel(modelo);
+
+        alinhaTableCentro(tabela);
+            cont++;
+        }
+     }
     
     private void defineValoresRelatorio(LocalDate date) {
         Dia dia = diaService.pesquisarDiaPorData(date);
@@ -586,6 +613,9 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
                 operadoresT3[1] = turnos.get(2).getOperadores().get(1);
             }
         }
+        povoarjTables(ocorrenciasT1, tabela1);
+        povoarjTables(ocorrenciasT2, tabela2);
+        povoarjTables(ocorrenciasT3, tabela3);
     }
 
 }

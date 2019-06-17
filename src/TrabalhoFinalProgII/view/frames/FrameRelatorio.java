@@ -890,6 +890,28 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             }
         }
     }
+     public void povoarjTables(List<Ocorrencia> list, JTable tabela ){
+         int cont = 0;
+     
+        String frases[] = {};
+
+        for (Ocorrencia ocor : list) {
+            String hora = ocor.getHora().toString();
+            String fraseT1[] = {hora, ocor.getDescricao()};
+            
+        DefaultTableModel modelo = new DefaultTableModel(fraseT1, 0);
+        modelo = (DefaultTableModel) tabela.getModel();
+        if (modelo.getValueAt(0, 0) == null) {
+            modelo.removeRow(0);
+        }
+        modelo.addRow(fraseT1);
+
+        tabela.setModel(modelo);
+
+        alinhaTableCentro(tabela);
+            cont++;
+        }
+     }
 
     private void defineValoresRelatorio(Dia dia) {
         List<Turno> turnos = dia.getTurnos();
@@ -921,6 +943,11 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                 operadoresT3[1] = turnos.get(2).getOperadores().get(1);
             }
         }
+        
+        povoarjTables(ocorrenciasT1, tabela1);
+        povoarjTables(ocorrenciasT2, tabela2);
+        povoarjTables(ocorrenciasT3, tabela3);
+      
     }
 
 }
