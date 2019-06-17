@@ -138,7 +138,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         addComponents();
         setBorder(null);
         setClosable(true);
-        getNomeAndIdOperadores();
+        getNomeOperadores();
 
     }
 
@@ -189,8 +189,8 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         return F_Mascara;
     }
 
-    public String[][] getNomeAndIdOperadores() {
-        String[][] operadores = operadorService.buscarNomesAndIdOperadores();
+    public String[] getNomeOperadores() {
+        String[] operadores = operadorService.buscarNomesOperadores();
         return operadores;
     }
 
@@ -232,7 +232,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         cbSA = new JComboBox(EstadoServicosAuxiliares.values());
 
         cbTurnos = new JComboBox(EnumTurnos.values());
-        String[][] dados = getNomeAndIdOperadores();
+        String[] dados = getNomeOperadores();
         cbOp1Turno1 = new JComboBox(dados);
         tabtOps1 = new JTable(1, 2);
         tabtOps2 = new JTable(1, 2);
@@ -242,8 +242,8 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         cbOp1Turno2 = new JComboBox(dados);
         cbOp1Turno3 = new JComboBox(dados);
         cbOp2Turno1 = new JComboBox(dados);
-        cbOp2Turno2 = new JComboBox(getNomeAndIdOperadores());
-        cbOp2Turno3 = new JComboBox(getNomeAndIdOperadores());
+        cbOp2Turno2 = new JComboBox(getNomeOperadores());
+        cbOp2Turno3 = new JComboBox(getNomeOperadores());
         tabelaOps(tabtOps1, cbOp1Turno1);
         tabelaOps(tabtOps1, cbOp2Turno1);
         tabelaOps(tabtOps2, cbOp1Turno2);
@@ -286,7 +286,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             }
         };
 
-        cabecalhoLayout1 = new FlowLayout(FlowLayout.CENTER, 50, 10);
+        cabecalhoLayout1 = new FlowLayout(FlowLayout.CENTER, 20, 10);
 
         layout = new GridBagLayout();
         panel1 = new JPanel(new BorderLayout());

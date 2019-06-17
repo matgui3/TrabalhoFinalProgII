@@ -52,6 +52,17 @@ public class OperadorService {
         operadores = operadorDAO.buscarTodosOperadores();
         return operadores;
     }
+    public String[]buscarNomesOperadores(){
+        List<Operador> operadores = buscarOperadores();
+         int cont = 0;
+        String nomes [] = new String[12];
+        for (Operador ops : operadores) {
+            nomes[cont] =  ops.getNome() + "";
+            cont++;
+        }
+        
+        return nomes;
+    }
     
     public String[][] buscarNomesAndIdOperadores(){
         List<Operador> operadores = buscarOperadores();
