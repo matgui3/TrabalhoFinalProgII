@@ -5,9 +5,14 @@
  */
 package TrabalhoFinalProgII.view.frames;
 
+import TrabalhoFinalProgII.model.Dia;
 import TrabalhoFinalProgII.model.EstadoServicosAuxiliares;
 import TrabalhoFinalProgII.model.EstadoSubestacao;
 import TrabalhoFinalProgII.model.EstadoUnidadeGeradora;
+import TrabalhoFinalProgII.model.Ocorrencia;
+import TrabalhoFinalProgII.model.Operador;
+import TrabalhoFinalProgII.model.Turno;
+import TrabalhoFinalProgII.service.DiaService;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -24,6 +29,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -43,6 +49,8 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
 
     private static final String titulo = "Relatório de Ocorrências";
     private static Dimension dimension = new Dimension(800, 600);
+    
+    private DiaService diaService;
 
     private Label lb1;
     private Label lb2;
@@ -142,6 +150,8 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
     }
 
     private void initializeComponents() {
+        diaService = new DiaService();
+        
         lb1 = new Label("Dia da Semana ");
         editaFont(lb1);
         lb2 = new Label("Preencher");
@@ -542,6 +552,40 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
     @Override
     public void excluirRegistro() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    private void defineValoresRelatorio(LocalDate date) {
+        Dia dia = diaService.pesquisarDiaPorData(date);
+        
+        List<Turno> turnos = dia.getTurnos();
+
+        List<Ocorrencia> ocorrenciasT1 = turnos.get(0).getOcorrencias();
+        List<Ocorrencia> ocorrenciasT2 = turnos.get(1).getOcorrencias();
+        List<Ocorrencia> ocorrenciasT3 = turnos.get(2).getOcorrencias();
+
+        Operador[] operadoresT1 = new Operador[2];
+        if (turnos.get(0).getOperadores().size() > 0) {
+            operadoresT1[0] = turnos.get(0).getOperadores().get(0);
+            if (turnos.get(0).getOperadores().size() > 1) {
+                operadoresT1[1] = turnos.get(0).getOperadores().get(1);
+            }
+        }
+
+        Operador[] operadoresT2 = new Operador[2];
+        if (turnos.get(1).getOperadores().size() > 0) {
+            operadoresT2[0] = turnos.get(1).getOperadores().get(0);
+            if (turnos.get(1).getOperadores().size() > 1) {
+                operadoresT2[1] = turnos.get(1).getOperadores().get(1);
+            }
+        }
+
+        Operador[] operadoresT3 = new Operador[2];
+        if (turnos.get(2).getOperadores().size() > 0) {
+            operadoresT3[0] = turnos.get(2).getOperadores().get(0);
+            if (turnos.get(2).getOperadores().size() > 1) {
+                operadoresT3[1] = turnos.get(2).getOperadores().get(1);
+            }
+        }
     }
 
 }
