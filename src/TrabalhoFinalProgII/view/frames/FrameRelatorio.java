@@ -41,6 +41,7 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -671,22 +672,30 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             try {
                 horaRecebida = LocalTime.parse(tfHora.getText());
             } catch (DateTimeParseException ex) {
+                JOptionPane.showMessageDialog(null, "Horário de ocorrência inválido!");
                 throw new HoraInvalidaException("Horário de ocorrência inválido!");
             }
 
             Turno turno = null;
-            if (horaRecebida.isAfter(LocalTime.of(23, 30))) {
-                if(combo!=2)
-                    throw new TurnoSelecionadoInvalidoException("O turno selecionado é inválido para o horário informado.");
-                turno = dia.getTurnos().get(2);
-            } else if (horaRecebida.isAfter(LocalTime.of(15, 30))) {
-                 if(combo!=1)
-                    throw new TurnoSelecionadoInvalidoException("O turno selecionado é inválido para o horário informado.");
-                turno = dia.getTurnos().get(1);
-            } else {
-                 if(combo!=0)
-                    throw new TurnoSelecionadoInvalidoException("O turno selecionado é inválido para o horário informado.");
-                turno = dia.getTurnos().get(0);
+            try {
+                if (horaRecebida.isAfter(LocalTime.of(23, 30))) {
+                    if (combo != 2) {
+                        throw new TurnoSelecionadoInvalidoException("O turno selecionado é inválido para o horário informado.");
+                    }
+                    turno = dia.getTurnos().get(2);
+                } else if (horaRecebida.isAfter(LocalTime.of(15, 30))) {
+                    if (combo != 1) {
+                        throw new TurnoSelecionadoInvalidoException("O turno selecionado é inválido para o horário informado.");
+                    }
+                    turno = dia.getTurnos().get(1);
+                } else {
+                    if (combo != 0) {
+                        throw new TurnoSelecionadoInvalidoException("O turno selecionado é inválido para o horário informado.");
+                    }
+                    turno = dia.getTurnos().get(0);
+                }
+            }catch(TurnoSelecionadoInvalidoException ex){
+                JOptionPane.showMessageDialog(null, "O turno selecionado é inválido para o horário informado.");
             }
 
             String descricao = "<html>" + taOcorrencia.getText() + "</html>";
