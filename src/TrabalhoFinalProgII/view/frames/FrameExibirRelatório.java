@@ -99,14 +99,16 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
     private JPanel panel8;
     private JPanel panelzaco;
     private JScrollPane barra;
+    private LocalDate date;
 
     private LayoutManager layout;
     private GridBagConstraints cons;
     private FlowLayout cabecalhoLayout1;
 
-    public FrameExibirRelatório() {
+    public FrameExibirRelatório(LocalDate date) {
         super(titulo, dimension);
 
+        this.date = date;
         initializeComponents();
         addComponents();
         setMaximizable(true);

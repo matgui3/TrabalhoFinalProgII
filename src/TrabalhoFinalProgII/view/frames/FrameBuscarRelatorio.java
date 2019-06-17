@@ -17,6 +17,9 @@ import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -44,6 +47,7 @@ public final class FrameBuscarRelatorio extends FrameCRUD implements ActionListe
     private MaskFormatter maskTf;
 
     private JButton jbAbrirRelatorio;
+    private LocalDate data;
 
     private JPanel panelFormulario;
     private JPanel panelBotoes;
@@ -103,8 +107,10 @@ public final class FrameBuscarRelatorio extends FrameCRUD implements ActionListe
         if (obj == jbAbrirRelatorio) {
             //Adicionar aqui também o método para buscar os dados dos campos para 
             //o relatório a ser buscado
+            
+            data = LocalDate.parse(tfDtRelatorio.getText(),DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-            FrameExibirRelatório tela = new FrameExibirRelatório();
+            FrameExibirRelatório tela = new FrameExibirRelatório(data);
             this.getParent().add(tela);
             tela.setVisible(true);
 
