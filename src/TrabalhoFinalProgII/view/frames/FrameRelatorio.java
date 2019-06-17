@@ -123,6 +123,8 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     private JTable tabtOps3;
     private JButton jbFimTurno;
     private JScrollPane barra;
+    private Turno turno;
+    LocalTime horaRecebida;
 
     private JPanel panelzaco;
     private JPanel panel1;
@@ -202,6 +204,8 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     }
 
     private void initializeComponents() {
+        turno = null;
+        horaRecebida = null;
         diaService = new DiaService();
         criarDia();
         operadorService = new OperadorService();
@@ -675,14 +679,12 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             int combo = cbTurnos.getSelectedIndex();
 
             //Verificação feita no horário para ver se confere com o Turno recebido, e se é um horário possível.
-            LocalTime horaRecebida = null;
             try {
                 horaRecebida = LocalTime.parse(tfHora.getText());
             } catch (DateTimeParseException ex) {
                 JOptionPane.showMessageDialog(null, "Horário de ocorrência inválido!");
             }
 
-            Turno turno = null;
             try {
                 if (horaRecebida.isAfter(LocalTime.of(23, 30)) || horaRecebida.isBefore(LocalTime.of(07, 30))) {
                     if (combo != 2) {
@@ -850,9 +852,69 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 
                     break;
             }
-            
-            ocorrenciaService.deletarOcorrencias();
-            
+
+            try {
+                ocorrenciaService.deletarOcorrencias();
+
+            } catch (Exception ex) {
+            }
+            for (int i = 0; i < tabela1.getRowCount(); i++) {
+                Ocorrencia ocorrencia = new Ocorrencia();
+                String s[] = {tabela1.getValueAt(i, 0).toString(), tabela1.getValueAt(i, 1).toString()};
+                System.out.println(tabela1.getValueAt(i, 1).toString());
+                horaRecebida = LocalTime.parse(tabela1.getValueAt(i, 0).toString());
+                String descricao = tabela1.getValueAt(i, 1).toString();
+                turno = dia.getTurnos().get(0);
+                ocorrencia.setTurno(turno);
+                ocorrencia.setDescricao(descricao);
+                ocorrencia.setHora(horaRecebida);
+                turno.addOcorrencia(descricao, horaRecebida);
+                try {
+                    ocorrenciaService.cadastrarOcorrencia(ocorrencia);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+            if (tabela2.getValueAt(0, 0) != null) {
+                for (int i = 0; i < tabela2.getRowCount(); i++) {
+                    Ocorrencia ocorrencia = new Ocorrencia();
+                    String s[] = {tabela2.getValueAt(i, 0).toString(), tabela2.getValueAt(i, 1).toString()};
+                    System.out.println(tabela2.getValueAt(i, 1).toString());
+                    horaRecebida = LocalTime.parse(tabela2.getValueAt(i, 0).toString());
+                    String descricao = tabela2.getValueAt(i, 1).toString();
+                    turno = dia.getTurnos().get(1);
+                    ocorrencia.setTurno(turno);
+                    ocorrencia.setDescricao(descricao);
+                    ocorrencia.setHora(horaRecebida);
+                    turno.addOcorrencia(descricao, horaRecebida);
+                    try {
+                        ocorrenciaService.cadastrarOcorrencia(ocorrencia);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+            if (tabela3.getValueAt(0, 0) != null) {
+                for (int i = 0; i < tabela3.getRowCount(); i++) {
+                    Ocorrencia ocorrencia = new Ocorrencia();
+                    String s[] = {tabela3.getValueAt(i, 0).toString(), tabela3.getValueAt(i, 1).toString()};
+                    System.out.println(tabela3.getValueAt(i, 1).toString());
+                    horaRecebida = LocalTime.parse(tabela3.getValueAt(i, 0).toString());
+                    String descricao = tabela3.getValueAt(i, 1).toString();
+                    turno = dia.getTurnos().get(2);
+                    ocorrencia.setTurno(turno);
+                    ocorrencia.setDescricao(descricao);
+                    ocorrencia.setHora(horaRecebida);
+                    turno.addOcorrencia(descricao, horaRecebida);
+                    try {
+                        ocorrenciaService.cadastrarOcorrencia(ocorrencia);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+
         }
         if (obj == jbFrases) {
             FrameExibirFrases tela = new FrameExibirFrases();

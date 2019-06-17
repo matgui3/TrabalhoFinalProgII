@@ -17,8 +17,7 @@ public class OcorrenciaDAO extends JPADAO<Ocorrencia>{
         
         try {
             em.getTransaction().begin();
-            em.createNativeQuery("DELETE FROM Cliente").executeUpdate();
-            em.createNativeQuery("ALTER SEQUENCE GEN_CLIENTE RESTART WITH 0").executeUpdate();
+            em.createNativeQuery("DELETE FROM ocorrencia").executeUpdate();
         } catch (Exception e) {
             System.out.println("Deu erro!" + e);
             em.getTransaction().rollback(); // desfaz transacao se ocorrer erro ao persitir
