@@ -93,7 +93,6 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
             nomesEIds[cont]= "Id:"+ ops.getMatricula()+" " + ops.getNome()+ "";
             cont++;
         }
-            System.out.println(nomesEIds);
     }
 
     public void initializeComponents() {
