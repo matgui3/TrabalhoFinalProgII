@@ -777,12 +777,12 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                     | cbOp2Turno2.getSelectedIndex() == -1 | cbOp1Turno3.getSelectedIndex() == -1 | cbOp2Turno3.getSelectedIndex() == -1) {
                 JOptionPane.showMessageDialog(null, "Todos os turnos devem possuir pelo menos dois operadores.");
             } else {
-                for(Operador op: operadores){
+                for (Operador op : operadores) {
                     String nome1 = cbOp1Turno1.getSelectedItem().toString();
                     String nome2 = cbOp2Turno1.getSelectedItem().toString();
-                    if(op.getNome() == nome1){
+                    if (op.getNome() == nome1) {
                         turno.addOperadores(op);
-                    }else if(op.getNome() == nome2){
+                    } else if (op.getNome() == nome2) {
                         turno.addOperadores(op);
                     }
                 }
@@ -876,19 +876,21 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         }
 
     }
-    public void fechar(){
+
+    public void fechar() {
         this.dispose();
     }
-    public void exclusaoEAlteracao(){
-        try {
-                ocorrenciaService.deletarOcorrencias();
 
-            } catch (Exception ex) {
-            }
+    public void exclusaoEAlteracao() {
+        try {
+            ocorrenciaService.deletarOcorrencias();
+
+        } catch (Exception ex) {
+        }
+        if (tabela1.getValueAt(0, 0) != null) {
             for (int i = 0; i < tabela1.getRowCount(); i++) {
                 Ocorrencia ocorrencia = new Ocorrencia();
                 String s[] = {tabela1.getValueAt(i, 0).toString(), tabela1.getValueAt(i, 1).toString()};
-                System.out.println(tabela1.getValueAt(i, 1).toString());
                 horaRecebida = LocalTime.parse(tabela1.getValueAt(i, 0).toString());
                 String descricao = tabela1.getValueAt(i, 1).toString();
                 turno = dia.getTurnos().get(0);
@@ -901,46 +903,45 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+            }
 
-            }
-            if (tabela2.getValueAt(0, 0) != null) {
-                for (int i = 0; i < tabela2.getRowCount(); i++) {
-                    Ocorrencia ocorrencia = new Ocorrencia();
-                    String s[] = {tabela2.getValueAt(i, 0).toString(), tabela2.getValueAt(i, 1).toString()};
-                    System.out.println(tabela2.getValueAt(i, 1).toString());
-                    horaRecebida = LocalTime.parse(tabela2.getValueAt(i, 0).toString());
-                    String descricao = tabela2.getValueAt(i, 1).toString();
-                    turno = dia.getTurnos().get(1);
-                    ocorrencia.setTurno(turno);
-                    ocorrencia.setDescricao(descricao);
-                    ocorrencia.setHora(horaRecebida);
-                    turno.addOcorrencia(descricao, horaRecebida);
-                    try {
-                        ocorrenciaService.cadastrarOcorrencia(ocorrencia);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
+        }
+        if (tabela2.getValueAt(0, 0) != null) {
+            for (int i = 0; i < tabela2.getRowCount(); i++) {
+                Ocorrencia ocorrencia = new Ocorrencia();
+                String s[] = {tabela2.getValueAt(i, 0).toString(), tabela2.getValueAt(i, 1).toString()};
+                horaRecebida = LocalTime.parse(tabela2.getValueAt(i, 0).toString());
+                String descricao = tabela2.getValueAt(i, 1).toString();
+                turno = dia.getTurnos().get(1);
+                ocorrencia.setTurno(turno);
+                ocorrencia.setDescricao(descricao);
+                ocorrencia.setHora(horaRecebida);
+                turno.addOcorrencia(descricao, horaRecebida);
+                try {
+                    ocorrenciaService.cadastrarOcorrencia(ocorrencia);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
-            if (tabela3.getValueAt(0, 0) != null) {
-                for (int i = 0; i < tabela3.getRowCount(); i++) {
-                    Ocorrencia ocorrencia = new Ocorrencia();
-                    String s[] = {tabela3.getValueAt(i, 0).toString(), tabela3.getValueAt(i, 1).toString()};
-                    System.out.println(tabela3.getValueAt(i, 1).toString());
-                    horaRecebida = LocalTime.parse(tabela3.getValueAt(i, 0).toString());
-                    String descricao = tabela3.getValueAt(i, 1).toString();
-                    turno = dia.getTurnos().get(2);
-                    ocorrencia.setTurno(turno);
-                    ocorrencia.setDescricao(descricao);
-                    ocorrencia.setHora(horaRecebida);
-                    turno.addOcorrencia(descricao, horaRecebida);
-                    try {
-                        ocorrenciaService.cadastrarOcorrencia(ocorrencia);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
+        }
+        if (tabela3.getValueAt(0, 0) != null) {
+            for (int i = 0; i < tabela3.getRowCount(); i++) {
+                Ocorrencia ocorrencia = new Ocorrencia();
+                String s[] = {tabela3.getValueAt(i, 0).toString(), tabela3.getValueAt(i, 1).toString()};
+                horaRecebida = LocalTime.parse(tabela3.getValueAt(i, 0).toString());
+                String descricao = tabela3.getValueAt(i, 1).toString();
+                turno = dia.getTurnos().get(2);
+                ocorrencia.setTurno(turno);
+                ocorrencia.setDescricao(descricao);
+                ocorrencia.setHora(horaRecebida);
+                turno.addOcorrencia(descricao, horaRecebida);
+                try {
+                    ocorrenciaService.cadastrarOcorrencia(ocorrencia);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
+        }
     }
 
     @Override
