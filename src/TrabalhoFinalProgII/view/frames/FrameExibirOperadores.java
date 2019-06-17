@@ -32,7 +32,7 @@ import javax.swing.text.MaskFormatter;
  *
  * @author guilh
  */
-public class FrameExibirOperadores extends FrameCRUD implements ActionListener{
+public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
 
     private static final String titulo = "Cadastro de Operadores";
     private static final Dimension dimension = new Dimension(800, 300);
@@ -51,6 +51,7 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener{
     private MaskFormatter maskTf;
     private MaskFormatter maskTf1;
     private List<Operador> operadores;
+    private String nomesEIds[];
 
     private JPanel panelFormulario;
 
@@ -62,7 +63,9 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener{
 
         novoOperador = new Operador();
         operadorService = new OperadorService();
-
+        operadores = operadorService.buscarOperadores();
+        carregarNomesEids();
+        
         initializeComponents();
         addComponents();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -72,11 +75,25 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener{
         super(titulo, dimension, true);
 
         novoOperador = new Operador();
+        operadorService = new OperadorService();
+        operadores = operadorService.buscarOperadores();
+        carregarNomesEids();
+        
 
         initializeComponents();
         addComponents();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+    }
+
+    public void carregarNomesEids() {
+        int cont = 0;
+        nomesEIds = new String[12];
+        for (Operador ops : operadores) {
+            nomesEIds[cont]= "Id:"+ ops.getMatricula()+" " + ops.getNome()+ "";
+            cont++;
+        }
+            System.out.println(nomesEIds);
     }
 
     public void initializeComponents() {
@@ -90,10 +107,8 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener{
         editaFont(lbCargo);
 
         //String para obter nomes dos operadores
-        operadores = operadorService.buscarOperadores();
-        String nomes[] = {"bla", "blu"}; 
 
-        cbOpenadores = new JComboBox(nomes);
+        cbOpenadores = new JComboBox(nomesEIds);
         editaFont(cbOpenadores);
         cbOpenadores.addActionListener(this);
 
@@ -128,6 +143,7 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener{
     public void editaFont(Label umJl) {
         umJl.setFont(new Font("Serif", Font.PLAIN, 18));
     }
+
     public void editaFont(JComboBox umJl) {
         umJl.setFont(new Font("Serif", Font.PLAIN, 18));
     }
@@ -219,7 +235,7 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener{
     @Override
     public void excluirRegistro() {
         String nomeOp = (String) cbOpenadores.getSelectedItem();
-        
+
         tfNome.setText(" ");
         fTfDataNasc.setText("");
         fTfTelefone.setText("");
