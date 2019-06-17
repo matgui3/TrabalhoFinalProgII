@@ -23,9 +23,18 @@ public class DiaService {
         return dao.pesquisarDiaPorData(dataFormatada);
     }
     
+    public Dia salvarDia(Dia dia) throws Exception {
+        dao.inserir(dia);
+        return dia;
+    }
+    
     public Dia novoDia(Dia dia) throws Exception{
         dao.inserir(dia);
         return dia;
+    }
+
+    public void salvarDia() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
