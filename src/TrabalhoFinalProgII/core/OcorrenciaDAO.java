@@ -13,6 +13,21 @@ import TrabalhoFinalProgII.model.Ocorrencia;
  */
 public class OcorrenciaDAO extends JPADAO<Ocorrencia>{
     
+    public void excluirOcorrencia() throws Exception {
+        
+        try {
+            em.getTransaction().begin();
+            em.createNativeQuery("DELETE FROM Cliente").executeUpdate();
+            em.createNativeQuery("ALTER SEQUENCE GEN_CLIENTE RESTART WITH 0").executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Deu erro!" + e);
+            em.getTransaction().rollback(); // desfaz transacao se ocorrer erro ao persitir
+        } finally {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().commit();
+            }
+        }
+    }
     
     
 }

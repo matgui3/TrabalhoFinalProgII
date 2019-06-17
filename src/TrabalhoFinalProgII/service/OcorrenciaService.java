@@ -20,5 +20,11 @@ public class OcorrenciaService {
         dao.inserir(ocorrencia);
         return ocorrencia;
     }
-
+    
+    public void deletarOcorrencias() throws Exception{
+        
+        
+            dao.excluirOcorrencia();
+        
+    }    
 }
