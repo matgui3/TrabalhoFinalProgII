@@ -12,6 +12,7 @@ import TrabalhoFinalProgII.model.Operador;
 import TrabalhoFinalProgII.model.PeriodoTurno;
 import TrabalhoFinalProgII.model.Turno;
 import TrabalhoFinalProgII.service.DiaService;
+import TrabalhoFinalProgII.service.OcorrenciaService;
 import TrabalhoFinalProgII.service.OperadorService;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -64,9 +65,10 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 
     private Dia dia;
     private DiaService diaService;
-
-    OperadorService operadorService;
+    private OcorrenciaService ocorrenciaService;
+    private OperadorService operadorService;
     private List<Operador> operadores;
+
     private Label lb1;
     private Label lb2;
     private Label lb3;
@@ -200,6 +202,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         criarDia();
         operadorService = new OperadorService();
         operadores = operadorService.buscarOperadores();
+        ocorrenciaService = new OcorrenciaService();
 
         lb1 = new Label("Dia da Semana ");
         editaFont(lb1);
@@ -676,31 +679,39 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 
             Turno turno = null;
             if (horaRecebida.isAfter(LocalTime.of(23, 30))) {
-                if(combo!=2)
+                if (combo != 2) {
                     throw new TurnoSelecionadoInvalidoException("O turno selecionado é inválido para o horário informado.");
+                }
                 turno = dia.getTurnos().get(2);
             } else if (horaRecebida.isAfter(LocalTime.of(15, 30))) {
-                 if(combo!=1)
+                if (combo != 1) {
                     throw new TurnoSelecionadoInvalidoException("O turno selecionado é inválido para o horário informado.");
+                }
                 turno = dia.getTurnos().get(1);
             } else {
-                 if(combo!=0)
+                if (combo != 0) {
                     throw new TurnoSelecionadoInvalidoException("O turno selecionado é inválido para o horário informado.");
+                }
                 turno = dia.getTurnos().get(0);
             }
 
             String descricao = "<html>" + taOcorrencia.getText() + "</html>";
-            int cont = 0;
-            int height = 20;
             if (descricao.length() > 60) {
-                cont++;
-                height += 20;
                 tabela1.setRowHeight(40);
                 StringBuilder stringBuilder = new StringBuilder(descricao);
                 stringBuilder.insert(60, "<br>");
                 descricao = stringBuilder.toString();
             }
-            System.out.println(descricao);
+
+            ocorrencia.setTurno(turno);
+            ocorrencia.setDescricao(descricao);
+            ocorrencia.setHora(horaRecebida);
+            turno.addOcorrencia(descricao, horaRecebida);
+            try {
+                ocorrenciaService.cadastrarOcorrencia(ocorrencia);
+            } catch(Exception ex){
+                ex.printStackTrace();
+            }
 
             String frase[] = {tfHora.getText(), descricao};
             DefaultTableModel modelo = new DefaultTableModel(frase, 0);
