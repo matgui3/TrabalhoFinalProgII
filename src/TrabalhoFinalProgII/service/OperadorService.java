@@ -77,6 +77,13 @@ public class OperadorService {
         
         return dados;
     }
+    
+    public boolean  excluirOperadorPorId(long id) throws Exception{
+        Operador operador = (Operador) operadorDAO.pesquisarPorId(id, Operador.class);
+        operadorDAO.deletar(operador);
+        
+        return true;
+    }
 
 //    public Operador editarOperador(long matricula, String nome, LocalDate dataNascimento, String telefone, Cargo cargo) throws Exception {
 //        Operador operador = operadorDAO.buscarOperadorPorMatricula(Long matricula

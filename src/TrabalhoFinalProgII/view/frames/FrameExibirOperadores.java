@@ -38,7 +38,7 @@ import javax.swing.text.MaskFormatter;
  */
 public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
 
-    private static final String titulo = "Cadastro de Operadores";
+    private static final String titulo = "Exibição de Operadores";
     private static final Dimension dimension = new Dimension(800, 300);
     private Operador novoOperador;
     private OperadorService operadorService;
@@ -51,7 +51,7 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
     private Label lbExibeDataNasc;
     private Label lbExibeTelefone;
     private Label lbExibeCargo;
-    private JComboBox cbOpenadores;
+    private JComboBox cbOperadores;
     private List<Operador> operadores;
     private String nomesEIds[];
     private JButton jbMostrar;
@@ -127,8 +127,8 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
         addBotao(jbMostrar);
         jbMostrar.addActionListener(this);
 
-        cbOpenadores = new JComboBox(nomesEIds);
-        editaFont(cbOpenadores);
+        cbOperadores = new JComboBox(nomesEIds);
+        editaFont(cbOperadores);
 
         layout = new GridBagLayout();
         panelFormulario = new JPanel(layout);
@@ -223,7 +223,7 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
         cons.gridy = 5;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(cbOpenadores, cons);
+        panelFormulario.add(cbOperadores, cons);
 
         super.addFormulario(panelFormulario);
     }
@@ -243,7 +243,15 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
 
     @Override
     public void excluirRegistro() {
-        String nomeOp = (String) cbOpenadores.getSelectedItem();
+        try {
+            long idOperador = Long.parseLong(cbOperadores.getSelectedItem().toString().split(" ")[1]);
+            operadorService.excluirOperadorPorId(idOperador);
+            JOptionPane.showMessageDialog(null, "Operador excluído com sucesso!");
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Selecione um operador para excluir.");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "O operador informado não pôde ser excluído.");
+        }
 
         tfNome.setText(" ");
         lbExibeDataNasc.setText("");
@@ -252,11 +260,12 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent evt) {
+    public void actionPerformed(ActionEvent evt
+    ) {
         Object obj = evt.getSource();
         if (obj == jbMostrar) {
-            String od = cbOpenadores.getSelectedItem().toString();
-            System.out.println(cbOpenadores.getSelectedItem());
+            String od = cbOperadores.getSelectedItem().toString();
+            System.out.println(cbOperadores.getSelectedItem());
 
             int id = Integer.parseInt(od.split(" ")[1]);
             for (Operador op : operadores) {

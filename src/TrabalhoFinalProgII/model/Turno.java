@@ -6,9 +6,11 @@
 package TrabalhoFinalProgII.model;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,7 +39,7 @@ public class Turno {
     @ManyToOne
     @JoinColumn(name = "id_dia", referencedColumnName = "id_dia")
     private Dia dia;
-    @OneToMany()
+    @OneToMany(mappedBy = "turno")
     private List<Ocorrencia> ocorrencias;
     @Column(name = "periodo")
     private String periodo;
@@ -66,7 +68,7 @@ public class Turno {
      * @param descricao Descrição da ocorrência.
      * @param hora Hora em que a ocorrência foi adicionada.
      */
-    public void addOcorrencia(String descricao, LocalDate hora) {
+    public void addOcorrencia(String descricao, LocalTime hora) {
         Ocorrencia ocorrencia = new Ocorrencia(hora, descricao);
         ocorrencias.add(ocorrencia);
     }
