@@ -10,6 +10,7 @@ import TrabalhoFinalProgII.model.Ocorrencia;
 import TrabalhoFinalProgII.model.Operador;
 import TrabalhoFinalProgII.model.PeriodoTurno;
 import TrabalhoFinalProgII.model.Turno;
+import TrabalhoFinalProgII.model.UnidadeGeradora;
 import TrabalhoFinalProgII.service.DiaService;
 import TrabalhoFinalProgII.service.OcorrenciaService;
 import TrabalhoFinalProgII.service.OperadorService;
@@ -36,6 +37,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
@@ -138,7 +141,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     public FrameRelatorio() {
         super(titulo, dimension);
 
-       initializeComponents();
+        initializeComponents();
         addComponents();
         setBorder(null);
         setClosable(true);
@@ -321,8 +324,6 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         op1Column.setCellEditor(new DefaultCellEditor(cbT));
         op2Column.setCellEditor(new DefaultCellEditor(cbT));
     }
-
-  
 
     private void addComponents() {
         /* panel1.add(panel3, BorderLayout.CENTER);
@@ -683,7 +684,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 
             Turno turno = null;
             try {
-                if (horaRecebida.isAfter(LocalTime.of(23, 30))) {
+                if (horaRecebida.isAfter(LocalTime.of(23, 30)) || horaRecebida.isBefore(LocalTime.of(07, 30))) {
                     if (combo != 2) {
                         throw new TurnoSelecionadoInvalidoException("O turno selecionado é inválido para o horário informado.");
                     }
@@ -769,7 +770,33 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 
         }
         if (obj == jbFimTurno) {
+
+            if (cbOp1Turno1.getSelectedIndex() == 0 | cbOp2Turno1.getSelectedIndex() == 0 | cbOp1Turno2.getSelectedIndex() == 0
+                    | cbOp2Turno2.getSelectedIndex() == 0 | cbOp1Turno3.getSelectedIndex() == 0 | cbOp2Turno3.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Todos os turnos devem possuir pelo menos dois operadores.");
+            }
+
+            JOptionPane.showConfirmDialog(null, "Deseja confirmar todos os dados do relatório?");
+
+            dia.setGerador1(cbUgs.getSelectedItem().toString());
+            dia.setGerador2(cbUgs2.getSelectedItem());
+            dia.setServicosAuxiliares(cbSA.getSelectedItem());
+            dia.setSubestacao(cbSE.getSelectedItem());
+            try {
+                diaService.salvarDia(dia);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            Dia novoDia = new Dia();
+            try {
+                diaService.novoDia(novoDia);
+                initializeComponents();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
+        
         if (obj == jbEditar) {
 
             String hora = tfHora.getText();
@@ -834,7 +861,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             this.getParent().add(tela);
             tela.setVisible(true);
         }
-        
+
     }
 
     @Override
