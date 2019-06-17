@@ -850,6 +850,9 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 
                     break;
             }
+            
+            ocorrenciaService.deletarOcorrencias();
+            
         }
         if (obj == jbFrases) {
             FrameExibirFrases tela = new FrameExibirFrases();
