@@ -44,7 +44,7 @@ public class Turno {
     @Column(name = "periodo")
     private String periodo;
     @ManyToMany()
-    @JoinTable(name = "operadores_turnos", joinColumns = {@JoinColumn(name = "id_turno")}, inverseJoinColumns = {@JoinColumn(name = "matricula")})
+    @JoinTable(name = "operadores_turnos", joinColumns = {@JoinColumn(name = "id_turno")}, inverseJoinColumns = {@JoinColumn(name = "matricula_operador")})
     private List<Operador> operadores;
 
     /**

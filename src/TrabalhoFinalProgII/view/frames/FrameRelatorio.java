@@ -307,6 +307,8 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         panelBotoesCRUD.setVisible(
                 false);
 
+        defineValoresRelatorio(dia);
+
     }
 
     public void tabelaOps(JTable tab, JComboBox cbT) {
@@ -695,7 +697,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                     }
                     turno = dia.getTurnos().get(0);
                 }
-            }catch(TurnoSelecionadoInvalidoException ex){
+            } catch (TurnoSelecionadoInvalidoException ex) {
                 JOptionPane.showMessageDialog(null, "O turno selecionado é inválido para o horário informado.");
             }
 
@@ -711,10 +713,10 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             ocorrencia.setDescricao(descricao);
             ocorrencia.setHora(horaRecebida);
             turno.addOcorrencia(descricao, horaRecebida);
-            
+
             try {
                 ocorrenciaService.cadastrarOcorrencia(ocorrencia);
-            } catch(Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
 
@@ -855,6 +857,38 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                 diaService.novoDia(dia);
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
+            }
+        }
+    }
+
+    private void defineValoresRelatorio(Dia dia) {
+        List<Turno> turnos = dia.getTurnos();
+
+        List<Ocorrencia> ocorrenciasT1 = turnos.get(0).getOcorrencias();
+        List<Ocorrencia> ocorrenciasT2 = turnos.get(1).getOcorrencias();
+        List<Ocorrencia> ocorrenciasT3 = turnos.get(2).getOcorrencias();
+
+        Operador[] operadoresT1 = new Operador[2];
+        if (turnos.get(0).getOperadores().size() > 0) {
+            operadoresT1[0] = turnos.get(0).getOperadores().get(0);
+            if (turnos.get(0).getOperadores().size() > 1) {
+                operadoresT1[1] = turnos.get(0).getOperadores().get(1);
+            }
+        }
+
+        Operador[] operadoresT2 = new Operador[2];
+        if (turnos.get(1).getOperadores().size() > 0) {
+            operadoresT2[0] = turnos.get(1).getOperadores().get(0);
+            if (turnos.get(1).getOperadores().size() > 1) {
+                operadoresT2[1] = turnos.get(1).getOperadores().get(1);
+            }
+        }
+
+        Operador[] operadoresT3 = new Operador[2];
+        if (turnos.get(2).getOperadores().size() > 0) {
+            operadoresT3[0] = turnos.get(2).getOperadores().get(0);
+            if (turnos.get(2).getOperadores().size() > 1) {
+                operadoresT3[1] = turnos.get(2).getOperadores().get(1);
             }
         }
     }
