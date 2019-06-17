@@ -35,7 +35,7 @@ public class FrasesService {
         String[] textoFrases = new String[frases.size()];
         
         for(int i=0; i<frases.size(); i++){
-            textoFrases[i] = frases.get(i).getTexto();
+            textoFrases[i] = frases.get(i).getArea() +": "+ frases.get(i).getTexto();
         }
         
         return textoFrases;
