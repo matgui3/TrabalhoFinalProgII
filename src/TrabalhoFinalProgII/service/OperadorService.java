@@ -53,17 +53,18 @@ public class OperadorService {
         return operadores;
     }
     
-    public String[] buscarNomesOperadores(){
+    public String[][] buscarNomesAndIdOperadores(){
         List<Operador> operadores = buscarOperadores();
-        String[] nomes = new String[operadores.size()];
+        String[][] dados = new String[operadores.size()][2];
         int i = 0;
         
         for(Operador o : operadores){
-            nomes[i] = o.getNome();
+            dados[i][0] = ("" + o.getMatricula());
+            dados[i][1] = o.getNome();
             i++;
         }
         
-        return nomes;
+        return dados;
     }
 
 //    public Operador editarOperador(long matricula, String nome, LocalDate dataNascimento, String telefone, Cargo cargo) throws Exception {

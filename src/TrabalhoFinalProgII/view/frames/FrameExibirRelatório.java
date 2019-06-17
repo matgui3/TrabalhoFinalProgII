@@ -20,6 +20,7 @@ import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -119,22 +120,22 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
                 nome = "Domingo";
                 break;
             case Calendar.MONDAY:
-                nome = "Segunda-feria";
+                nome = "Segunda-feira";
                 break;
             case Calendar.TUESDAY:
-                nome = "Terça-feria";
+                nome = "Terça-feira";
                 break;
             case Calendar.WEDNESDAY:
                 nome = "Quarta-feira";
                 break;
             case Calendar.THURSDAY:
-                nome = "Quinta-feria";
+                nome = "Quinta-feira";
                 break;
             case Calendar.FRIDAY:
-                nome = "Sexta-feria";
+                nome = "Sexta-feira";
                 break;
             case Calendar.SATURDAY:
-                nome = "sábado-feria";
+                nome = "Sábado";
                 break;
         }
         return nome;
@@ -150,7 +151,7 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
         editaFont(lb3);
         lb4 = new Label("Horário");
         editaFont(lb4);
-        lb5 = new Label("00:00h");
+        lb5 = new Label();
         editaFont(lb5);
 
         lb6 = new Label("Condições da Usina");

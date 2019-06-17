@@ -128,7 +128,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         addComponents();
         setBorder(null);
         setClosable(true);
-        getNomeOperadores();
+        getNomeAndIdOperadores();
 
     }
 
@@ -183,9 +183,9 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         return F_Mascara;
     }
 
-    public String[] getNomeOperadores() {
-        String[] nomes = operadorService.buscarNomesOperadores();
-        return nomes;
+    public String[][] getNomeAndIdOperadores() {
+        String[][] operadores = operadorService.buscarNomesAndIdOperadores();
+        return operadores;
     }
 
     private void initializeComponents() {
@@ -221,18 +221,18 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         cbSA = new JComboBox(EstadoServicosAuxiliares.values());
 
         cbTurnos = new JComboBox(EnumTurnos.values());
-        String[] nomes = operadorService.buscarNomesOperadores();
-        cbOp1Turno1 = new JComboBox(nomes);
+        String[][] dados = getNomeAndIdOperadores();
+        cbOp1Turno1 = new JComboBox(dados);
         tabtOps1 = new JTable(1, 2);
         tabtOps2 = new JTable(1, 2);
         tabtOps3 = new JTable(1, 2);
 
         cbOp1Turno1.setMaximumSize(new Dimension(100, 100));
-        cbOp1Turno2 = new JComboBox(nomes);
-        cbOp1Turno3 = new JComboBox(nomes);
-        cbOp2Turno1 = new JComboBox(nomes);
-        cbOp2Turno2 = new JComboBox(getNomeOperadores());
-        cbOp2Turno3 = new JComboBox(getNomeOperadores());
+        cbOp1Turno2 = new JComboBox(dados);
+        cbOp1Turno3 = new JComboBox(dados);
+        cbOp2Turno1 = new JComboBox(dados);
+        cbOp2Turno2 = new JComboBox(getNomeAndIdOperadores());
+        cbOp2Turno3 = new JComboBox(getNomeAndIdOperadores());
         tabelaOps(tabtOps1, cbOp1Turno1);
         tabelaOps(tabtOps1, cbOp2Turno1);
         tabelaOps(tabtOps2, cbOp1Turno2);
