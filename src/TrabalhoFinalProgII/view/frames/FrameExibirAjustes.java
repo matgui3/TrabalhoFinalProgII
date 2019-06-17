@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -120,6 +121,7 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
         modelo.addColumn("AJUSTES");
         modelo.addColumn("UG1");
         modelo.addColumn("UG2");
+        
         String a[] = {"AJUSTES", "UG1", "UG2"};
         modelo.addRow(a);
         Color color = UIManager.getColor("Table.gridColor");
@@ -180,6 +182,22 @@ public class FrameExibirAjustes extends FrameCRUD implements ActionListener {
     @Override
     public void excluirRegistro() {
         removeLinha(tabela1);
+        try {
+            ajustesService.excluirAjuste();
+
+        } catch (Exception ex) {
+        }
+        for (int i = 1; i < tabela1.getRowCount(); i++) {
+            String nomeAjuste = tabela1.getValueAt(i, 0).toString();
+            String textoUg1 = tabela1.getValueAt(i, 1).toString();
+            String textoUg2 = tabela1.getValueAt(i, 2).toString();
+            try {
+                ajustesService.criarAjuste(nomeAjuste, textoUg1, textoUg2);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Algo deu errado!\nAjuste não cadastrado!");
+            }
+        }
     }
 
     public static void alinhaTableCentro(JTable table) {

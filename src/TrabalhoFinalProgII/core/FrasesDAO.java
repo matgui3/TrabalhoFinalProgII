@@ -23,5 +23,19 @@ public class FrasesDAO extends JPADAO<Frase>{
         
         return frases;
     }
+
+    public void excluirFrases() {
+         try {
+            em.getTransaction().begin();
+            em.createNativeQuery("DELETE FROM frases_prontas").executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Deu erro!" + e);
+            em.getTransaction().rollback(); // desfaz transacao se ocorrer erro ao persitir
+        } finally {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().commit();
+            }
+        }
+    }
     
 }

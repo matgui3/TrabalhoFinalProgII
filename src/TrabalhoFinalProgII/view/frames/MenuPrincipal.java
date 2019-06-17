@@ -22,6 +22,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
     private JMenu menuAbrirRelatorio;
     private JMenu menuBibliotecas;
     private JMenu menuOperadores;
+    private JMenu menuAtualizar;
     private JMenu menuAjuda;
 
     private JMenuItem menuItemAbrirRelatorio;
@@ -29,6 +30,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
     private JMenuItem menuItemAddAjuste;
     private JMenuItem menuItemAddOperadores;
     private JMenuItem menuItemVerOperadores;
+    private JMenuItem menuItemAtualizar;
     private JMenuItem menuItemSair;
 
     private FramePrincipal frameSistema;
@@ -79,7 +81,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
 
         listener = new ListenerMenuAplicação(FrameCadastrarFrases.class, frameSistema);
         menuItemAddFrase.addActionListener(listener);
-        
+
         listener = new ListenerMenuAplicação(FrameCadastrarOperadores.class, frameSistema);
         menuItemAddOperadores.addActionListener(listener);
 
@@ -97,10 +99,11 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
             Object[] options = {"Sim", "Não"};
             int opcao = JOptionPane.showOptionDialog(null, "Deseja realmente sair do sistema?",
                     "Informação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-            if (opcao == 0 ) { 
+            if (opcao == 0) {
                 frameSistema.dispose();
             }
         }
+       
     }
 
 }

@@ -93,8 +93,8 @@ public class Turno {
         return operadores;
     }
 
-    public void setOperadores(List<Operador> operadores) {
-        this.operadores = operadores;
+    public void addOperadores(Operador op) {
+        this.operadores.add(op);
     }
     
     

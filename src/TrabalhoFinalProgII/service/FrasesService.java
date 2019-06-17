@@ -40,4 +40,10 @@ public class FrasesService {
         
         return textoFrases;
     }
+
+   
+
+    public void excluirFrase() throws Exception{
+        frasesDAO.excluirFrases();
+    }
 }

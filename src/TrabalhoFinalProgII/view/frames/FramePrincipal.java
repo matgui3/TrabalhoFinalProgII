@@ -39,16 +39,16 @@ public class FramePrincipal extends JFrame {
 
     }
 
-    private void initializeComponents()  {
+    public void initializeComponents()  {
         dimTela = Toolkit.getDefaultToolkit().getScreenSize();
         desktop = new JDesktopPane();
         contentPane = super.getContentPane();
-        menuAplicacao = new MenuPrincipal(this);
         relatorio = new FrameRelatorio();
+        menuAplicacao = new MenuPrincipal(this);
 
     }
 
-    private void addComponents() {
+    public void addComponents() {
         contentPane.add(desktop, BorderLayout.CENTER);
         super.setJMenuBar(menuAplicacao);
         adicionarFormulario(relatorio);

@@ -777,6 +777,15 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                     | cbOp2Turno2.getSelectedIndex() == -1 | cbOp1Turno3.getSelectedIndex() == -1 | cbOp2Turno3.getSelectedIndex() == -1) {
                 JOptionPane.showMessageDialog(null, "Todos os turnos devem possuir pelo menos dois operadores.");
             } else {
+                for(Operador op: operadores){
+                    String nome1 = cbOp1Turno1.getSelectedItem().toString();
+                    String nome2 = cbOp2Turno1.getSelectedItem().toString();
+                    if(op.getNome() == nome1){
+                        turno.addOperadores(op);
+                    }else if(op.getNome() == nome2){
+                        turno.addOperadores(op);
+                    }
+                }
                 JOptionPane.showConfirmDialog(null, "Deseja confirmar todos os dados do relatório?");
 
                 dia.setGerador1(cbUgs.getSelectedItem().toString());
@@ -833,6 +842,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 
             tfHora.setText("");
             taOcorrencia.setText(" ");
+            exclusaoEAlteracao();
         }
         if (obj == jbExcluir) {
 
@@ -852,8 +862,25 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 
                     break;
             }
+            exclusaoEAlteracao();
+        }
+        if (obj == jbFrases) {
+            FrameExibirFrases tela = new FrameExibirFrases();
+            this.getParent().add(tela);
+            tela.setVisible(true);
+        }
+        if (obj == jbAjustes) {
+            FrameExibirAjustes tela = new FrameExibirAjustes();
+            this.getParent().add(tela);
+            tela.setVisible(true);
+        }
 
-            try {
+    }
+    public void fechar(){
+        this.dispose();
+    }
+    public void exclusaoEAlteracao(){
+        try {
                 ocorrenciaService.deletarOcorrencias();
 
             } catch (Exception ex) {
@@ -914,19 +941,6 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                     }
                 }
             }
-
-        }
-        if (obj == jbFrases) {
-            FrameExibirFrases tela = new FrameExibirFrases();
-            this.getParent().add(tela);
-            tela.setVisible(true);
-        }
-        if (obj == jbAjustes) {
-            FrameExibirAjustes tela = new FrameExibirAjustes();
-            this.getParent().add(tela);
-            tela.setVisible(true);
-        }
-
     }
 
     @Override

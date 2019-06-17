@@ -27,6 +27,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -51,7 +53,7 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
 
     private static final String titulo = "Relatório de Ocorrências";
     private static Dimension dimension = new Dimension(800, 600);
-    
+
     private DiaService diaService;
 
     private Label lb1;
@@ -102,6 +104,7 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
     private JPanel panelzaco;
     private JScrollPane barra;
     private LocalDate date;
+    private  String dateFormatado;
 
     private LayoutManager layout;
     private GridBagConstraints cons;
@@ -121,8 +124,8 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
         umJl.setFont(new Font("Serif", Font.PLAIN, 18));
     }
 
-    public String setDiaDaSemana() {
-        Date d = new Date();
+    public String setDiaDaSemana(LocalDate ld) {
+        Date d = Date.from(ld.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Calendar c = new GregorianCalendar();
         c.setTime(d);
         String nome = "";
@@ -155,13 +158,15 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
 
     private void initializeComponents() {
         diaService = new DiaService();
-        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        dateFormatado = date.format(formatter);
+
         lb1 = new Label("Dia da Semana ");
         editaFont(lb1);
-        lb2 = new Label("Preencher");
+        lb2 = new Label(setDiaDaSemana(date));
         editaFont(lb2);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        lb3 = new Label("Data: " + "Preencher");
+        lb3 = new Label("Data: " + dateFormatado);
         editaFont(lb3);
         lb4 = new Label("Horário");
         editaFont(lb4);
@@ -357,13 +362,8 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
         editaFont(lbCabecalhoTurno1);
         lbCabecalhoTurno2 = new Label("07:30");
         editaFont(lbCabecalhoTurno2);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        lbCabecalhoTurno3 = new Label("Data: " + "Preencher");
+        lbCabecalhoTurno3 = new Label("Data: " + dateFormatado);
         editaFont(lbCabecalhoTurno3);
-        lbCabecalhoTurno4 = new Label("Operadores");
-        editaFont(lbCabecalhoTurno4);
-        lbCabecalhoTurno5 = new Label("Nomes Preencher");
-        editaFont(lbCabecalhoTurno5);
 
         cons = new GridBagConstraints();
         cons.gridx = 0;
@@ -386,32 +386,14 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
         cons.fill = GridBagConstraints.HORIZONTAL;
         panel2.add(lbCabecalhoTurno3, cons);
 
-        cons = new GridBagConstraints();
-        cons.gridx = 0;
-        cons.gridy = 10;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panel2.add(lbCabecalhoTurno4, cons);
-
-        cons = new GridBagConstraints();
-        cons.gridx = 1;
-        cons.gridy = 10;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panel2.add(lbCabecalhoTurno5, cons);
-
         iniciarTabela(tabela1);
         panel3.add(tabela1);
         lbCabecalhoTurno21 = new Label("2º Turno");
         editaFont(lbCabecalhoTurno21);
         lbCabecalhoTurno22 = new Label("15:30");
         editaFont(lbCabecalhoTurno22);
-        lbCabecalhoTurno23 = new Label("Data: " + "Preencher");
+        lbCabecalhoTurno23 = new Label("Data: " + dateFormatado);
         editaFont(lbCabecalhoTurno23);
-        lbCabecalhoTurno24 = new Label("Operadores");
-        editaFont(lbCabecalhoTurno24);
-        lbCabecalhoTurno25 = new Label("Nomes Preencher");
-        editaFont(lbCabecalhoTurno25);
 
         cons = new GridBagConstraints();
         cons.gridx = 0;
@@ -436,20 +418,6 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
         cons.fill = GridBagConstraints.HORIZONTAL;
         panel4.add(lbCabecalhoTurno23, cons);
 
-        cons = new GridBagConstraints();
-        cons.gridx = 0;
-        cons.gridy = 10;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panel4.add(lbCabecalhoTurno24, cons);
-
-        cons = new GridBagConstraints();
-        cons.gridx = 1;
-        cons.gridy = 10;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panel4.add(lbCabecalhoTurno25, cons);
-
         iniciarTabela(tabela2);
         panel5.add(tabela2);
 
@@ -457,12 +425,8 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
         editaFont(lbCabecalhoTurno31);
         lbCabecalhoTurno32 = new Label("23:30");
         editaFont(lbCabecalhoTurno32);
-        lbCabecalhoTurno33 = new Label("Data: " + "Preencher");
+        lbCabecalhoTurno33 = new Label("Data: " + dateFormatado);
         editaFont(lbCabecalhoTurno33);
-        lbCabecalhoTurno34 = new Label("Operadores");
-        editaFont(lbCabecalhoTurno34);
-        lbCabecalhoTurno35 = new Label("Nomes Preencher");
-        editaFont(lbCabecalhoTurno35);
 
         cons = new GridBagConstraints();
         cons.gridx = 0;
@@ -486,20 +450,6 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panel6.add(lbCabecalhoTurno33, cons);
-
-        cons = new GridBagConstraints();
-        cons.gridx = 0;
-        cons.gridy = 10;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panel6.add(lbCabecalhoTurno34, cons);
-
-        cons = new GridBagConstraints();
-        cons.gridx = 1;
-        cons.gridy = 10;
-        cons.gridwidth = 1;
-        cons.fill = GridBagConstraints.HORIZONTAL;
-        panel6.add(lbCabecalhoTurno35, cons);
 
         iniciarTabela(tabela3);
         panel7.add(tabela3);
@@ -558,32 +508,37 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
     public void excluirRegistro() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    public void povoarjTables(List<Ocorrencia> list, JTable tabela ){
-         int cont = 0;
-     
+
+    public void povoarjTables(List<Ocorrencia> list, JTable tabela) {
+        int cont = 0;
+
         String frases[] = {};
 
         for (Ocorrencia ocor : list) {
             String hora = ocor.getHora().toString();
             String fraseT1[] = {hora, ocor.getDescricao()};
-            
-        DefaultTableModel modelo = new DefaultTableModel(fraseT1, 0);
-        modelo = (DefaultTableModel) tabela.getModel();
-        if (modelo.getValueAt(0, 0) == null) {
-            modelo.removeRow(0);
-        }
-        modelo.addRow(fraseT1);
 
-        tabela.setModel(modelo);
+            DefaultTableModel modelo = new DefaultTableModel(fraseT1, 0);
+            modelo = (DefaultTableModel) tabela.getModel();
+            if (modelo.getValueAt(0, 0) == null) {
+                modelo.removeRow(0);
+            }
+            modelo.addRow(fraseT1);
 
-        alinhaTableCentro(tabela);
+            tabela.setModel(modelo);
+
+            alinhaTableCentro(tabela);
             cont++;
         }
-     }
-    
+    }
+
     private void defineValoresRelatorio(LocalDate date) {
         Dia dia = diaService.pesquisarDiaPorData(date);
-        
+        lbUgs.setText(dia.getGerador1());
+        lbUgs2.setText(dia.getGerador2());
+        lbSE.setText(dia.getSubestacao());
+        lbSA.setText(dia.getServicosAuxiliares());
+
         List<Turno> turnos = dia.getTurnos();
 
         List<Ocorrencia> ocorrenciasT1 = turnos.get(0).getOcorrencias();
@@ -593,9 +548,11 @@ public class FrameExibirRelatório extends FrameCRUD implements ActionListener {
         Operador[] operadoresT1 = new Operador[2];
         if (turnos.get(0).getOperadores().size() > 0) {
             operadoresT1[0] = turnos.get(0).getOperadores().get(0);
+
             if (turnos.get(0).getOperadores().size() > 1) {
                 operadoresT1[1] = turnos.get(0).getOperadores().get(1);
             }
+
         }
 
         Operador[] operadoresT2 = new Operador[2];

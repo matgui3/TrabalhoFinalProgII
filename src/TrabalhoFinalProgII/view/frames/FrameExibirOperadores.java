@@ -112,13 +112,13 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
         editaFont(lbCargo);
 
         //String para obter nomes dos operadores
-        tfNome = new Label("Nome");
+        tfNome = new Label("");
         editaFont(tfNome);
-        lbExibeCargo = new Label("Cargo");
+        lbExibeCargo = new Label("");
         editaFont(lbExibeCargo);
-        lbExibeDataNasc = new Label("Data de Nascimento");
+        lbExibeDataNasc = new Label("");
         editaFont(lbExibeDataNasc);
-        lbExibeTelefone = new Label("Telefone");
+        lbExibeTelefone = new Label("");
         editaFont(lbExibeTelefone);
         lbExibeTelefone.setPreferredSize(new Dimension(150, 25));
 

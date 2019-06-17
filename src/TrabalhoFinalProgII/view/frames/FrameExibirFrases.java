@@ -5,6 +5,7 @@
  */
 package TrabalhoFinalProgII.view.frames;
 
+import TrabalhoFinalProgII.model.EnumFrases;
 import TrabalhoFinalProgII.service.FrasesService;
 import static TrabalhoFinalProgII.view.frames.FrameExibirAjustes.alinhaTableCentro;
 import static TrabalhoFinalProgII.view.frames.FrameRelatorio.alinhaTableCentro;
@@ -20,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -194,6 +196,21 @@ public class FrameExibirFrases extends FrameCRUD implements ActionListener {
     @Override
     public void excluirRegistro() {
         removeLinha(tabela1);
+        try {
+            frasesService.excluirFrase();
+
+        } catch (Exception ex) {
+        }
+        for (int i = 0; i<tabela1.getRowCount();i++){
+        String frase = tabela1.getValueAt(i, 0).toString();
+       
+        try {
+            frasesService.criarFrase(frase, EnumFrases.UG1);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Algo deu errado!\nAjuste não cadastrado!");
+        }
+        }
     }
 
 }

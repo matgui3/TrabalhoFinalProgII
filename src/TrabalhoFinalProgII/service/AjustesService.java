@@ -20,6 +20,11 @@ public class AjustesService {
     JPADAO<ValoresAlarmesTrip> dao = new JPADAO();
     AjustesDAO ajustesDao = new AjustesDAO();
     
+    
+    public void excluirAjuste() throws Exception{
+        ajustesDao.excluirAjuste();
+    }
+    
     public ValoresAlarmesTrip criarAjuste(String nomeAjuste, String valorAjusteUg1, String valorAjusteUg2) throws Exception{
         if(nomeAjuste == null | valorAjusteUg1 == null | valorAjusteUg2 == null)
             throw new NoSuchElementException("Preencha todos os campos do formulário e tente novamente.");

@@ -155,6 +155,9 @@ public final class FrameCadastrarAjustes extends FrameCRUD {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Algo deu errado!\nAjuste não cadastrado!");
         }
+        tfAjuste.setText("");
+        tfUg1.setText("");
+        tfUg2.setText("");
     }
 
     @Override

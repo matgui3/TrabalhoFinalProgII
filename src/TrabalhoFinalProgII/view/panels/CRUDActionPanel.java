@@ -6,6 +6,8 @@
 package TrabalhoFinalProgII.view.panels;
 
 import TrabalhoFinalProgII.view.frames.FrameCRUD;
+import TrabalhoFinalProgII.view.frames.FramePrincipal;
+import TrabalhoFinalProgII.view.frames.FrameRelatorio;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;
@@ -118,6 +120,7 @@ public class CRUDActionPanel extends JPanel implements ActionListener {
 
         if (obj == btSair) {
             this.parent.fechar();
+            
         }
         if (obj == btGravar) {
             this.parent.gravarCampos();

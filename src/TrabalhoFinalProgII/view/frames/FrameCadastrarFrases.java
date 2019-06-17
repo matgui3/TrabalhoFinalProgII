@@ -143,6 +143,7 @@ public final class FrameCadastrarFrases extends FrameCRUD {
             System.out.println(ex.getMessage());
                 JOptionPane.showMessageDialog(null, "Algo deu errado!\nFrase não cadastrado!");
         }
+        taFrase.setText(" ");
     }
 
     @Override
