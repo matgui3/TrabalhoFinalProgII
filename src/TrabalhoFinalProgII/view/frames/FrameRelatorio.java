@@ -38,6 +38,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -137,7 +138,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     public FrameRelatorio() {
         super(titulo, dimension);
 
-        initializeComponents();
+       initializeComponents();
         addComponents();
         setBorder(null);
         setClosable(true);
@@ -194,6 +195,10 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 
     public String[] getNomeOperadores() {
         String[] operadores = operadorService.buscarNomesOperadores();
+        for(int i = 0; i<operadores.length;i++){
+                
+            System.out.println(operadores[i]);
+            }
         return operadores;
     }
 
@@ -236,24 +241,23 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         cbSA = new JComboBox(EstadoServicosAuxiliares.values());
 
         cbTurnos = new JComboBox(EnumTurnos.values());
-        String[] dados = getNomeOperadores();
-        cbOp1Turno1 = new JComboBox(dados);
+        cbOp1Turno1 = new JComboBox(getNomeOperadores());
         tabtOps1 = new JTable(1, 2);
         tabtOps2 = new JTable(1, 2);
         tabtOps3 = new JTable(1, 2);
 
         cbOp1Turno1.setMaximumSize(new Dimension(100, 100));
-        cbOp1Turno2 = new JComboBox(dados);
-        cbOp1Turno3 = new JComboBox(dados);
-        cbOp2Turno1 = new JComboBox(dados);
+        cbOp1Turno2 = new JComboBox(getNomeOperadores());
+        cbOp1Turno3 = new JComboBox(getNomeOperadores());
+        cbOp2Turno1 = new JComboBox(getNomeOperadores());
         cbOp2Turno2 = new JComboBox(getNomeOperadores());
         cbOp2Turno3 = new JComboBox(getNomeOperadores());
-        tabelaOps(tabtOps1, cbOp1Turno1);
-        tabelaOps(tabtOps1, cbOp2Turno1);
-        tabelaOps(tabtOps2, cbOp1Turno2);
-        tabelaOps(tabtOps2, cbOp2Turno2);
-        tabelaOps(tabtOps3, cbOp1Turno3);
-        tabelaOps(tabtOps3, cbOp2Turno3);
+        tabelaOpsAdiciona(tabtOps1, cbOp1Turno1);
+        tabelaOpsAdiciona(tabtOps1, cbOp2Turno1);
+        tabelaOpsAdiciona(tabtOps2, cbOp1Turno2);
+        tabelaOpsAdiciona(tabtOps2, cbOp2Turno2);
+        tabelaOpsAdiciona(tabtOps3, cbOp1Turno3);
+        tabelaOpsAdiciona(tabtOps3, cbOp2Turno3);
 
         lbHora = new Label("Hora");
         tfHora = new JFormattedTextField(Mascara("##:##"));
@@ -311,7 +315,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
 
     }
 
-    public void tabelaOps(JTable tab, JComboBox cbT) {
+    public void tabelaOpsAdiciona(JTable tab, JComboBox cbT) {
         Color color = UIManager.getColor("Table.gridColor");
         MatteBorder border = new MatteBorder(1, 1, 1, 1, color);
         tab.setRowHeight(25);
@@ -321,6 +325,8 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         op1Column.setCellEditor(new DefaultCellEditor(cbT));
         op2Column.setCellEditor(new DefaultCellEditor(cbT));
     }
+
+  
 
     private void addComponents() {
         /* panel1.add(panel3, BorderLayout.CENTER);
@@ -832,6 +838,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             this.getParent().add(tela);
             tela.setVisible(true);
         }
+        
     }
 
     @Override
