@@ -160,8 +160,6 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
         cons.fill = GridBagConstraints.HORIZONTAL;
         panelFormulario.add(new Label(" "), cons);
 
-        
-
         cons = new GridBagConstraints();
         cons.gridx = 0;
         cons.gridy = 1;
@@ -219,7 +217,7 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
         panelFormulario.add(lbExibeCargo, cons);
-        
+
         cons = new GridBagConstraints();
         cons.gridx = 0;
         cons.gridy = 5;
@@ -250,6 +248,7 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
         tfNome.setText(" ");
         lbExibeDataNasc.setText("");
         lbExibeTelefone.setText("");
+        lbExibeCargo.setText("");
     }
 
     @Override
@@ -257,6 +256,8 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
         Object obj = evt.getSource();
         if (obj == jbMostrar) {
             String od = cbOpenadores.getSelectedItem().toString();
+            System.out.println(cbOpenadores.getSelectedItem());
+
             int id = Integer.parseInt(od.split(" ")[1]);
             for (Operador op : operadores) {
                 if (op.getMatricula() == id) {
@@ -266,7 +267,6 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
                     lbExibeTelefone.setText(op.getTelefone());
                     System.out.println(id);
                     id = 0;
-                    cbOpenadores = new JComboBox(nomesEIds);
                 };
             }
 
