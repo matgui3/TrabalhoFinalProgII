@@ -91,6 +91,10 @@ public class CRUDActionPanel extends JPanel implements ActionListener {
         this.add(btGravar);
         this.add(btSair);
     }
+    
+    public void addBotao(JButton jbt){
+        this.add(jbt);
+    }
 
     public JButton getBtSair() {
         return btSair;

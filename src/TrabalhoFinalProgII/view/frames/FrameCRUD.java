@@ -69,6 +69,9 @@ public abstract class FrameCRUD extends JInternalFrame {
         setPosicao();
 
     }
+    public void addBotao(JButton jbt){
+        this.panelBotoesCRUD.add(jbt);
+    }
     
     public void addBotaoInferior(JButton botao){
         panelPrincipal.add(botao, BorderLayout.SOUTH);
