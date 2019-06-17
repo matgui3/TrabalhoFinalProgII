@@ -1,6 +1,5 @@
 package TrabalhoFinalProgII.view.frames;
 
-import TrabalhoFinalProgII.exceptions.HoraInvalidaException;
 import TrabalhoFinalProgII.exceptions.TurnoSelecionadoInvalidoException;
 import TrabalhoFinalProgII.model.Dia;
 import TrabalhoFinalProgII.model.EnumTurnos;
@@ -663,7 +662,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent evt) throws HoraInvalidaException {
+    public void actionPerformed(ActionEvent evt) {
         Object obj = evt.getSource();
 
         if (obj == jbGravar) {
@@ -676,7 +675,6 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                 horaRecebida = LocalTime.parse(tfHora.getText());
             } catch (DateTimeParseException ex) {
                 JOptionPane.showMessageDialog(null, "Horário de ocorrência inválido!");
-                throw new HoraInvalidaException("Horário de ocorrência inválido!");
             }
 
             Turno turno = null;
@@ -713,6 +711,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             ocorrencia.setDescricao(descricao);
             ocorrencia.setHora(horaRecebida);
             turno.addOcorrencia(descricao, horaRecebida);
+            
             try {
                 ocorrenciaService.cadastrarOcorrencia(ocorrencia);
             } catch(Exception ex){
