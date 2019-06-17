@@ -8,6 +8,8 @@ package TrabalhoFinalProgII.view.frames;
 import TrabalhoFinalProgII.model.Cargo;
 import TrabalhoFinalProgII.model.Operador;
 import TrabalhoFinalProgII.service.OperadorService;
+import TrabalhoFinalProgII.view.panels.CRUDActionPanel;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -22,8 +24,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.text.MaskFormatter;
@@ -43,15 +47,14 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
     private Label lbDataNasc;
     private Label lbCargo;
     private Label lbTelefone;
-    private TextField tfNome;
-    private JFormattedTextField fTfDataNasc;
-    private JFormattedTextField fTfTelefone;
-    private JComboBox cbCargo;
+    private Label tfNome;
+    private Label lbExibeDataNasc;
+    private Label lbExibeTelefone;
+    private Label lbExibeCargo;
     private JComboBox cbOpenadores;
-    private MaskFormatter maskTf;
-    private MaskFormatter maskTf1;
     private List<Operador> operadores;
     private String nomesEIds[];
+    private JButton jbMostrar;
 
     private JPanel panelFormulario;
 
@@ -65,7 +68,7 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
         operadorService = new OperadorService();
         operadores = operadorService.buscarOperadores();
         carregarNomesEids();
-        
+
         initializeComponents();
         addComponents();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -78,7 +81,6 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
         operadorService = new OperadorService();
         operadores = operadorService.buscarOperadores();
         carregarNomesEids();
-        
 
         initializeComponents();
         addComponents();
@@ -90,9 +92,13 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
         int cont = 0;
         nomesEIds = new String[12];
         for (Operador ops : operadores) {
-            nomesEIds[cont]= "Id:"+ ops.getMatricula()+" " + ops.getNome()+ "";
+            nomesEIds[cont] = "Id: " + ops.getMatricula() + " " + ops.getNome() + "";
             cont++;
         }
+    }
+
+    public void carregarCamposOps() {
+
     }
 
     public void initializeComponents() {
@@ -106,31 +112,23 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
         editaFont(lbCargo);
 
         //String para obter nomes dos operadores
+        tfNome = new Label("Nome");
+        editaFont(tfNome);
+        lbExibeCargo = new Label("Cargo");
+        editaFont(lbExibeCargo);
+        lbExibeDataNasc = new Label("Data de Nascimento");
+        editaFont(lbExibeDataNasc);
+        lbExibeTelefone = new Label("Telefone");
+        editaFont(lbExibeTelefone);
+        lbExibeTelefone.setPreferredSize(new Dimension(150, 25));
+
+        jbMostrar = new JButton("Exibir");
+        jbMostrar.setSize(new Dimension(100, 20));
+        addBotao(jbMostrar);
+        jbMostrar.addActionListener(this);
 
         cbOpenadores = new JComboBox(nomesEIds);
         editaFont(cbOpenadores);
-        cbOpenadores.addActionListener(this);
-
-        tfNome = new TextField();
-        cbCargo = new JComboBox(Cargo.values());
-
-        fTfDataNasc = new JFormattedTextField();
-        fTfDataNasc.setPreferredSize(new Dimension(150, 25));
-        try {
-            maskTf = new MaskFormatter("##/##/####");
-        } catch (ParseException ex) {
-            Logger.getLogger(FrameBuscarRelatorio.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        maskTf.install(fTfDataNasc);
-
-        fTfTelefone = new JFormattedTextField();
-        fTfTelefone.setPreferredSize(new Dimension(150, 25));
-        try {
-            maskTf1 = new MaskFormatter("(##) #####-####");
-        } catch (ParseException ex) {
-            Logger.getLogger(FrameBuscarRelatorio.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        maskTf1.install(fTfTelefone);
 
         layout = new GridBagLayout();
         panelFormulario = new JPanel(layout);
@@ -148,14 +146,21 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
     }
 
     public void addComponents() {
-
         cons = new GridBagConstraints();
         cons.gridx = 0;
         cons.gridy = 0;
         cons.gridwidth = 1;
-        cons.ipadx = 100;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(cbOpenadores, cons);
+        panelFormulario.add(new Label(" "), cons);
+
+        cons = new GridBagConstraints();
+        cons.gridx = 1;
+        cons.gridy = 0;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panelFormulario.add(new Label(" "), cons);
+
+        
 
         cons = new GridBagConstraints();
         cons.gridx = 0;
@@ -185,7 +190,7 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
         cons.gridy = 2;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(fTfDataNasc, cons);
+        panelFormulario.add(lbExibeDataNasc, cons);
 
         cons = new GridBagConstraints();
         cons.gridx = 0;
@@ -199,7 +204,7 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
         cons.gridy = 3;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(fTfTelefone, cons);
+        panelFormulario.add(lbExibeTelefone, cons);
 
         cons = new GridBagConstraints();
         cons.gridx = 0;
@@ -213,7 +218,14 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
         cons.gridy = 4;
         cons.gridwidth = 1;
         cons.fill = GridBagConstraints.HORIZONTAL;
-        panelFormulario.add(cbCargo, cons);
+        panelFormulario.add(lbExibeCargo, cons);
+        
+        cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 5;
+        cons.gridwidth = 1;
+        cons.fill = GridBagConstraints.HORIZONTAL;
+        panelFormulario.add(cbOpenadores, cons);
 
         super.addFormulario(panelFormulario);
     }
@@ -222,8 +234,8 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
     public void limparCampos() {
 
         tfNome.setText(" ");
-        fTfDataNasc.setText("");
-        fTfTelefone.setText("");
+        lbExibeDataNasc.setText("");
+        lbExibeTelefone.setText("");
     }
 
     @Override
@@ -236,13 +248,30 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener {
         String nomeOp = (String) cbOpenadores.getSelectedItem();
 
         tfNome.setText(" ");
-        fTfDataNasc.setText("");
-        fTfTelefone.setText("");
+        lbExibeDataNasc.setText("");
+        lbExibeTelefone.setText("");
     }
 
     @Override
-    public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void actionPerformed(ActionEvent evt) {
+        Object obj = evt.getSource();
+        if (obj == jbMostrar) {
+            String od = cbOpenadores.getSelectedItem().toString();
+            int id = Integer.parseInt(od.split(" ")[1]);
+            for (Operador op : operadores) {
+                if (op.getMatricula() == id) {
+                    tfNome.setText(op.getNome());
+                    lbExibeCargo.setText(op.getCargo());
+                    lbExibeDataNasc.setText(op.getDataNascimento());
+                    lbExibeTelefone.setText(op.getTelefone());
+                    System.out.println(id);
+                    id = 0;
+                    cbOpenadores = new JComboBox(nomesEIds);
+                };
+            }
+
+        }
+
     }
 
 }
