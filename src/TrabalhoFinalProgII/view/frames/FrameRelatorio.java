@@ -1,6 +1,7 @@
 package TrabalhoFinalProgII.view.frames;
 
 import TrabalhoFinalProgII.exceptions.HoraInvalidaException;
+import TrabalhoFinalProgII.exceptions.TurnoSelecionadoInvalidoException;
 import TrabalhoFinalProgII.model.Dia;
 import TrabalhoFinalProgII.model.EnumTurnos;
 import TrabalhoFinalProgII.model.EstadoServicosAuxiliares;
@@ -673,18 +674,33 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                 throw new HoraInvalidaException("Horário de ocorrência inválido!");
             }
 
+            Turno turno = null;
+            if (horaRecebida.isAfter(LocalTime.of(23, 30))) {
+                if(combo!=2)
+                    throw new TurnoSelecionadoInvalidoException("O turno selecionado é inválido para o horário informado.");
+                turno = dia.getTurnos().get(2);
+            } else if (horaRecebida.isAfter(LocalTime.of(15, 30))) {
+                 if(combo!=1)
+                    throw new TurnoSelecionadoInvalidoException("O turno selecionado é inválido para o horário informado.");
+                turno = dia.getTurnos().get(1);
+            } else {
+                 if(combo!=0)
+                    throw new TurnoSelecionadoInvalidoException("O turno selecionado é inválido para o horário informado.");
+                turno = dia.getTurnos().get(0);
+            }
+
             String descricao = "<html>" + taOcorrencia.getText() + "</html>";
             int cont = 0;
             int height = 20;
             if (descricao.length() > 60) {
                 cont++;
-                height = height + 20;
+                height += 20;
                 tabela1.setRowHeight(40);
                 StringBuilder stringBuilder = new StringBuilder(descricao);
                 stringBuilder.insert(60, "<br>");
                 descricao = stringBuilder.toString();
             }
-            System.out.println(ocorrencia);
+            System.out.println(descricao);
 
             String frase[] = {tfHora.getText(), descricao};
             DefaultTableModel modelo = new DefaultTableModel(frase, 0);
@@ -812,7 +828,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             LocalDate data = LocalDate.now();
             String dataFormatada = data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             dia.setData(dataFormatada);
-            
+
             dia.getTurnos().add(new Turno(PeriodoTurno.MANHA.getPeriodoTurno()));
             dia.getTurnos().get(0).setDia(dia);
             dia.getTurnos().add(new Turno(PeriodoTurno.TARDE.getPeriodoTurno()));

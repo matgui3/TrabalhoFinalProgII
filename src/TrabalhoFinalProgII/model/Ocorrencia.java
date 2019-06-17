@@ -53,8 +53,6 @@ public class Ocorrencia {
         this.descricao = descricao;
     }
     
-    
-    
     public LocalDate getHora() {
         return hora;
     }
