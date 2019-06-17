@@ -1,10 +1,14 @@
 package TrabalhoFinalProgII.view.frames;
 
+import TrabalhoFinalProgII.exceptions.HoraInvalidaException;
+import TrabalhoFinalProgII.model.Dia;
 import TrabalhoFinalProgII.model.EnumTurnos;
 import TrabalhoFinalProgII.model.EstadoServicosAuxiliares;
 import TrabalhoFinalProgII.model.EstadoSubestacao;
 import TrabalhoFinalProgII.model.EstadoUnidadeGeradora;
+import TrabalhoFinalProgII.model.Ocorrencia;
 import TrabalhoFinalProgII.model.Operador;
+import TrabalhoFinalProgII.service.DiaService;
 import TrabalhoFinalProgII.service.OperadorService;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,6 +24,11 @@ import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -50,8 +59,11 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     private static final String titulo = "Relatório de Ocorrências";
     private static Dimension dimension = new Dimension(800, 600);
 
-    OperadorService operadorService = new OperadorService();
-    private final List<Operador> operadores = operadorService.buscarOperadores();
+    private Dia dia;
+    private DiaService diaService;
+
+    OperadorService operadorService;
+    private List<Operador> operadores;
     private Label lb1;
     private Label lb2;
     private Label lb3;
@@ -120,20 +132,12 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     public FrameRelatorio() {
         super(titulo, dimension);
 
-//        Operador op1 = new Operador("Rodrigo", LocalDate.of(1983, 03, 14), "47992402517", Cargo.OPERADOR3);
-//        Operador op2 = new Operador("Giovani", LocalDate.of(1987, 03, 14), "47999999999", Cargo.OPERADOR2);
-//        addOperador(op1);
-//        addOperador(op2);
         initializeComponents();
         addComponents();
         setBorder(null);
         setClosable(true);
         getNomeOperadores();
 
-    }
-
-    public void addOperador(Operador op) {
-        operadores.add(op);
     }
 
     public void editaFont(Label umJl) {
@@ -189,6 +193,24 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
     }
 
     private void initializeComponents() {
+        diaService = new DiaService();
+        operadorService = new OperadorService();
+
+        dia = diaService.pesquisarDiaPorData(LocalDate.now());
+        if (dia == null) {
+            dia = new Dia();
+            LocalDate data = LocalDate.now();
+            String dataFormatada = data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            dia.setData(dataFormatada);
+            try {
+                diaService.novoDia(dia);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+
+        operadores = operadorService.buscarOperadores();
+
         lb1 = new Label("Dia da Semana ");
         editaFont(lb1);
         lb2 = new Label(setDiaDaSemana());
@@ -248,7 +270,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         taOcorrencia = new TextArea("", 1, 60);
         jbGravar = new JButton("Gravar");
         jbGravar.addActionListener(this);
-        jbFimTurno = new JButton("Finaliza Dia");
+        jbFimTurno = new JButton("Finalizar Dia");
         jbFimTurno.addActionListener(this);
         jbFrases = new JButton("Frases");
         jbFrases.addActionListener(this);
@@ -260,7 +282,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         jbExcluir.addActionListener(this);
 
         tabela1 = new JTable(1, 2) {
-            
+
         };
         tabela2 = new JTable(1, 2) {
             @Override
@@ -304,7 +326,6 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         op1Column.setCellEditor(new DefaultCellEditor(cbT));
         op2Column.setCellEditor(new DefaultCellEditor(cbT));
     }
-  
 
     private void addComponents() {
         /* panel1.add(panel3, BorderLayout.CENTER);
@@ -646,30 +667,37 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             model.removeRow(rows[i] - i);
         }
     }
-    
-    
-    
+
     @Override
-    public void actionPerformed(ActionEvent evt) {
+    public void actionPerformed(ActionEvent evt) throws HoraInvalidaException {
         Object obj = evt.getSource();
 
         if (obj == jbGravar) {
+            Ocorrencia ocorrencia = new Ocorrencia();
             int combo = cbTurnos.getSelectedIndex();
 
-            String ocorrencia = "<html>"+ taOcorrencia.getText()+"</html>";
+            //Verificação feita no horário para ver se confere com o Turno recebido, e se é um horário possível.
+            LocalTime horaRecebida = null;
+            try {
+                horaRecebida = LocalTime.parse(tfHora.getText());
+            } catch (DateTimeParseException ex) {
+                throw new HoraInvalidaException("Horário de ocorrência inválido!");
+            }
+
+            String descricao = "<html>" + taOcorrencia.getText() + "</html>";
             int cont = 0;
-                int height = 20;
-            if (ocorrencia.length() > 60) {
+            int height = 20;
+            if (descricao.length() > 60) {
                 cont++;
-                height = height+20;
-            tabela1.setRowHeight(40);
-                StringBuilder stringBuilder = new StringBuilder(ocorrencia);
+                height = height + 20;
+                tabela1.setRowHeight(40);
+                StringBuilder stringBuilder = new StringBuilder(descricao);
                 stringBuilder.insert(60, "<br>");
-                ocorrencia = stringBuilder.toString();
+                descricao = stringBuilder.toString();
             }
             System.out.println(ocorrencia);
 
-            String frase[] = {tfHora.getText(), ocorrencia};
+            String frase[] = {tfHora.getText(), descricao};
             DefaultTableModel modelo = new DefaultTableModel(frase, 0);
             switch (combo) {
                 case 0:

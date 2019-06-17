@@ -44,6 +44,16 @@ public class Ocorrencia {
     }  
     
     public Ocorrencia(){}
+
+    public void setHora(LocalDate hora) {
+        this.hora = hora;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+    
+    
     
     public LocalDate getHora() {
         return hora;

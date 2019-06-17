@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Classe contendo os comportamentos e atributos dos Relatórios de Ocorrências.
@@ -26,20 +27,19 @@ public class RelatorioOcorrencias {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private Dia[] dias;
     @OneToOne
     @JoinColumn(name = "id_painel_avisos", referencedColumnName = "id_painel")
     private PainelDeAvisos painelAvisos;
     @OneToOne
     @JoinColumn(name = "id_dia", referencedColumnName = "id_dia")
     private Dia diaAtual;
+    @Transient
     private int i = 0;
     
     /**
      * Método construtor da classe RelatorioOcorrencias, responsável por criar o Array de dias, o Painel de Avisos, e settar os dados do dia atual.
      */
     public RelatorioOcorrencias(){
-        dias = new Dia[31];
         painelAvisos= new PainelDeAvisos();
         diaAtual = new Dia(EstadoUnidadeGeradora.OPERANDO, EstadoUnidadeGeradora.PARADA_SGI, EstadoSubestacao.LTS2, EstadoServicosAuxiliares.TSA1E2);
     }
@@ -52,8 +52,6 @@ public class RelatorioOcorrencias {
      * @param servicosAuxiliares  Estado dos serviços auxiliares no momento de criação do dia.
      */
     public void NovoDia(EstadoUnidadeGeradora estadoGerador1, EstadoUnidadeGeradora estadoGerador2, EstadoSubestacao subestacao, EstadoServicosAuxiliares servicosAuxiliares){
-        dias[i] = (diaAtual);
-        i++;
         diaAtual = new Dia(estadoGerador1, estadoGerador2, subestacao, servicosAuxiliares);
     }
     
