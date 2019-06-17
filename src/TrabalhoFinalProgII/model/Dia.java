@@ -35,11 +35,9 @@ public class Dia {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_dia")
     private long id;
-    @OneToOne
-    @JoinColumn(name = "id_unidade1")
+    @Column(name = "id_unidade1")
     private String gerador1;
-    @OneToOne
-    @JoinColumn(name = "id_unidade2")
+    @Column(name = "id_unidade2")
     private String gerador2;
     @OneToMany(mappedBy = "dia", cascade = CascadeType.ALL)
     private List<Turno> turnos;
@@ -85,7 +83,7 @@ public class Dia {
         return gerador1;
     }
 
-    public void setGerador1(UnidadeGeradora gerador1) {
+    public void setGerador1(String gerador1) {
         this.gerador1 = gerador1.toString();
     }
 
@@ -93,8 +91,8 @@ public class Dia {
         return gerador2;
     }
 
-    public void setGerador2(UnidadeGeradora gerador2) {
-        this.gerador2 = gerador2.toString();
+    public void setGerador2(String gerador2) {
+        this.gerador2 = gerador2;
     }
 
     public List<Turno> getTurnos() {
@@ -113,16 +111,16 @@ public class Dia {
         return subestacao;
     }
 
-    public void setSubestacao(EstadoSubestacao subestacao) {
-        this.subestacao = subestacao.toString();
+    public void setSubestacao(String subestacao) {
+        this.subestacao = subestacao;
     }
 
     public String getServicosAuxiliares() {
         return servicosAuxiliares;
     }
 
-    public void setServicosAuxiliares(EstadoServicosAuxiliares servicosAuxiliares) {
-        this.servicosAuxiliares = servicosAuxiliares.toString();
+    public void setServicosAuxiliares(String servicosAuxiliares) {
+        this.servicosAuxiliares = servicosAuxiliares;
     }
 
 }

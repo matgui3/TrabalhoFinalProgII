@@ -771,32 +771,32 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         }
         if (obj == jbFimTurno) {
 
-            if (cbOp1Turno1.getSelectedIndex() == 0 | cbOp2Turno1.getSelectedIndex() == 0 | cbOp1Turno2.getSelectedIndex() == 0
-                    | cbOp2Turno2.getSelectedIndex() == 0 | cbOp1Turno3.getSelectedIndex() == 0 | cbOp2Turno3.getSelectedIndex() == 0) {
+            if (cbOp1Turno1.getSelectedIndex() == -1 | cbOp2Turno1.getSelectedIndex() == -1 | cbOp1Turno2.getSelectedIndex() == -1
+                    | cbOp2Turno2.getSelectedIndex() == -1 | cbOp1Turno3.getSelectedIndex() == -1 | cbOp2Turno3.getSelectedIndex() == -1) {
                 JOptionPane.showMessageDialog(null, "Todos os turnos devem possuir pelo menos dois operadores.");
-            }
+            } else {
+                JOptionPane.showConfirmDialog(null, "Deseja confirmar todos os dados do relatório?");
 
-            JOptionPane.showConfirmDialog(null, "Deseja confirmar todos os dados do relatório?");
+                dia.setGerador1(cbUgs.getSelectedItem().toString());
+                dia.setGerador2(cbUgs2.getSelectedItem().toString());
+                dia.setServicosAuxiliares(cbSA.getSelectedItem().toString());
+                dia.setSubestacao(cbSE.getSelectedItem().toString());
+                try {
+                    diaService.salvarDia(dia);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
 
-            dia.setGerador1(cbUgs.getSelectedItem().toString());
-            dia.setGerador2(cbUgs2.getSelectedItem());
-            dia.setServicosAuxiliares(cbSA.getSelectedItem());
-            dia.setSubestacao(cbSE.getSelectedItem());
-            try {
-                diaService.salvarDia(dia);
-            } catch (Exception ex) {
-                ex.printStackTrace();
+                Dia novoDia = new Dia();
+                try {
+                    diaService.novoDia(novoDia);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
-
-            Dia novoDia = new Dia();
-            try {
-                diaService.novoDia(novoDia);
-                initializeComponents();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            initializeComponents();
         }
-        
+
         if (obj == jbEditar) {
 
             String hora = tfHora.getText();
@@ -890,28 +890,29 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             }
         }
     }
-     public void povoarjTables(List<Ocorrencia> list, JTable tabela ){
-         int cont = 0;
-     
+
+    public void povoarjTables(List<Ocorrencia> list, JTable tabela) {
+        int cont = 0;
+
         String frases[] = {};
 
         for (Ocorrencia ocor : list) {
             String hora = ocor.getHora().toString();
             String fraseT1[] = {hora, ocor.getDescricao()};
-            
-        DefaultTableModel modelo = new DefaultTableModel(fraseT1, 0);
-        modelo = (DefaultTableModel) tabela.getModel();
-        if (modelo.getValueAt(0, 0) == null) {
-            modelo.removeRow(0);
-        }
-        modelo.addRow(fraseT1);
 
-        tabela.setModel(modelo);
+            DefaultTableModel modelo = new DefaultTableModel(fraseT1, 0);
+            modelo = (DefaultTableModel) tabela.getModel();
+            if (modelo.getValueAt(0, 0) == null) {
+                modelo.removeRow(0);
+            }
+            modelo.addRow(fraseT1);
 
-        alinhaTableCentro(tabela);
+            tabela.setModel(modelo);
+
+            alinhaTableCentro(tabela);
             cont++;
         }
-     }
+    }
 
     private void defineValoresRelatorio(Dia dia) {
         List<Turno> turnos = dia.getTurnos();
@@ -943,11 +944,11 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                 operadoresT3[1] = turnos.get(2).getOperadores().get(1);
             }
         }
-        
+
         povoarjTables(ocorrenciasT1, tabela1);
         povoarjTables(ocorrenciasT2, tabela2);
         povoarjTables(ocorrenciasT3, tabela3);
-      
+
     }
 
 }
