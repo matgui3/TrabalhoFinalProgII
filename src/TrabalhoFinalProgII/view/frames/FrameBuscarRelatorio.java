@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.text.MaskFormatter;
@@ -107,17 +108,19 @@ public final class FrameBuscarRelatorio extends FrameCRUD implements ActionListe
         if (obj == jbAbrirRelatorio) {
             //Adicionar aqui também o método para buscar os dados dos campos para 
             //o relatório a ser buscado
-            
-            data = LocalDate.parse(tfDtRelatorio.getText(),DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-            FrameExibirRelatório tela = new FrameExibirRelatório(data);
-            this.getParent().add(tela);
-            tela.setVisible(true);
+            if (tfDtRelatorio.getText().equals("  /  /    ")) {
+                JOptionPane.showMessageDialog(null, "A data do relatório não pode ser nula!");
+            } else {
+                data = LocalDate.parse(tfDtRelatorio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-            this.dispose();
+                FrameExibirRelatório tela = new FrameExibirRelatório(data);
+                this.getParent().add(tela);
+                tela.setVisible(true);
 
+                this.dispose();
+            }
         }
-
     }
 
     public void addComponents() {
