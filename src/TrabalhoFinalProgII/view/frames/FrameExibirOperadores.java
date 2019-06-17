@@ -18,6 +18,7 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -49,6 +50,7 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener{
     private JComboBox cbOpenadores;
     private MaskFormatter maskTf;
     private MaskFormatter maskTf1;
+    private List<Operador> operadores;
 
     private JPanel panelFormulario;
 
@@ -88,7 +90,8 @@ public class FrameExibirOperadores extends FrameCRUD implements ActionListener{
         editaFont(lbCargo);
 
         //String para obter nomes dos operadores
-        String[] nomes = operadorService.buscarNomesOperadores();
+        operadores = operadorService.buscarOperadores();
+        String nomes[] = {"bla", "blu"}; 
 
         cbOpenadores = new JComboBox(nomes);
         editaFont(cbOpenadores);
