@@ -148,6 +148,7 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
         setBorder(null);
         setClosable(true);
         getNomeOperadores();
+        setMaximizable(true);
 
     }
 
@@ -669,6 +670,13 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
             model.removeRow(rows[i] - i);
         }
     }
+    public void LimpaTabela(JTable tabela) {
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+                System.out.println(tabela.getRowCount());
+        for (int i = 0; i < tabela.getRowCount(); i++) {
+            model.removeRow(i);
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
@@ -805,7 +813,11 @@ public final class FrameRelatorio extends FrameCRUD implements ActionListener {
                     ex.printStackTrace();
                 }
             }
+            LimpaTabela(tabela1);
+            LimpaTabela(tabela2);
+            LimpaTabela(tabela3);
             initializeComponents();
+            this.dispose();
         }
 
         if (obj == jbEditar) {

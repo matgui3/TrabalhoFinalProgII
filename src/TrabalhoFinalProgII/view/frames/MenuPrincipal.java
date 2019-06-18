@@ -22,7 +22,6 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
     private JMenu menuAbrirRelatorio;
     private JMenu menuBibliotecas;
     private JMenu menuOperadores;
-    private JMenu menuAtualizar;
     private JMenu menuAjuda;
 
     private JMenuItem menuItemAbrirRelatorio;
@@ -30,7 +29,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
     private JMenuItem menuItemAddAjuste;
     private JMenuItem menuItemAddOperadores;
     private JMenuItem menuItemVerOperadores;
-    private JMenuItem menuItemAtualizar;
+    private JMenuItem menuItemNovoRelatório;
     private JMenuItem menuItemSair;
 
     private FramePrincipal frameSistema;
@@ -54,6 +53,8 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
         menuItemAddAjuste = new JMenuItem("Adicionar Ajuste à Biblioteca");
         menuItemAddOperadores = new JMenuItem("Adicionar Operadores");
         menuItemVerOperadores = new JMenuItem("Operadores Cadastrados");
+        menuItemNovoRelatório = new JMenuItem("Novo Relatório");
+        menuItemNovoRelatório.addActionListener(this);
         menuItemSair = new JMenuItem("Sair");
         menuItemSair.addActionListener(this);
     }
@@ -66,6 +67,8 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
 
         menuOperadores.add(menuItemVerOperadores);
         menuOperadores.add(menuItemAddOperadores);
+        
+        menuAbrirRelatorio.add(menuItemNovoRelatório);
 
         menuAjuda.add(menuItemSair);
 
@@ -79,6 +82,9 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
         ActionListener listener = new ListenerMenuAplicação(FrameBuscarRelatorio.class, frameSistema);
         menuItemAbrirRelatorio.addActionListener(listener);
 
+        listener = new ListenerMenuAplicação(FrameRelatorio.class, frameSistema);
+        menuItemNovoRelatório.addActionListener(listener);
+        
         listener = new ListenerMenuAplicação(FrameCadastrarFrases.class, frameSistema);
         menuItemAddFrase.addActionListener(listener);
 

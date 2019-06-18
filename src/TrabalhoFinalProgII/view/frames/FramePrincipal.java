@@ -52,7 +52,6 @@ public class FramePrincipal extends JFrame {
         contentPane.add(desktop, BorderLayout.CENTER);
         super.setJMenuBar(menuAplicacao);
         adicionarFormulario(relatorio);
-        System.out.println(relatorio.getComponentZOrder(this));
         try {
             relatorio.setMaximum(true);
         } catch (PropertyVetoException ex) {
@@ -60,6 +59,7 @@ public class FramePrincipal extends JFrame {
         }
         
     }
+    
 
 
     public void adicionarFormulario(JInternalFrame frame) {
